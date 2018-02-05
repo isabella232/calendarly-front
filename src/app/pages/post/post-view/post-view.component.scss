@@ -1,0 +1,56 @@
+.tvh-user img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+}
+
+.t-view[data-tv-type="text"]:before,
+.t-view[data-tv-type="text"]:after {
+    display: none;
+}
+
+.nav-icon {
+    font-size: 20px;
+}
+
+.posts-header {
+    padding: 0;
+    list-style-type: none;
+}
+
+.nav-link {
+    width: 150px !important;
+    float: left;
+}
+
+.timeline {
+    padding-left: 50px;
+    padding-top: 0;
+}
+
+.unlisted {
+    list-style-type: none;
+}
+
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 200px;
+}
+
+@media (max-width: 767px) {
+    .timeline {
+        padding: 20px;
+    }
+}
+
+.fa-trash {
+    font-size: 15px;
+}
+
+.btn:not(.btn-link):not(.btn-float):not(.command-edit):not(.command-delete):not(.selectpicker) {
+    box-shadow: none;
+}
+
+.watchBtn {
+    width: 100%;
+    margin: 30px 0;
+}

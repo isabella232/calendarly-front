@@ -1,0 +1,143 @@
+<form [formGroup]="createPost" (ngSubmit)="submitForm()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group" [ngClass]="{'is-invalid':createPost.get('title').invalid,'is-valid':createPost.get('title').valid}">
+                <label for="disabledTextInput">Title</label>
+                <input formControlName="title" type="text" class="form-control form-control-sm">
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="topic">Topics</label>
+                <input formControlName="topic" value="Topic-1,Topic-2" data-role="tagsinput" type="text" class="form-control tagsinput form-control-sm">
+
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <input formControlName="tags" id="tagsinput" value="Tag-A,Tag-B" data-role="tagsinput" type="text" class="form-control tagsinput form-control-sm">
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="social">Social Profiles</label>
+                <input formControlName="socialMedia" value="Facebook,Linkedin" data-role="tagsinput" type="text" id="socialMedia" class="form-control tagsinput form-control-sm">
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+<div class="form-group col-md-12">
+    <label for="date">Date</label>
+    <input [(ngModel)]="date" type="text" class="form-control" placeholder="Datepicker" bsDatepicker />
+    <i class="form-group__bar"></i>
+</div>
+
+<div class="form group col-md-12">
+    <label for="time">Time</label>
+    <timepicker class="timepicker" [(ngModel)]="time"></timepicker>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-12" id="html-editor">
+        <div class="html-editor"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    Attach Post
+                </h2>
+                <h3 class="card-subtitle">Write your post in your favorite word processor or design software and drag it here or click below to attach files for your colleagues to provide feedback on.</h3>
+            </div>
+            <div class="card-body">
+                <div class="contacts clearfix row">
+                    <div class="col-md-3 col-sm-6 col-xs-6 " *ngFor="let file of files;let i=index;">
+                        <div class="c-item">
+                            <a class="ci-avatar file-image">
+                                <i class="fa pull-right eye" (click)="toggleVisibility(file)" [ngClass]="{'fa-eye-slash':file.isVisible,'fa-eye ':!file.isVisible}" aria-hidden="true"></i>
+
+                                <img [src]="file.thumbnail_card_url" src-fallback="{{images.fileFallback}}" class="upload-logo" alt="powerpoint">
+
+                                <br>
+                                <h6 style="padding:10px;overflow:auto;text-overflow:ellipsis;height:50px;">{{file.name }}</h6>
+                            </a>
+
+                            <div class="c-footer">
+                                <div class="btn-group download-group">
+                                    <button type="button" class="btn btn-default attachmentBtn" (click)="deleteFile(file,i)">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle attachmentBtn" data-toggle="dropdown">
+                                                                
+                                                                <span class="caret"></span>
+                                                            </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">Upload new version</a></li>
+                                            <li><a href="#">Version 3</a></li>
+                                            <li><a href="#">Version 2</a></li>
+                                            <li><a href="#">Version 1</a></li>
+                                        </ul>
+                                    </div>
+                                    <button type="button" class="btn btn-default attachmentBtn">
+                                                        <i class="fa fa-link" aria-hidden="true"></i>
+                                                    </button>
+                                </div>
+                                <!-- <button class="waves-effect"><i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                            <button class="waves-effect"><i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            </button>
+                                            <button class="waves-effect">
+                                                    <i class="fa fa-link" aria-hidden="true"></i>
+                                                    
+                                            </button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <input type="file" multiple id="fileUpload" (change)="selectFiles($event)">
+
+                <button type="button" class=" upload-btn btn btn-primary waves-effect waves-button waves-float pull-right">
+                            FROM A URL
+                        </button>
+
+                <button type="button" (click)="uploadFiles()" class="pull-right upload-btn btn btn-primary waves-effect waves-button waves-float pull-right">
+                        FROM MY COMPUTER
+                    </button>
+
+                <div class="clearfix"></div>
+                <!-- <a href="#" class="close fileinput-exists" data-dismiss="fileinput">&times;</a> -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <button type="button" class="btn btn-danger waves-effect waves-button pull-right submit-btn waves-float" (click)="cancel()" *ngIf="!editMode" data-dismiss="modal">Close</button>
+        <button type="button" (click)="goback()" class="btn btn-danger waves-effect waves-button pull-right submit-btn waves-float" *ngIf="editMode" (click)="cancel()">Cancel</button>
+        <button type="button" (click)="submitForm()" class="btn btn-primary waves-effect waves-button waves-float pull-right submit-btn" id="addEvent" *ngIf="!editMode">Save</button>
+        <button type="button" (click)="updatePost()" class="btn btn-primary waves-effect waves-button waves-float pull-right submit-btn" id="addEvent" *ngIf="editMode">Update</button>
+
+        <div class="clearfix"></div>
+    </div>
+</div>

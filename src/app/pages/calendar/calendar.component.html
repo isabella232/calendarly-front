@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-12">
+        <div id="calendar"></div>
+
+
+    </div>
+</div>
+<div bsModal #createPost="bs-modal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title pull-left">Create a Post</h5>
+            </div>
+            <div class="modal-body">
+                <app-create-post (formSubmitted)="submitForm($event)" (exit)="exit()" [date]="date" [time]="date"></app-create-post>
+                <!-- Curabitur blandit mollis lacus. Nulla sit amet est. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Cras sagittis. -->
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-link">Save changes</button>
+                <button type="button" class="btn btn-link" (click)="ModalLarge.hide()">Close</button> -->
+            </div>
+        </div>
+    </div>
+</div>
