@@ -19,6 +19,8 @@ export class PostViewComponent  {
   post:any;
   date;
   time;
+  comments=[];
+  commentBody;
   user:any;
   ngOnInit() {
     this.user=this.container.user;
@@ -26,6 +28,7 @@ export class PostViewComponent  {
       console.log(param)
     this.postService.getPost(Number(param.id)).subscribe(post=>{
       this.post=post;
+      this.getComments(this.post.id)
       // this.date=post.start.toDate()
       this.time=post.date.toDate();
       this.date=post.time.toDate();
@@ -36,12 +39,60 @@ export class PostViewComponent  {
     })
   }
 
+
   watchPost()
   {
     this.postService.toggleWatchPost(this.post.id,!this.post.is_watcher).subscribe(res=>{
       console.log(res)
     })
   }
+  isCommentOpen=false;
+  currentComments=[];
+  toggleComments()
+  {
+    this.isCommentOpen=!this.isCommentOpen;
+    if(this.isCommentOpen)
+    {
+      this.currentComments=this.comments;
+    }
+    else{
+      this.currentComments=this.visibleComments;
+    }
+  }
+
+  getComments(postId)
+  {
+    this.postService.getComments(postId).subscribe(comments=>{
+      this.currentComments=this.comments;
+      this.comments=comments;
+      if(this.comments.length>2)
+      {
+        this.visibleComments[0]=this.comments[this.comments.length-2];
+        this.visibleComments[1]=this.comments[this.comments.length-1];
+        this.currentComments=this.visibleComments;
+      }
+
+      console.log(comments)
+    },er=>{
+      console.log(er)
+    })
+  }
+
+  visibleComments=[];
+  postComment(body)
+  {
+    if(body)
+    {
+      console.log(this.comments)
+      this.postService.updatePost({comment:body,version:1,id:this.post.id}).subscribe(res=>{
+        console.log(res)
+      },er=>{
+        console.log(er)
+      })
+    }
+ 
+  }
+
   deletePost(post)
   {
       swal({

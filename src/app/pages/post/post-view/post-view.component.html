@@ -66,5 +66,55 @@
                 <app-create-post [postData]="post" [date]="date" [time]="time" (formUpdated)="updateForm($event)"></app-create-post>
             </div>
         </div>
+
+        <!-- <ng-container> -->
+        <div class="card">
+            <!-- <div class="card-header">
+
+                </div> -->
+            <div class="card-body">
+                <ng-container *ngIf="comments?.length">
+                    <div class="listview" *ngFor="let comment of currentComments">
+                        <div class="listview__item ">
+                            <img src-fallback="{{images.fallbackImg}}" [src]="comment.user.photo" class="listview__img" alt="">
+
+                            <div class="listview__content">
+                                <h3 class="listview__heading">{{comment.user.name}}</h3>
+                                <!-- <p>{{ recentPostData.post }}</p> -->
+                                <p>{{comment.comment}}</p>
+                            </div>
+
+                        </div>
+                        <!-- <button class="btn btn-primary" (click)="postComment(commentBody)">Post Comment</button> -->
+
+                        <!-- <a href="" class="view-more">View All Comments</a> -->
+                    </div>
+                    <a (click)="toggleComments()" class="view-more">View {{isCommentOpen?'Less':'All'}} Comments</a>
+
+                </ng-container>
+
+
+                <div class="listview ">
+                    <div class="listview__item ">
+                        <img src-fallback="{{images.fallbackImg}}" [src]="user.photo" class="listview__img" alt="">
+
+                        <div class="listview__content">
+                            <h3 class="listview__heading">{{user.full_name}}</h3>
+                            <!-- <p>{{ recentPostData.post }}</p> -->
+                            <div class="form-group">
+                                <input type="text" class="form-control" [(ngModel)]="commentBody" placeholder="Post comment">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="btn btn-primary pull-right" (click)="postComment(commentBody)">Post Comment</button>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- </ng-container> -->
     </div>
 </div>

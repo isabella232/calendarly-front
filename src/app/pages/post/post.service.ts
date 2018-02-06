@@ -49,6 +49,16 @@ export class PostService {
     });
   }
 
+  getComments(postId)
+  {
+    return this.http.get(config.url+'/api/v1/history/userstory/'+postId,{
+      headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
+    }).catch((error:any) => {
+      console.log(error)
+     return Observable.throw(error)
+    });
+  }
+
   getCustomAttributes()
   {
     return this.http.get(config.url+'/api/v1/userstory-custom-attributes?project='+this.container.projectId)
