@@ -3,9 +3,10 @@ import { AuthService } from './../../../providers/auth.service';
 
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'toastr-ng2';
 
+import {ModalDirective} from 'ngx-bootstrap'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +18,9 @@ export class LoginComponent implements OnInit {
   private container:ContainerService,private toastr:ToastrService) { }
 
   loginForm:FormGroup;
+  @ViewChild('forgotPasswordModal') forgotPasswordModal:ModalDirective;
   rememberMe=false;
+  username;
   initForm()
   {
 
@@ -26,6 +29,17 @@ export class LoginComponent implements OnInit {
       password:this.fb.control(null)
     })
 
+  }
+
+  emailPassword(userInfo)
+  {
+    this.authService.forgotPassword(userInfo).subscribe(res=>{
+      console.log(res)
+      this.forgotPasswordModal.hide();
+    },er=>{
+      console.log(er)
+      this.forgotPasswordModal.hide();
+    })
   }
 
   submitForm()

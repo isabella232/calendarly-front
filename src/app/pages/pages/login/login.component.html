@@ -51,57 +51,41 @@
       </label>
 
                         </div>
-                        <!-- <div class="form-group form-group--float">
-                                <input formControlName="full_name" type="text" class="form-control" formControlFloat>
-                                <label>Full Name</label>
-                                <i class="form-group__bar"></i>
-                            </div>
-                            <div class="form-group form-group--float">
-                                <input formControlName="email" type="text" class="form-control" formControlFloat>
-                                <label>Email Id</label>
-                                <i class="form-group__bar"></i>
-                            </div>
-                            <ng-container formGroupName="password">
-                                <div class="form-group form-group--float">
-                                    <input formControlName="password" type="text" class="form-control" formControlFloat>
-                                    <label>Password</label>
-                                    <i class="form-group__bar"></i>
-                                </div>
 
-                                <div class="form-group form-group--float">
-                                    <input formControlName="confirmPassword" type="text" class="form-control" formControlFloat>
-                                    <label>Confirm Password</label>
-                                    <i class="form-group__bar"></i>
-                                </div>
-
-                            </ng-container> -->
                     </form>
 
                     <button class="btn btn-success btn--icon-text login-btn" (click)="submitForm()"><i class="zmdi zmdi-refresh"></i> Login</button>
 
-                    <button class="btn btn-info btn--icon-text login-btn" (click)="forgotPassword()"><i class="zmdi zmdi-refresh"></i> Forgot Password</button>
+                    <button class="btn btn-info btn--icon-text login-btn" (click)="forgotPasswordModal.show()"><i class="zmdi zmdi-refresh"></i> Forgot Password</button>
 
-                    <!-- <div class="row">
-                            <div class="col-md-4">
-                                <button class="btn btn-success btn--icon-text login-btn"><i class="zmdi zmdi-refresh"></i> Login</button>
+                    <div bsModal #forgotPasswordModal="bs-modal" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title pull-left">Forgot Password</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" [(ngModel)]="username" placeholder="Enter username or email">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link" (click)="forgotPasswordModal.hide()">Close</button>
+                                    <button type="button" class="btn btn-link" (click)="emailPassword(username)">Email Password</button>
+                                </div>
                             </div>
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4">
-                                <button (click)="submitForm()" class="btn btn-success btn--icon-text login-btn"><i class="zmdi zmdi-refresh"></i> Login</button>
-                            </div>
-                        </div> -->
-
-
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3"></div>
+        <!-- </section> -->
+
+
     </div>
-    <!-- </section> -->
-
-
-</div>
-<!-- <body class="login-content">
+    <!-- <body class="login-content">
 
     <img class="img-responsive" id="logo" src="./assets/img/logo.jpg" alt="">
     <div class="lc-block toggled" id="l-login">

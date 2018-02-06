@@ -70,7 +70,13 @@ export class CreatePostComponent implements OnInit {
 
     toggleVisibility(file)
     {
-        file.isVisible=!file.isVisible
+        // var formData=new FormData();
+        // formData.append('attached_file',file,file.name)
+
+        file.isVisible=!file.isVisible;
+        this.postService.updateAttachment({isVisible:file.isVisible,id:file.id}).subscribe(res=>{
+            console.log(res)
+        },er=>console.log(er))
     }
 
     cancel()

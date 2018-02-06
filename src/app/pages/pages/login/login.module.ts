@@ -1,3 +1,4 @@
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -17,7 +18,8 @@ const LOGIN_PAGES_ROUTES = [
         CommonModule,
         RouterModule.forChild(LOGIN_PAGES_ROUTES),
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ModalModule.forRoot()
     ]
 })
 

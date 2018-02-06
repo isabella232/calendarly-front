@@ -30,6 +30,19 @@ export class AuthService {
     });
   }
 
+  forgotPassword(userInfo)
+  {
+    return this.http.post(config.url+'/api/v1/users/password_recovery',{username:userInfo})
+    .map(res=>{
+      console.log(res)
+      return res;
+    }).catch((error:any) => {
+      console.log(error)
+      // this.handleError(error)
+     return Observable.throw(error || 'Server error')
+    });
+  }
+
   signupUser(data)
   {
     return this.http.post(config.url+'/api/v1/auth/register',data).map((res:any)=>{

@@ -188,6 +188,17 @@ export class PostService {
     });
   }
 
+  
+  updateAttachment(file)
+  {
+    var token=window[this.container.storageStrategy].getItem('cypheredToken');
+
+    var headers=new HttpHeaders()
+    headers.append('Authorization','Application '+token)
+    return this.http.patch(config.url+'/api/v1/userstories/attachments/'+file.id,file,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)}).catch(er=>er)
+
+  }
+
   getPosts()
   {
     var token=window[this.container.storageStrategy].getItem('authToken');

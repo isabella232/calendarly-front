@@ -4,13 +4,13 @@
             <!-- <div class="card-header">
 
             </div> -->
-            <div class="card-body">
+            <div class="card-body" *ngIf="user">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card card--inverse widget-profile">
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img src="./assets/demo/img/profile-pics/profile-pic.jpg" class="widget-profile__img" alt="">
+                                    <img [src]="user.big_photo" class="widget-profile__img" alt="">
 
                                     <h4 class="card-title">Malinda Hollway</h4>
                                 </div>
