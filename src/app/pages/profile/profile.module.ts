@@ -1,4 +1,3 @@
-import { WidgetsModule } from './../widgets/widgets.module';
 import { ProfileComponent } from './profile.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';

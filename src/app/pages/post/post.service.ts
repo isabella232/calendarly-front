@@ -31,6 +31,16 @@ export class PostService {
     });
   }
 
+  deleteComment(postId,commentId)
+  {
+    return this.http.post(config.url+`/api/v1/history/userstory/${postId}/delete_comment?id=${commentId}`,{
+      headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
+    }).catch((error:any) => {
+      console.log(error)
+     return Observable.throw(error)
+    });
+  }
+
   updatePost(data)
   {
     // var token=window[this.container.storageStrategy].getItem('authToken');

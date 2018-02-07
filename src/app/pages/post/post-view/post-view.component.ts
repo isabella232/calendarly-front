@@ -86,6 +86,10 @@ export class PostViewComponent  {
       console.log(this.comments)
       this.postService.updatePost({comment:body,version:1,id:this.post.id}).subscribe(res=>{
         console.log(res)
+        this.comments.push({
+          comment:body,
+          user:this.user
+        })
       },er=>{
         console.log(er)
       })

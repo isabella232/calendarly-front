@@ -1,8 +1,7 @@
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ImgFallbackModule } from 'ngx-img-fallback';
+import { Ng2ImgFallbackModule } from 'ng2-img-fallback';
 import { ContinuePipe } from './../../pipes/continue.pipe';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { TimepickerComponentModule } from './../components/time-picker/time-picker.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { PostService } from './post.service';
 import { PostViewComponent } from './post-view/post-view.component';
@@ -23,7 +22,7 @@ import { CalendarService } from '../calendar/calendar.service';
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
-    ImgFallbackModule,
+    Ng2ImgFallbackModule,
     BsDropdownModule.forRoot()
     // PostRoutingModule
   ],

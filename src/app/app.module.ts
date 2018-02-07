@@ -1,3 +1,4 @@
+import { SharedService } from './providers/shared.service';
 // import { ProfileComponent } from './pages/profile/profile.components';
 import { ResponseInterceptorService } from './providers/interceptors/response-interceptor.service';
 import { RequestInterceptorService } from './providers/interceptors/request-interceptor.service';
@@ -11,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { SharedService } from "./shared/services/shared.service";
+// import { SharedService } from "./shared/services/shared.service";
 import { routing } from './app.routing';
 import {AuthGuard} from './providers/auth.guard';
 import {AuthService} from './providers/auth.service';

@@ -1,7 +1,7 @@
+import { SharedService } from './../../providers/shared.service';
 import { AuthService } from './../../providers/auth.service';
 import { EventsService } from './../../providers/events.service';
 import { Component, OnInit, trigger, state, style, transition, animate} from '@angular/core';
-import { SharedService } from "../../shared/services/shared.service";
 import { Router } from '@angular/router';
 
 @Component({

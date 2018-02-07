@@ -1,4 +1,5 @@
-import { SharedService } from "./shared/services/shared.service";
+import { SharedService } from './providers/shared.service';
+// import { SharedService } from "./shared/services/shared.service";
 import { Router,NavigationStart,NavigationEnd } from '@angular/router';
 import { Component, state } from '@angular/core';
 import { EventsService } from './providers/events.service';
