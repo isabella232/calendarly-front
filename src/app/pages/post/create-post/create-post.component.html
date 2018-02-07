@@ -78,26 +78,22 @@
                             </a>
 
                             <div class="c-footer">
-                                <div class="btn-group download-group">
-                                    <button type="button" class="btn btn-default attachmentBtn" (click)="deleteFile(file,i)">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </button>
+                                <div class="btn-group" dropdown>
+                                    <button (click)="deleteFile(file,i)" type="button" class="btn btn-primary dropdown-toggle-split">
+                                        <span class="zmdi zmdi-hc-lg zmdi-delete "></span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary dropdown-toggle-split" dropdownToggle>
+                                        <span class="zmdi zmdi-hc-lg zmdi-caret-down"></span>
+                                    </button> <button type="button" class="btn btn-primary dropdown-toggle-split">
+                                        <span class="zmdi zmdi-hc-lg zmdi-link"></span>
+                                    </button>
 
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default dropdown-toggle attachmentBtn" data-toggle="dropdown">
-                                                                
-                                                                <span class="caret"></span>
-                                                            </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Upload new version</a></li>
-                                            <li><a href="#">Version 3</a></li>
-                                            <li><a href="#">Version 2</a></li>
-                                            <li><a href="#">Version 1</a></li>
-                                        </ul>
-                                    </div>
-                                    <button type="button" class="btn btn-default attachmentBtn">
-                                                        <i class="fa fa-link" aria-hidden="true"></i>
-                                                    </button>
+                                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                        <li><a class="dropdown-item">Upload a new version</a></li>
+                                        <li><a class="dropdown-item">Version 3</a></li>
+                                        <li><a class="dropdown-item">Version 2</a></li>
+                                        <li><a class="dropdown-item">Version 1</a></li>
+                                    </ul>
                                 </div>
                                 <!-- <button class="waves-effect"><i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>

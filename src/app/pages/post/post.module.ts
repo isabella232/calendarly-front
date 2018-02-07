@@ -1,3 +1,4 @@
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ImgFallbackModule } from 'ngx-img-fallback';
 import { ContinuePipe } from './../../pipes/continue.pipe';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
@@ -22,7 +23,8 @@ import { CalendarService } from '../calendar/calendar.service';
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
-    ImgFallbackModule
+    ImgFallbackModule,
+    BsDropdownModule.forRoot()
     // PostRoutingModule
   ],
   declarations: [CreatePostComponent,PostViewComponent,ContinuePipe],
