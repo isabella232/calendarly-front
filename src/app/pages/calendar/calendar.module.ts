@@ -1,3 +1,5 @@
+import { AddUserComponent } from './../../components/add-user/add-user.component';
+import { FormsModule } from '@angular/forms';
 import { PostModule } from './../post/post.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CalendarService } from './calendar.service';
@@ -12,13 +14,15 @@ const Calendar_ROUTES = [
 
 @NgModule ({
     declarations: [
-        CalendarComponent
+        CalendarComponent,
+        AddUserComponent
     ],
     imports: [
         CommonModule,
         RouterModule.forChild(Calendar_ROUTES),
         ModalModule.forRoot(),
-        PostModule
+        PostModule,
+        FormsModule
     ],
     providers:[CalendarService]
 })

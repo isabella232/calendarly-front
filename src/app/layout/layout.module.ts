@@ -1,3 +1,4 @@
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { PostModule } from './../pages/post/post.module';
 import { ProfileModule } from './../pages/profile/profile.module';
 import { ProfileComponent } from './../pages/profile/profile.component';
@@ -39,7 +40,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ButtonsModule.forRoot(),
     PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
     ProfileModule,
-    PostModule
+    PostModule,
+    ModalModule.forRoot()
   ]
 })
 

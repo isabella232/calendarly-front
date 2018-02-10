@@ -27,6 +27,7 @@ export class CreatePostComponent implements OnInit {
   images=config.images;
   todayDate=new Date()
   minDate = new Date(2017, 5, 10);
+  dateMask=[/[1-9]/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   maxDate = new Date(2018, 9, 15);
   files=[];
   @Output() exit = new EventEmitter();
@@ -86,10 +87,32 @@ export class CreatePostComponent implements OnInit {
 
     deleteFile(file,index)
     {
-        this.postService.deleteAttachment(file).subscribe(res=>{
-            console.log(res)
-            this.files.splice(index,1)
-        })
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            swal.showLoading()
+            if (result.value) {
+                this.postService.deleteAttachment(file).subscribe(res=>{
+                    swal.hideLoading()
+                    console.log(res)
+                    this.files.splice(index,1);
+                    swal(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                      )
+                },er=>{
+                    console.log(er)
+                })
+            }
+          })
+       
     }
 
   @Input() postData;

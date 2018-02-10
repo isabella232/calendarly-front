@@ -12,7 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PostRoutingModule } from './post.routing.module';
 import { CalendarService } from '../calendar/calendar.service';
-
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import { CalendarService } from '../calendar/calendar.service';
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     Ng2ImgFallbackModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TextMaskModule
     // PostRoutingModule
   ],
   declarations: [CreatePostComponent,PostViewComponent,ContinuePipe],
