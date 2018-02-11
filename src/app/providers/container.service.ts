@@ -14,4 +14,5 @@ export class ContainerService {
   customAttributes:any={}
   projectId=9;
   cypheredToken;
+  projectTemplate;
 }

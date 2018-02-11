@@ -1,3 +1,4 @@
+import { SharedService } from './../../providers/shared.service';
 import { PostService } from './../post/post.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
@@ -14,10 +15,23 @@ import { ContainerService } from '../../providers/container.service';
 })
 export class CalendarComponent  {
   @ViewChild('createPost') createPost:ModalDirective
-  constructor(private calendarService:CalendarService,private container:ContainerService,private router:Router,private postService:PostService) { }
+  constructor(private calendarService:CalendarService,
+    private container:ContainerService,private router:Router,
+    private postService:PostService,private sharedService:SharedService) { }
   date:Date;
   currentPost;
+  roles=[];
   fullCalendar;
+  user:any={};
+    addMember()
+    {
+      this.user.role=Number(this.user.role)
+      console.log(this.user)
+        this.calendarService.addMember({project:this.container.projectId,...this.user}).subscribe(res=>{
+          console.log(res)
+        })
+    }
+
   initCalendar(posts?:any[]) {
     this.fullCalendar=$('#calendar')
     
@@ -146,14 +160,15 @@ $(this).css('background-color', 'red');
 
   ngOnInit()
   {
-
+    this.sharedService.getProjectTemplate().subscribe(template=>{
+      this.roles=template.roles;
+      this.user.role=this.roles[0];
+    })
     // this.initCalendar();
     this.postService.getPosts().subscribe(posts=>{
       console.log(posts)
       this.initCalendar(posts);
-
       // this.fullCalendar.fullCalendar('renderEvents', posts)
-
     })
 
     this.postService.getCustomAttributes().subscribe((res:any[])=>{

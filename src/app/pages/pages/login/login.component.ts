@@ -4,7 +4,7 @@ import { AuthService } from './../../../providers/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'toastr-ng2';
+// import { ToastrService } from 'toastr-ng2';
 
 import {ModalDirective} from 'ngx-bootstrap'
 @Component({
@@ -15,7 +15,7 @@ import {ModalDirective} from 'ngx-bootstrap'
 export class LoginComponent implements OnInit {
 
   constructor(private fb:FormBuilder,private authService:AuthService,private router:Router,
-  private container:ContainerService,private toastr:ToastrService) { }
+  private container:ContainerService) { }
 
   loginForm:FormGroup;
   @ViewChild('forgotPasswordModal') forgotPasswordModal:ModalDirective;
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/','calendar'])   ;       
       console.log(res)
     },er=>{
-      this.toastr.error('Username or password not found.')
+      // this.toastr.error('Username or password not found.')
       console.log(er)
     })
   }

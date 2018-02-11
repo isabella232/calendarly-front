@@ -16,6 +16,9 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sharedService.getProjectTemplate().subscribe(res=>{
+      console.log(res)
+    })
   }
 
 }

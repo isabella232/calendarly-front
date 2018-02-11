@@ -5,7 +5,7 @@ import { Component, state } from '@angular/core';
 import { EventsService } from './providers/events.service';
 import { ContainerService } from './providers/container.service';
 import { RouteConfigLoadStart, RouteConfigLoadEnd } from "@angular/router";
-
+import { Spinkit } from 'ng-http-loader/spinkits';
 declare var $:any;
 
 @Component({
@@ -15,6 +15,7 @@ declare var $:any;
 })
 
 export class AppComponent {
+   spinkit = Spinkit;
   title = 'app';
 
   constructor(private eventsService:EventsService,private sharedService:SharedService,private router:Router,private container:ContainerService){}
@@ -28,20 +29,20 @@ export class AppComponent {
   showLoader()
   {
     this.router.events.subscribe(e=>{
-      if(e instanceof RouteConfigLoadStart)
+      if(e instanceof NavigationStart)
       {
-        this.loading=true;
+        // this.loading=true;
       }
-      if(e instanceof RouteConfigLoadEnd)
+      if(e instanceof NavigationEnd)
       {
-        this.loading=false;
+        // this.loading=false;
         this.sharedService.sidebarVisibilitySubject.next(false);
       }
     })
 
-    this.eventsService.showLoader.subscribe(show=>{
-      this.loading=show;
-    })
+    // this.eventsService.showLoader.subscribe(show=>{
+    //   this.loading=show;
+    // })
   }
 
   loading=false;

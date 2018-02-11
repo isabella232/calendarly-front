@@ -67,8 +67,11 @@ export class PostViewComponent  {
       this.comments=comments;
       if(this.comments.length>2)
       {
-        this.visibleComments[0]=this.comments[this.comments.length-2];
-        this.visibleComments[1]=this.comments[this.comments.length-1];
+        // this.visibleComments[0]=this.comments[this.comments.length-2];
+        // this.visibleComments[1]=this.comments[this.comments.length-1];
+        var len=this.comments.length;
+        this.visibleComments=this.comments.slice(len-2,len-1)
+        // this.visibleComments=this.comments.slice(len-1)
         this.currentComments=this.visibleComments;
       }
 
@@ -86,7 +89,7 @@ export class PostViewComponent  {
       console.log(this.comments)
       this.postService.updatePost({comment:body,version:1,id:this.post.id}).subscribe(res=>{
         console.log(res)
-        this.comments.push({
+        this.visibleComments.push({
           comment:body,
           user:this.user
         })

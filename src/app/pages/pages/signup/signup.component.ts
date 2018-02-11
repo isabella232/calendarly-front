@@ -1,4 +1,4 @@
-import { ToastrService } from 'toastr-ng2';
+// import { ToastrService } from 'toastr-ng2';
 import { ContainerService } from '../../../providers/container.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../providers/auth.service';
@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class SignupComponent implements OnInit {
   
     constructor(private fb:FormBuilder,private authService:AuthService,private router:Router,
-    private container:ContainerService,private toastr:ToastrService) { }
+    private container:ContainerService) { }
     signupForm:FormGroup;
   
    validatePassword():ValidatorFn
@@ -72,7 +72,7 @@ export class SignupComponent implements OnInit {
         }
         console.log(res)
       },er=>{
-        this.toastr.error('Username or password not found.')
+        // this.toastr.error('Username or password not found.')
         console.log(er)
         // this.eventsService.notify(er.message,'danger');
       })

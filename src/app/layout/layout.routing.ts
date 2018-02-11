@@ -31,8 +31,9 @@ const LAYOUT_ROUTES: Routes = [
             { path: 'login', loadChildren: '../pages/pages/login/login.module#LoginModule' },
             { path: 'signup', loadChildren: '../pages/pages/signup/signup.module#SignupModule' },]
         },
-        
-
+        {
+            path:'**', redirectTo: 'calendar', pathMatch: 'full' 
+        }
         // Sample Pages'
         // { path: 'sample-pages', loadChildren: '../pages/sample-pages/sample-pages.module#SamplePagesModule' }
         ];

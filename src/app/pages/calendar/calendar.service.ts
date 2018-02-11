@@ -1,10 +1,12 @@
+import { config } from './../../providers/config';
+import { HttpClient } from '@angular/common/http';
 import { PostService } from './../post/post.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CalendarService {
 
-  constructor(private postService:PostService) { }
+  constructor(private postService:PostService,private http:HttpClient) { }
 
   posts=[];
 
@@ -21,15 +23,10 @@ export class CalendarService {
 
   }
 
-  // deletePost(post)
-  // {
-  //   this.postService.posts.forEach((e,index)=>{
-  //     if(e._id===post._id)
-  //     {
-  //       this.postService.posts.splice(index,1);
-  //     }
-  //   })
-  // }
+  addMember(data)
+  {
+    return this.http.post(config.url+'/api/v1/memberships',data)
+  }
 
   // deleteComment(comment)
   // {
