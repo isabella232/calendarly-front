@@ -1,3 +1,4 @@
+import { SharedService } from './../../providers/shared.service';
 import { Router } from '@angular/router';
 import { config } from './../../providers/config';
 import { ContainerService } from './../../providers/container.service';
@@ -7,11 +8,12 @@ import { Injectable } from '@angular/core';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import { isArray } from 'util';
+import { catchError } from 'rxjs/operators/catchError';
 @Injectable()
 export class PostService {
 
   constructor(private http:HttpClient,private container:ContainerService,
-  private router:Router) { }
+  private router:Router,private sharedService:SharedService) { }
 
   createPost(data)
   {
@@ -25,20 +27,14 @@ export class PostService {
       })
       obj.postId=res.id;
       return this.addCustomAttributesToPost(obj)
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error)
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   deleteComment(postId,commentId)
   {
     return this.http.post(config.url+`/api/v1/history/userstory/${postId}/delete_comment?id=${commentId}`,{
       headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error)
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   updatePost(data)
@@ -53,25 +49,21 @@ export class PostService {
       })
       obj.postId=res.id;
       return this.addCustomAttributesToPost(obj)
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error)
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   getComments(postId)
   {
     return this.http.get(config.url+'/api/v1/history/userstory/'+postId,{
       headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error)
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   getCustomAttributes()
   {
-    return this.http.get(config.url+'/api/v1/userstory-custom-attributes?project='+this.container.projectId)
+    return this.http
+    .get(config.url+'/api/v1/userstory-custom-attributes?project='+this.container.projectId)
+    .pipe(catchError(this.sharedService.handleError));
   }
 
   addCustomAttributesToPost(data)
@@ -88,7 +80,7 @@ export class PostService {
       version:1
     },{
       headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
-    })  }
+    }).pipe(catchError(this.sharedService.handleError));  }
 
     createAttachment(data)
     {
@@ -96,7 +88,8 @@ export class PostService {
 
       var headers=new HttpHeaders()
       headers.append('Authorization','Application '+token)
-      return this.http.post(config.url+'/api/v1/userstories/attachments',data,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)}).catch(er=>er)
+      return this.http.post(config.url+'/api/v1/userstories/attachments',data,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)})
+      .pipe(catchError(this.sharedService.handleError));
 
     }
 
@@ -106,7 +99,8 @@ export class PostService {
 
       var headers=new HttpHeaders()
       headers.append('Authorization','Application '+token)
-      return this.http.delete(config.url+'/api/v1/userstories/attachments/'+file.id,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)}).catch(er=>er)
+      return this.http.delete(config.url+'/api/v1/userstories/attachments/'+file.id,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)})
+      .pipe(catchError(this.sharedService.handleError));
 
     }
 
@@ -115,7 +109,8 @@ export class PostService {
       var token=window[this.container.storageStrategy].getItem('cypheredToken');
       var headers=new HttpHeaders()
       headers.append('Authorization','Application '+token)
-      return this.http.delete(config.url+'/api/v1/userstories/'+postId,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)}).catch(er=>er)
+      return this.http.delete(config.url+'/api/v1/userstories/'+postId,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)})
+      .pipe(catchError(this.sharedService.handleError));
 
     }
 
@@ -125,8 +120,8 @@ export class PostService {
 
       var headers=new HttpHeaders()
       headers.append('Authorization','Application '+token)
-      return this.http.get(config.url+`/api/v1/userstories/attachments?object_id=${post.id}\&project=${post.project}`,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)}).catch(er=>er)
-
+      return this.http.get(config.url+`/api/v1/userstories/attachments?object_id=${post.id}\&project=${post.project}`,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)})
+      .pipe(catchError(this.sharedService.handleError));
     }
 
 
@@ -157,10 +152,7 @@ export class PostService {
     var token=window[this.container.storageStrategy].getItem('cypheredToken');
     return this.http.post(config.url+'/api/v1/userstories/'+postId+'/'+(isWatch?'watch':'unwatch'),null,{
       headers:new HttpHeaders().set('Authorization','Application '+token)
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error)
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   mapPostResponse(postData:any)
@@ -198,14 +190,7 @@ export class PostService {
     var token=window[this.container.storageStrategy].getItem('authToken');
     return this.http.get(config.url+'/api/v1/userstories/'+postId).map(post=>{
       return this.mapPostResponse(post)
-    }).catch((err:any) => {
-      if(err.status===404)
-      {
-        this.router.navigate(['/','calendar'])
-      }
-      console.log(err)
-     return Observable.throw(err)
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   
@@ -215,7 +200,8 @@ export class PostService {
 
     var headers=new HttpHeaders()
     headers.append('Authorization','Application '+token)
-    return this.http.patch(config.url+'/api/v1/userstories/attachments/'+file.id,file,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)}).catch(er=>er)
+    return this.http.patch(config.url+'/api/v1/userstories/attachments/'+file.id,file,{headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)})
+    .pipe(catchError(this.sharedService.handleError));
 
   }
 
@@ -227,21 +213,6 @@ export class PostService {
       this.posts=this.mapPostResponse(posts)
       console.log(this.posts)
       return this.posts;
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error)
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
-
-  // mapToPostToTaiga(post)
-  // {
-  //   return {
-  //     ...post,
-  //     tags:post.tags.split(','),
-  //     subject:post.title,
-  //     project:9
-  //   }
-  // }
-
-  
 }

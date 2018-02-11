@@ -1,3 +1,4 @@
+import { SharedService } from './shared.service';
 import { Router } from '@angular/router';
 import { EventsService } from './events.service';
 import { Observable } from 'rxjs/Observable';
@@ -6,13 +7,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {config} from './config';
 import 'rxjs';
+import { catchError } from 'rxjs/operators/catchError';
 
 @Injectable()
 export class AuthService {
 
   constructor(private http:HttpClient,private container:ContainerService,
     private eventService:EventsService,private eventsService:EventsService,
-  private router:Router) { }
+  private router:Router,private sharedService:SharedService) { }
 
   authenticateUser(data)
   {
@@ -23,11 +25,7 @@ export class AuthService {
     this.container.isAuthenticated=true;
     this.eventService.userUpdated.next(res);    
     return this.getToken();
-    }).catch((error:any) => {
-      console.log(error)
-      // this.handleError(error)
-     return Observable.throw(error || 'Server error')
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   forgotPassword(userInfo)
@@ -36,11 +34,7 @@ export class AuthService {
     .map(res=>{
       console.log(res)
       return res;
-    }).catch((error:any) => {
-      console.log(error)
-      // this.handleError(error)
-     return Observable.throw(error || 'Server error')
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   signupUser(data)
@@ -52,10 +46,7 @@ export class AuthService {
     this.eventService.userUpdated.next(res);
     this.container.user=res;
     return res;
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error || 'Server error')
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
   
 
@@ -74,10 +65,7 @@ export class AuthService {
     // this.eventService.userUpdated.next(res);
     
     return this.validateToken();
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error || 'Server error')
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   validateToken()
@@ -96,10 +84,7 @@ export class AuthService {
     this.container.authHeader='Application';
     // return this.getUserDetails();
     return res;
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error || 'Server error');
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   getUserDetails()
@@ -109,10 +94,7 @@ export class AuthService {
       this.container.user=res;
       console.log(res);
       return res;
-    }).catch((error:any) => {
-      console.log(error)
-     return Observable.throw(error || 'Server error');
-    });
+    }).pipe(catchError(this.sharedService.handleError));
   }
 
   handleError(er)

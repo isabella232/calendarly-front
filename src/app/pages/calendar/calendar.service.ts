@@ -1,12 +1,16 @@
+import { SharedService } from './../../providers/shared.service';
 import { config } from './../../providers/config';
 import { HttpClient } from '@angular/common/http';
 import { PostService } from './../post/post.service';
 import { Injectable } from '@angular/core';
-
+// import 'rxjs/operators';
+// import 'rxjs'
+import { catchError } from 'rxjs/operators/catchError';
 @Injectable()
 export class CalendarService {
 
-  constructor(private postService:PostService,private http:HttpClient) { }
+  constructor(private postService:PostService,private http:HttpClient,
+  private sharedService:SharedService) { }
 
   posts=[];
 
@@ -25,7 +29,7 @@ export class CalendarService {
 
   addMember(data)
   {
-    return this.http.post(config.url+'/api/v1/memberships',data)
+    return this.http.post(config.url+'/api/v1/memberships',data).pipe(catchError(this.sharedService.handleError));
   }
 
   // deleteComment(comment)

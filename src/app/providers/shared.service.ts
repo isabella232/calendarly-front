@@ -1,8 +1,10 @@
+import { Observable } from 'rxjs/Observable';
 import { ContainerService } from './container.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { config } from './config';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { element } from 'protractor';
 
 @Injectable()
 export class SharedService {
@@ -30,7 +32,6 @@ export class SharedService {
         this.maThemeSubject.next(this.maTheme)
     }
 
-<<<<<<< HEAD
     getProjectTemplate()
     {
         var token=this.container.cypheredToken;
@@ -43,25 +44,16 @@ export class SharedService {
     }
 
     constructor(private http:HttpClient,private container:ContainerService)  {
-=======
-    // getProjectTemplate()
-    // {
-    //     var token=this.container.cypheredToken;
-    //     var headers=new HttpHeaders();
-    //     headers.append('Application',token)
-    //     return this.http.get(config.url+'/api/v1/project-templates').map(res=>{
-    //         this.container.projectTemplate=res[0];
-    //         return res[0];
-    //     })
-    // }
-
-    constructor(private http:HttpClient)  {
->>>>>>> a6147bd67abec95db8b1f0a3c8666e8e3846dcad
         // Hidden the sidebar by default
         this.sidebarVisible = false
 
         // Set default theme as green
         this.maTheme = 'green'
+    }
+
+    handleError(er)
+    {
+        return Observable.throw(er || 'Server error')
     }
 
 
