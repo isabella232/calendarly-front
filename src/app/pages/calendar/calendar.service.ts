@@ -53,7 +53,7 @@ export class CalendarService {
 
   addPost(event)
   {
-    this.postService.posts.push(event)
+    this.postService.posts.push(event);
   }
 
 
