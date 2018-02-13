@@ -15,7 +15,7 @@ const Calendar_ROUTES = [
 @NgModule ({
     declarations: [
         CalendarComponent,
-        AddUserComponent
+        // AddUserComponent
     ],
     imports: [
         CommonModule,

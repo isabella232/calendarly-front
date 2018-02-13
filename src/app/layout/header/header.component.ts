@@ -1,3 +1,5 @@
+import { ContainerService } from './../../providers/container.service';
+import { CalendarService } from './../../pages/calendar/calendar.service';
 import { SharedService } from './../../providers/shared.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -17,7 +19,38 @@ export class HeaderComponent implements OnInit {
     this.sharedService.setTheme(this.maThemeModel)
   }
 
-  constructor(private sharedService: SharedService) {
+  // searchtext(text)
+  // {
+  //   this.sharedService.searchtext(text).subscribe(res=>{
+  //     console.log(res);
+  //   })
+  // }
+
+  createItem(type){
+    console.log(type);
+    if(type==='post')
+    {
+      this.sharedService.createPostSubject.next();
+    }
+
+    if(type=='topic')
+    {
+      this.sharedService.createTopicSubject.next();
+    }
+  }
+  
+  addMember()
+  {
+    this.user.role=Number(this.user.role)
+    console.log(this.user)
+      this.calendarService.addMember({project:this.container.projectId,...this.user}).subscribe(res=>{
+        console.log(res)
+      })
+  }
+
+
+  constructor(private sharedService: SharedService,private calendarService:CalendarService,
+  private container:ContainerService) {
     sharedService.maThemeSubject.subscribe((value) => {
       this.maThemeModel = value
     })
@@ -79,8 +112,12 @@ export class HeaderComponent implements OnInit {
       }
     ]
   }
-
+  roles=[];
+  user:any={};
   ngOnInit() {
-
+    this.sharedService.getProjectTemplate().subscribe(template=>{
+      this.roles=template.roles;
+      this.user.role=this.roles[0];
+    })
   }
 }

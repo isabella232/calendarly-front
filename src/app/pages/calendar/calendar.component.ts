@@ -15,6 +15,7 @@ import { ContainerService } from '../../providers/container.service';
 })
 export class CalendarComponent  {
   @ViewChild('createPost') createPost:ModalDirective
+  @ViewChild('createTopic') createTopic:ModalDirective
   constructor(private calendarService:CalendarService,
     private container:ContainerService,private router:Router,
     private postService:PostService,private sharedService:SharedService) { }
@@ -160,10 +161,18 @@ $(this).css('background-color', 'red');
 
   ngOnInit()
   {
-    this.sharedService.getProjectTemplate().subscribe(template=>{
-      this.roles=template.roles;
-      this.user.role=this.roles[0];
+    this.sharedService.createPostSubject.subscribe(()=>{
+      this.createPost.show()
     })
+
+    this.sharedService.createTopicSubject.subscribe(()=>{
+      this.createTopic.show();
+    })
+
+    // this.sharedService.getProjectTemplate().subscribe(template=>{
+    //   this.roles=template.roles;
+    //   this.user.role=this.roles[0];
+    // })
     // this.initCalendar();
     this.postService.getPosts().subscribe(posts=>{
       console.log(posts)

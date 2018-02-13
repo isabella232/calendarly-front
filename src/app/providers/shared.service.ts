@@ -12,7 +12,9 @@ export class SharedService {
     // Sidebar visibility
     sidebarVisible: boolean
     sidebarVisibilitySubject: Subject<boolean> = new Subject<boolean>()
-
+    createPostSubject: Subject<boolean> = new Subject<boolean>();
+    createTopicSubject: Subject<boolean> = new Subject<boolean>();
+    
     toggleSidebarVisibilty() {
         this.sidebarVisible = !this.sidebarVisible
         this.sidebarVisibilitySubject.next(this.sidebarVisible)
@@ -41,6 +43,11 @@ export class SharedService {
             this.container.projectTemplate=res[0];
             return res[0];
         })
+    }
+
+    searchtext(text)
+    {
+        return this.http.get(config.url+`/api/v1/search?project=${this.container.projectId}\&text=`+text)
     }
 
     constructor(private http:HttpClient,private container:ContainerService)  {

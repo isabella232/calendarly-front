@@ -1,3 +1,4 @@
+import { CreateTopicComponent } from './create-topic/create-topic.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { Ng2ImgFallbackModule } from 'ng2-img-fallback';
 import { ContinuePipe } from './../../pipes/continue.pipe';
@@ -13,6 +14,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PostRoutingModule } from './post.routing.module';
 import { CalendarService } from '../calendar/calendar.service';
 import { TextMaskModule } from 'angular2-text-mask';
+import { ColorPickerModule } from 'ng2-color-picker';
 
 @NgModule({
   imports: [
@@ -25,10 +27,12 @@ import { TextMaskModule } from 'angular2-text-mask';
     Ng2ImgFallbackModule,
     BsDropdownModule.forRoot(),
     TextMaskModule
+    // ,
+    // ColorPickerModule
     // PostRoutingModule
   ],
-  declarations: [CreatePostComponent,PostViewComponent,ContinuePipe],
-  exports:[CreatePostComponent,PostViewComponent],
+  declarations: [CreatePostComponent,PostViewComponent,ContinuePipe,CreateTopicComponent],
+  exports:[CreatePostComponent,PostViewComponent,CreateTopicComponent],
   providers:[PostService]
 })
 export class PostModule { }

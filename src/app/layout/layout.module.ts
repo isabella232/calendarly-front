@@ -1,3 +1,5 @@
+import { CalendarService } from './../pages/calendar/calendar.service';
+import { AddUserComponent } from './../components/add-user/add-user.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PostModule } from './../pages/post/post.module';
 import { ProfileModule } from './../pages/profile/profile.module';
@@ -18,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './header/search/search.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationTriggerComponent } from './header/navigation-trigger/navigation-trigger.component';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 // const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true
@@ -29,7 +32,8 @@ import { NavigationTriggerComponent } from './header/navigation-trigger/navigati
     HeaderComponent,
     SearchComponent,
     NavigationComponent,
-    NavigationTriggerComponent
+    NavigationTriggerComponent,
+    AddUserComponent
   ],
   imports: [
     CommonModule,
@@ -41,8 +45,10 @@ import { NavigationTriggerComponent } from './header/navigation-trigger/navigati
     // PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
     ProfileModule,
     PostModule,
-    ModalModule.forRoot()
-  ]
+    ModalModule.forRoot(),
+    TypeaheadModule.forRoot()
+  ],
+  providers:[CalendarService]
 })
 
 export class LayoutModule {  }

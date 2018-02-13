@@ -67,34 +67,23 @@
         </li>
 
         <li dropdown class="d-none d-sm-inline-block">
-            <a dropdownToggle><i class="zmdi zmdi-apps"></i></a>
+            <a dropdownToggle><i class="zmdi zmdi-collection-plus"></i></a>
 
             <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
                 <div class="row app-shortcuts">
-                    <a class="col-4 app-shortcuts__item" href="">
+                    <a class="col-4 app-shortcuts__item" (click)="createItem('post')">
                         <i class="zmdi zmdi-calendar bg-red"></i>
-                        <small class="">Calendar</small>
+                        <small class="">Add Post</small>
                     </a>
-                    <a class="col-4 app-shortcuts__item" href="">
+                    <a class="col-4 app-shortcuts__item" (click)="createItem('topic')">
                         <i class="zmdi zmdi-file-text bg-blue"></i>
-                        <small class="">Files</small>
+                        <small class="">Add Topic</small>
                     </a>
-                    <a class="col-4 app-shortcuts__item" href="">
-                        <i class="zmdi zmdi-email bg-teal"></i>
-                        <small class="">Email</small>
+                    <a class="col-4 app-shortcuts__item" (click)="addUserModal.show()">
+                        <i class="zmdi zmdi-plus-circle bg-blue"></i>
+                        <small class="">Add Member</small>
                     </a>
-                    <a class="col-4 app-shortcuts__item" href="">
-                        <i class="zmdi zmdi-trending-up bg-blue-grey"></i>
-                        <small class="">Reports</small>
-                    </a>
-                    <a class="col-4 app-shortcuts__item" href="">
-                        <i class="zmdi zmdi-view-headline bg-orange"></i>
-                        <small class="">News</small>
-                    </a>
-                    <a class="col-4 app-shortcuts__item" href="">
-                        <i class="zmdi zmdi-image bg-light-green"></i>
-                        <small class="">Gallery</small>
-                    </a>
+
                 </div>
             </div>
         </li>
@@ -151,3 +140,19 @@
     </ul>
 
 </header>
+
+<div bsModal #addUserModal="bs-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title pull-left">Add a member</h5>
+            </div>
+            <div class="modal-body">
+                <app-add-user [roles]="roles"></app-add-user>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" style="width: 100%;" (click)="addMember()">Send Invitation </button>
+            </div>
+        </div>
+    </div>
+</div>
