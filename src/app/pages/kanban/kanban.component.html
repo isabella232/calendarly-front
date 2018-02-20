@@ -1,0 +1,43 @@
+<div class="kanban-board" [style.width.px]="(kanbanBoard.length*330)">
+    <div class="row">
+        <div style="width:300px;margin:0 10px;" *ngFor="let board of kanbanBoard">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card" style="padding: 15px;">
+                        <div class="card-body" style="padding:0;">
+                            <h4 class="card-title">{{board.title}}</h4>
+
+                            <div class="actions">
+                                <div dropdown>
+                                    <i dropdownToggle class="actions__item zmdi zmdi-plus-circle"></i>
+                                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item">Add a post</a>
+                                        <a class="dropdown-item">Refresh</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="padding:0;" *ngFor="let card of board.data">
+                                <div class="card-body">
+                                    <h2 class="card-title">
+                                        {{card.title}}
+                                    </h2>
+                                    <div class="actions">
+                                        <div dropdown>
+                                            <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>
+                                            <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item">Edit </a>
+                                                <a class="dropdown-item">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text">{{card.body}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

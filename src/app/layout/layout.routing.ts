@@ -12,6 +12,7 @@ const LAYOUT_ROUTES: Routes = [
         //Home
         { path: '', redirectTo: 'calendar', pathMatch: 'full' },
         { path: 'calendar', loadChildren: '../pages/calendar/calendar.module#CalendarModule' },
+        { path: 'kanban', loadChildren: '../pages/kanban/kanban.module#KanbanModule' },
         {path:'profile',children:[
             {path:'',component:ProfileComponent}
         ]},

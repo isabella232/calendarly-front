@@ -35,6 +35,19 @@ bootstrap-tagsinput {
     // color: #000;
 }
 
+.topicBadge {
+    margin: 0 5px;
+}
+
+.plus-btn,
+.badge {
+    cursor: pointer;
+}
+
+span.plus-btn {
+    font-size: 18px;
+}
+
 .upload-logo {
     width: 100%;
     display: block;

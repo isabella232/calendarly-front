@@ -161,9 +161,9 @@ $(this).css('background-color', 'red');
 
   ngOnInit()
   {
-    this.sharedService.createPostSubject.subscribe(()=>{
-      this.createPost.show()
-    })
+    // this.sharedService.createPostSubject.subscribe(()=>{
+    //   this.createPost.show()
+    // })
 
     this.sharedService.createTopicSubject.subscribe(()=>{
       this.createTopic.show();

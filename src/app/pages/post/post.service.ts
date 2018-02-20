@@ -128,8 +128,9 @@ export class PostService {
   {
     console.log(post)
     post.start=post.date;
-    post.tags=post.tags.split(',');
-    post.project=9;
+    post.socialMedia=post.socialMedia.join(',')
+    // post.tags=post.tags.split(',');
+    post.project=this.container.projectId;
     post.subject=post.title;
     post.assigned_to=this.container.user.id;
     post.description_html=post.description;

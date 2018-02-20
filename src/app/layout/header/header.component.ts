@@ -1,8 +1,12 @@
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { PostService } from './../../pages/post/post.service';
 import { ContainerService } from './../../providers/container.service';
 import { CalendarService } from './../../pages/calendar/calendar.service';
 import { SharedService } from './../../providers/shared.service';
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import * as _ from 'underscore';
+declare var $:any
+declare var swal:any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -17,6 +21,44 @@ export class HeaderComponent implements OnInit {
 
   setTheme() {
     this.sharedService.setTheme(this.maThemeModel)
+  }
+
+  submitForm(post)
+  {
+    console.log(post,'post')
+     //  var post=this.createPost.value;
+     // this.createPost.value.description=this.postDescription;
+      // console.log(post);
+
+     this.postService.createPost(post).subscribe(res=>{
+         console.log(res)
+         _.extend(post,res);
+         this.addPost(post);
+     },er=>{ 
+       console.log(er)
+     })
+
+
+      
+  }
+  @ViewChild('createPost') createPost:ModalDirective
+  @ViewChild('createTopic') createTopic:ModalDirective
+
+  addPost(post)
+  {
+
+    var mappedPost=this.calendarService.mapPostToCalendar(post);
+    console.log(mappedPost)
+     swal('Post Added','Post has been added to your calendar','success').then(()=>{
+         this.calendarService.addPost(mappedPost);
+         $("#calendar").fullCalendar( 'renderEvent', mappedPost ,true);            
+        //  $('.modal').modal('hide');
+         this.createPost.hide();
+         // this.createPost.reset();
+         // this.createPost.markAsUntouched();
+         
+     })
+     
   }
 
   // searchtext(text)
@@ -38,7 +80,10 @@ export class HeaderComponent implements OnInit {
       this.sharedService.createTopicSubject.next();
     }
   }
-  
+  exit()
+  {
+    this.createPost.hide();
+  }
   addMember()
   {
     this.user.role=Number(this.user.role)
@@ -47,9 +92,9 @@ export class HeaderComponent implements OnInit {
         console.log(res)
       })
   }
+  date=new Date();
 
-
-  constructor(private sharedService: SharedService,private calendarService:CalendarService,
+  constructor(private postService:PostService,private sharedService: SharedService,private calendarService:CalendarService,
   private container:ContainerService) {
     sharedService.maThemeSubject.subscribe((value) => {
       this.maThemeModel = value

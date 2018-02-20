@@ -5,6 +5,7 @@ import { PostService } from './../post.service';
 import { CalendarService } from './../../calendar/calendar.service';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../../../providers/shared.service';
 declare var $:any;
 declare var swal:any;
 @Component({
@@ -15,11 +16,12 @@ declare var swal:any;
 export class PostViewComponent  {
     images=config.images;
   constructor(private route:ActivatedRoute,private router:Router,private eventsService:EventsService,
-  private postService:PostService,private container:ContainerService) { }
+  private postService:PostService,private container:ContainerService,private sharedService:SharedService) { }
   post:any;
   date;
   time;
   comments=[];
+  watchers=[];
   commentBody;
   user:any;
   ngOnInit() {
@@ -28,6 +30,11 @@ export class PostViewComponent  {
       console.log(param)
     this.postService.getPost(Number(param.id)).subscribe(post=>{
       this.post=post;
+      this.post.watchers.forEach(id=>{
+        this.sharedService.getUserDetails(id).subscribe(user=>{
+          this.watchers.push(user);
+        })
+      })
       this.getComments(this.post.id)
       // this.date=post.start.toDate()
       this.time=post.date.toDate();
@@ -43,7 +50,9 @@ export class PostViewComponent  {
   watchPost()
   {
     this.postService.toggleWatchPost(this.post.id,!this.post.is_watcher).subscribe(res=>{
-      console.log(res)
+      this.post.is_watcher=!this.post.is_watcher
+      console.log(res);
+      // this.watchPost
     })
   }
   isCommentOpen=false;

@@ -19,3 +19,18 @@
 .card-content {
     padding: 20px;
 }
+
+.button-container {
+    button {
+        width: 185px;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .button-container {
+        button {
+            width: 100%;
+        }
+    }
+}

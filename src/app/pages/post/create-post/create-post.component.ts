@@ -1,3 +1,4 @@
+import { SharedService } from './../../../providers/shared.service';
 import { Router } from '@angular/router';
 import { config } from './../../../providers/config';
 import { ContainerService } from './../../../providers/container.service';
@@ -18,7 +19,7 @@ import { EventsService } from '../../../providers/events.service';
 export class CreatePostComponent implements OnInit {
 
   constructor(private fb:FormBuilder,private container:ContainerService,private postService:PostService,
-    private eventsService:EventsService,
+    private eventsService:EventsService,private sharedService:SharedService,
     private router:Router
 ) { }
   createPost:FormGroup;
@@ -41,8 +42,9 @@ export class CreatePostComponent implements OnInit {
             description:$('.html-editor').summernote('code'),
             date:this.date,
             time:this.time,
-            tags:$('#tagsinput').val(),
-            socialMedia:$("#socialMedia").val()
+            tags:this.tags,
+            socialMedia:this.profiles,
+            topics:this.topics
         })
 
         console.log(this.createPost.value)
@@ -55,18 +57,19 @@ export class CreatePostComponent implements OnInit {
         this.isSubmitClicked=true;
         if(this.createPost.valid)
         {
-            // console.log(this.createPost.value)
-            // var post=this.postService.mapPostToCalendarly(this.createPost.value)
-
-            // console.log(post)
             this.formSubmitted.emit(this.postService.mapPostToCalendarly(this.createPost.value));
         }
     }
 
-    mapPostToCalendarly(post)
+    suggestedTopics=[];
+    suggestTopics()
     {
-
-
+        // var topic=this.topic;
+        // console.log(this.createPost.value.topic)
+        this.sharedService.searchtext(this.topic).subscribe((res:any)=>{
+            console.log(res);
+            this.suggestedTopics=res.epics;
+        })
     }
 
     toggleVisibility(file)
@@ -200,11 +203,104 @@ export class CreatePostComponent implements OnInit {
     this.formUpdated.emit(this.postService.mapPostToTaiga(this.postData));
     
   }
+  topics=['Topic-1','Topic-2'];
+  tags=['Tag-A','Tag-B'];
+  profiles=['Facebook-A','Linked-In'];
+  topic;
+  tag;
+  profile;
+  
+  addTopic(topic)
+  {
+      if(this.topic==='')
+      {
+          return false;
+      }
+      if(this.topics.indexOf(topic)===-1)
+      {
+        this.topics.push(topic);
+      }
+      this.topic=''
+  }
+
+
+  addTag(tag)
+  {
+      if(this.tag==='')
+      {
+          return false;
+      }
+      if(this.tags.indexOf(tag)===-1)
+      {
+        this.tags.push(tag);
+      }
+      this.tag=''
+  }
+
+ 
+  addProfile(profile)
+  {
+      if(this.profile==='')
+      {
+          return false;
+      }
+      if(this.profiles.indexOf(profile)===-1)
+      {
+        this.profiles.push(profile);
+      }
+      this.profile=''
+  }
+
+  removeTopic(topic)
+  {
+      var index;
+      this.topics.forEach((o,i)=>{
+          if(o===topic)
+          {
+             index=i;
+          }
+      })
+
+      this.topics.splice(index,1)
+  }
+
+
+  removeTag(tag)
+  {
+      var index;
+      this.tags.forEach((o,i)=>{
+          if(o===tag)
+          {
+             index=i;
+          }
+      })
+
+      this.tags.splice(index,1)
+  }
+
+
+  removeProfile(profile)
+  {
+      var index;
+      this.profiles.forEach((o,i)=>{
+          if(o===profile)
+          {
+             index=i;
+          }
+      })
+
+      this.profiles.splice(index,1)
+  }
 
   ngOnInit() {
     //   this.time=this.date;
       console.log(this.postData)
     this.initForm();
+
+    $("#topicTag").on('keyup',()=>{
+        console.log('hello')
+        this.suggestTopics();
+    })
     // this.initJqueryData();
    
     // console.log(this.postData)
@@ -214,7 +310,8 @@ export class CreatePostComponent implements OnInit {
         //   this.date=this.postData.date;
         // this.time=this.postData.time;
           this.createPost.patchValue(this.postData);
-          console.log('data found');
+          this.topics=this.postData.tags.split(',');
+          console.log('data found',this.postData);
 
           this.postService.getAttachments(this.postData).subscribe((files:any[])=>{
               console.log(files)

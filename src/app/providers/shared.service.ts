@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs/operators/catchError';
 import { Observable } from 'rxjs/Observable';
 import { ContainerService } from './container.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -5,7 +6,9 @@ import { config } from './config';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { element } from 'protractor';
+import { EventsService } from './events.service';
 
+// import {catchError}
 @Injectable()
 export class SharedService {
 
@@ -50,7 +53,8 @@ export class SharedService {
         return this.http.get(config.url+`/api/v1/search?project=${this.container.projectId}\&text=`+text)
     }
 
-    constructor(private http:HttpClient,private container:ContainerService)  {
+    constructor(private http:HttpClient,private container:ContainerService,
+    private eventsService:EventsService)  {
         // Hidden the sidebar by default
         this.sidebarVisible = false
 
@@ -62,6 +66,17 @@ export class SharedService {
     {
         return Observable.throw(er || 'Server error')
     }
+
+
+  getUserDetails(id)
+  {
+    return this.http.get(config.url+`/api/v1/users/`+id).map((res:any)=>{
+      this.eventsService.userUpdated.next(res);
+      this.container.user=res;
+      console.log(res);
+      return res;
+    }).pipe(catchError(this.handleError));
+  }
 
 
 }

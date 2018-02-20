@@ -15,6 +15,7 @@ import { PostRoutingModule } from './post.routing.module';
 import { CalendarService } from '../calendar/calendar.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ColorPickerModule } from 'ng2-color-picker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { ColorPickerModule } from 'ng2-color-picker';
     TimepickerModule.forRoot(),
     Ng2ImgFallbackModule,
     BsDropdownModule.forRoot(),
-    TextMaskModule
+    TextMaskModule,
+    TypeaheadModule
     // ,
     // ColorPickerModule
     // PostRoutingModule

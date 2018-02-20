@@ -10,28 +10,51 @@
 
         <div class="col-md-12">
             <div class="form-group">
-                <label for="topic">Topics</label>
-                <input formControlName="topic" value="Topic-1,Topic-2" data-role="tagsinput" type="text" class="form-control tagsinput form-control-sm">
+                <label for="topic">Topics</label><br>
+                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let topic of topics">{{topic}} <span (click)="removeTopic(topic)">X</span></span>
+                <div class="input-group">
+                    <div class="form-group" style="margin-top: 10px;">
+                        <input id="topicTag" (typeaheadOnSelect)="addTopic($event.value)" typeaheadOptionField="subject" (keydown)="suggestTopics()" [typeahead]="suggestedTopics" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" [(ngModel)]="topic" [ngModelOptions]="{standalone: true}"
+                            value="Topic-1,Topic-2" data-role="tagsinput" type="text" class="form-control form-control-sm">
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <span class="input-group-addon plus-btn" (click)="addTopic(topic)"><i class="zmdi zmdi-plus-circle plus-btn"></i></span>
+                </div>
 
                 <i class="form-group__bar"></i>
+                <!-- <button (click)="addTopic(topic)">Add Topic</button> -->
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
-                <label for="tags">Tags</label>
-                <input formControlName="tags" id="tagsinput" value="Tag-A,Tag-B" data-role="tagsinput" type="text" class="form-control tagsinput form-control-sm">
+                <label for="topic">Tags</label><br>
+                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let tag of tags">{{tag}} <span (click)="removeTag(tag)">X</span></span>
+                <div class="input-group">
+                    <div class="form-group" style="margin-top: 10px;">
+                        <input id="topicTag1" [(ngModel)]="tag" [ngModelOptions]="{standalone: true}" value="Tag-A,Tag-B" data-role="tagsinput" type="text" class="form-control form-control-sm">
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <span class="input-group-addon plus-btn" (click)="addTag(tag)"><i class="zmdi zmdi-plus-circle"></i></span>
+                </div>
                 <i class="form-group__bar"></i>
+                <!-- <button (click)="addTopic(topic)">Add Topic</button> -->
             </div>
         </div>
-
-
         <div class="col-md-12">
             <div class="form-group">
-                <label for="social">Social Profiles</label>
-                <input formControlName="socialMedia" value="Facebook,Linkedin" data-role="tagsinput" type="text" id="socialMedia" class="form-control tagsinput form-control-sm">
+                <label for="topic">Social Profile</label><br>
+                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let profile of profiles">{{profile}} <span (click)="removeProfile(profile)">X</span></span>
+                <div class="input-group">
+                    <div class="form-group" style="margin-top: 10px;">
+                        <input id="topicTag3" [(ngModel)]="profile" [ngModelOptions]="{standalone: true}" value="Facebook-A,Linked-In" data-role="tagsinput" type="text" class="form-control form-control-sm">
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <span class="input-group-addon plus-btn" (click)="addProfile(profile)"><i class="zmdi zmdi-plus-circle plus-btn"></i></span>
+                </div>
                 <i class="form-group__bar"></i>
             </div>
         </div>
+
 
     </div>
 </form>

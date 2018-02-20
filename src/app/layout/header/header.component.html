@@ -71,11 +71,11 @@
 
             <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
                 <div class="row app-shortcuts">
-                    <a class="col-4 app-shortcuts__item" (click)="createItem('post')">
+                    <a class="col-4 app-shortcuts__item" (click)="createPost.show()">
                         <i class="zmdi zmdi-calendar bg-red"></i>
                         <small class="">Add Post</small>
                     </a>
-                    <a class="col-4 app-shortcuts__item" (click)="createItem('topic')">
+                    <a class="col-4 app-shortcuts__item" (click)="createTopic.show()">
                         <i class="zmdi zmdi-file-text bg-blue"></i>
                         <small class="">Add Topic</small>
                     </a>
@@ -152,6 +152,38 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" style="width: 100%;" (click)="addMember()">Send Invitation </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div bsModal #createTopic="bs-modal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title pull-left">Create a Topic</h5>
+            </div>
+            <div class="modal-body">
+                <app-create-topic (exit)="exit()"></app-create-topic>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<div bsModal #createPost="bs-modal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title pull-left">Create a Post</h5>
+            </div>
+            <div class="modal-body">
+                <app-create-post (formSubmitted)="submitForm($event)" (exit)="exit()" [date]="date" [time]="date"></app-create-post>
+                <!-- Curabitur blandit mollis lacus. Nulla sit amet est. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Cras sagittis. -->
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-link">Save changes</button>
+                <button type="button" class="btn btn-link" (click)="ModalLarge.hide()">Close</button> -->
             </div>
         </div>
     </div>
