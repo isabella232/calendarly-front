@@ -1,15 +1,11 @@
 // Functions
 @import "../node_modules/bootstrap/scss/functions";
-
-
 // Site + Bootstrap Variable and Mixins
 @import "./assets/scss/variables";
 @import "../node_modules/bootstrap/scss/variables";
 @import "./assets/scss/mixins";
 @import "./assets/scss/bootstrap-overrides/mixins";
 @import "./assets/scss/bootstrap-imports";
-
-
 // Site Styles
 @import "./assets/scss/fonts";
 @import "./assets/scss/generics";
@@ -20,8 +16,6 @@
 @import "./assets/scss/listview";
 @import "./assets/scss/page-loader";
 @import "./assets/scss/theme";
-
-
 // Bootstrap Overrides
 @import "./assets/scss/bootstrap-overrides/dropdown";
 @import "./assets/scss/bootstrap-overrides/media";
@@ -46,8 +40,6 @@
 @import "./assets/scss/bootstrap-overrides/sortable";
 @import "./assets/scss/bootstrap-overrides/tabs";
 @import "./assets/scss/bootstrap-overrides/tooltip";
-
-
 // Vendor Overrides
 @import "./assets/scss/vendor-overrides/flot";
 @import "./assets/scss/vendor-overrides/sparklines";
@@ -57,7 +49,5 @@
 @import "./assets/scss/vendor-overrides/nouislider";
 @import "./assets/scss/vendor-overrides/easypiecharts";
 @import "./assets/scss/vendor-overrides/perfect-scrollbar";
-
-
 // App Global Styles
 @import "./assets/scss/misc";

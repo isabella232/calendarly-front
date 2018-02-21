@@ -4,7 +4,17 @@
 }
 
 .kanban-board {
-    padding: 15px;
-    overflow-x: scroll;
+    // padding: 15px;
+    overflow: auto;
     // width: 120%;
+}
+
+.kanban-scroll {
+    width: 2000px;
+    height: 100vh;
+}
+
+.card-container {
+    display: inline-block;
+    float: left;
 }

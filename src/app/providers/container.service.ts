@@ -15,4 +15,5 @@ export class ContainerService {
   projectId=9;
   cypheredToken;
   projectTemplate;
+  posts=[];
 }

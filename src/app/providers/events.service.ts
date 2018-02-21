@@ -8,6 +8,7 @@ export class EventsService {
 
   toggleChat=new Subject<any>()
   toggleSidebar=new Subject<any>();
+  getProjectTemplate=new Subject<any>();
   constructor() { }
 
     userUpdated=new Subject<any>();

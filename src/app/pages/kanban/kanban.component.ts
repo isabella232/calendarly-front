@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { EventsService } from './../../providers/events.service';
 import { SharedService } from './../../providers/shared.service';
 import { PostService } from './../post/post.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
@@ -18,99 +20,99 @@ export class KanbanComponent  {
   @ViewChild('createTopic') createTopic:ModalDirective
   constructor(private calendarService:KanbanService,
     private container:ContainerService,private router:Router,
-    private postService:PostService,private sharedService:SharedService) { }
+    private postService:PostService,private sharedService:SharedService,
+  private eventsService:EventsService) { }
 
-    ngOninit()
-    {}
-
-    kanbanBoard=[
-      {
-        title:'To Be Groomed',
-        index:0,
-        data:[
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          },
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          },
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          }
-        ]
-      },
-      {
-        title:'Grooming',
-        index:1,
-        data:[
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          }
-        ]
-      },
-      {
-        title:'To Develop',
-        index:4,
-        data:[]
-      },
-      {
-        title:'To Be Groomed',
-        index:0,
-        data:[
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          },
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          },
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          }
-        ]
-      },
-      {
-        title:'To Be Groomed',
-        index:0,
-        data:[
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          },
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          },
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          }
-        ]
-      },
-      {
-        title:'To Be Groomed',
-        index:0,
-        data:[
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          },
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          },
-          {
-            title:'As a user...',
-            body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
-          }
-        ]
-      }
-    ]
+ 
+    kanbanBoard:Observable<any>=this.sharedService.getKanbanLayout();
+    // kanbanBoard=[
+    //   {
+    //     title:'To Be Groomed',
+    //     index:0,
+    //     data:[
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       },
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       },
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     title:'Grooming',
+    //     index:1,
+    //     data:[
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     title:'To Develop',
+    //     index:4,
+    //     data:[]
+    //   },
+    //   {
+    //     title:'To Be Groomed',
+    //     index:0,
+    //     data:[
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       },
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       },
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     title:'To Be Groomed',
+    //     index:0,
+    //     data:[
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       },
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       },
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     title:'To Be Groomed',
+    //     index:0,
+    //     data:[
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       },
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       },
+    //       {
+    //         title:'As a user...',
+    //         body:'#16As a User, I would like to send an invite (SHARE Button) to a Stakeholder to get his/her feedback without enforcing registration. '
+    //       }
+    //     ]
+    //   }
+    // ]
 
   }

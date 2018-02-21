@@ -1,3 +1,4 @@
+import { EventsService } from './../../providers/events.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { PostService } from './../../pages/post/post.service';
 import { ContainerService } from './../../providers/container.service';
@@ -95,7 +96,7 @@ export class HeaderComponent implements OnInit {
   date=new Date();
 
   constructor(private postService:PostService,private sharedService: SharedService,private calendarService:CalendarService,
-  private container:ContainerService) {
+  private container:ContainerService,private eventsService:EventsService) {
     sharedService.maThemeSubject.subscribe((value) => {
       this.maThemeModel = value
     })
@@ -161,6 +162,8 @@ export class HeaderComponent implements OnInit {
   user:any={};
   ngOnInit() {
     this.sharedService.getProjectTemplate().subscribe(template=>{
+      this.container.projectTemplate=template[1];
+      this.eventsService.getProjectTemplate.next(template)
       this.roles=template.roles;
       this.user.role=this.roles[0];
     })

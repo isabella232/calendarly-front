@@ -1,3 +1,4 @@
+import { Observer } from 'rxjs/Observer';
 import { catchError } from 'rxjs/operators/catchError';
 import { Observable } from 'rxjs/Observable';
 import { ContainerService } from './container.service';
@@ -45,6 +46,31 @@ export class SharedService {
         return this.http.get(config.url+'/api/v1/project-templates').map(res=>{
             this.container.projectTemplate=res[0];
             return res[0];
+        })
+    }
+
+    getKanbanLayout()
+    {
+        var token=this.container.cypheredToken;
+        var headers=new HttpHeaders();
+        headers.append('Application',token)
+        return this.http.get(config.url+'/api/v1/project-templates').flatMap(res=>{
+            this.container.projectTemplate=res[0];
+            return Observable.create((observer:Observer<any>)=>{
+                var statuses=res[0].us_statuses;
+
+                statuses.forEach(o=>{
+                    o.data=[];
+                    this.container.posts.forEach(p=>{
+                        if(p.status_extra_info.name===o.name)
+                        {
+                            o.data.push(p);
+                        }
+                    })
+                })
+
+                observer.next(statuses)
+            })
         })
     }
 

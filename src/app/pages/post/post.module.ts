@@ -29,9 +29,6 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     BsDropdownModule.forRoot(),
     TextMaskModule,
     TypeaheadModule
-    // ,
-    // ColorPickerModule
-    // PostRoutingModule
   ],
   declarations: [CreatePostComponent,PostViewComponent,ContinuePipe,CreateTopicComponent],
   exports:[CreatePostComponent,PostViewComponent,CreateTopicComponent],

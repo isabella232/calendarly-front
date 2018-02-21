@@ -8,6 +8,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import {DragulaModule} from 'ng2-dragula';
 
 const Calendar_ROUTES = [
     { path: '', component: KanbanComponent }
@@ -23,7 +24,8 @@ const Calendar_ROUTES = [
         RouterModule.forChild(Calendar_ROUTES),
         ModalModule.forRoot(),
         BsDropdownModule.forRoot(),
-        FormsModule
+        FormsModule,
+        DragulaModule
     ],
     providers:[KanbanService]
 })

@@ -133,14 +133,21 @@
             </div>
             <div class="card-footer">
                 <input type="file" multiple id="fileUpload" (change)="selectFiles($event)">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button style="margin:10px auto !important;width:100% !important; " type="button" class=" upload-btn btn btn-primary waves-effect waves-button waves-float pull-right">
+                                    FROM A URL
+                                </button>
+                    </div>
 
-                <button type="button" class=" upload-btn btn btn-primary waves-effect waves-button waves-float pull-right">
-                            FROM A URL
-                        </button>
+                    <div class="col-md-6">
+                        <button style="margin:10px auto !important;width:100% !important; " type="button" (click)="uploadFiles()" class="pull-right upload-btn btn btn-primary waves-effect waves-button waves-float pull-right">
+                                    FROM MY COMPUTER
+                                </button>
+                    </div>
 
-                <button type="button" (click)="uploadFiles()" class="pull-right upload-btn btn btn-primary waves-effect waves-button waves-float pull-right">
-                        FROM MY COMPUTER
-                    </button>
+                </div>
+
 
                 <div class="clearfix"></div>
                 <!-- <a href="#" class="close fileinput-exists" data-dismiss="fileinput">&times;</a> -->

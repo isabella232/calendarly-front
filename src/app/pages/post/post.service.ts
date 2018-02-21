@@ -210,6 +210,7 @@ export class PostService {
     return this.http.get(config.url+'/api/v1/userstories').map((posts:any[])=>{
       // console.log(posts)
       this.posts=this.mapPostResponse(posts)
+      this.container.posts=this.posts;
       console.log(this.posts)
       return this.posts;
     }).pipe(catchError(this.sharedService.handleError));

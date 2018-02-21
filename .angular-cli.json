@@ -29,6 +29,7 @@
             "../node_modules/sweetalert2/dist/sweetalert2.css",
             "../node_modules/nouislider/distribute/nouislider.min.css",
             "../node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css",
+            "../node_modules/dragula/dist/dragula.css",
             "assets/vendors/fullcalendar/fullcalendar.css",
             "styles.scss"
         ],
