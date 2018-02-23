@@ -66,7 +66,7 @@ submitForm()
 {
     this.createTopic.patchValue({
         description:$('.html-editor').summernote('code'),
-        tags:$('#tagsinput').val()
+        tags:this.tags
     })
 
     console.log(this.createTopic.value)
@@ -75,6 +75,28 @@ submitForm()
          this.topicSubmitted.emit(this.postService.mapPostToCalendarly(this.createTopic.value));
     }
 }
+
+removeTag(index)
+{
+    this.tags.splice(index,1)
+}
+
+tag;
+tags=['Tag-A','Tag-B'];
+
+addTag(tag)
+{
+    if(this.tag==='')
+    {
+        return false;
+    }
+    if(this.tags.indexOf(tag)===-1)
+    {
+      this.tags.push(tag);
+    }
+    this.tag=''
+}
+
 
 // cancel()
 // {

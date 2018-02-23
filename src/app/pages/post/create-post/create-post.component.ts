@@ -251,47 +251,21 @@ export class CreatePostComponent implements OnInit {
       this.profile=''
   }
 
-  removeTopic(topic)
+  removeTopic(index)
   {
-      var index;
-      this.topics.forEach((o,i)=>{
-          if(o===topic)
-          {
-             index=i;
-          }
-      })
+    this.tags.splice(index,1)
+  }
 
-      this.topics.splice(index,1)
+  removeTag(index)
+  {
+    this.tags.splice(index,1)
   }
 
 
-  removeTag(tag)
+  removeProfile(index)
   {
-      var index;
-      this.tags.forEach((o,i)=>{
-          if(o===tag)
-          {
-             index=i;
-          }
-      })
-
-      this.tags.splice(index,1)
+    this.tags.splice(index,1)
   }
-
-
-  removeProfile(profile)
-  {
-      var index;
-      this.profiles.forEach((o,i)=>{
-          if(o===profile)
-          {
-             index=i;
-          }
-      })
-
-      this.profiles.splice(index,1)
-  }
-
   ngOnInit() {
     //   this.time=this.date;
       console.log(this.postData)

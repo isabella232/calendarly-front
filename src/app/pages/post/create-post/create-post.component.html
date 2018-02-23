@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="topic">Topics</label><br>
-                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let topic of topics">{{topic}} <span (click)="removeTopic(topic)">X</span></span>
+                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let topic of topics;let i=index;">{{topic}} <span (click)="removeTopic(i)">X</span></span>
                 <div class="input-group">
                     <div class="form-group" style="margin-top: 10px;">
                         <input id="topicTag" (typeaheadOnSelect)="addTopic($event.value)" typeaheadOptionField="subject" (keydown)="suggestTopics()" [typeahead]="suggestedTopics" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" [(ngModel)]="topic" [ngModelOptions]="{standalone: true}"
@@ -28,7 +28,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="topic">Tags</label><br>
-                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let tag of tags">{{tag}} <span (click)="removeTag(tag)">X</span></span>
+                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let tag of tags;let i=index;">{{tag}} <span (click)="removeTag(i)">X</span></span>
                 <div class="input-group">
                     <div class="form-group" style="margin-top: 10px;">
                         <input id="topicTag1" [(ngModel)]="tag" [ngModelOptions]="{standalone: true}" value="Tag-A,Tag-B" data-role="tagsinput" type="text" class="form-control form-control-sm">
@@ -43,7 +43,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="topic">Social Profile</label><br>
-                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let profile of profiles">{{profile}} <span (click)="removeProfile(profile)">X</span></span>
+                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let profile of profiles;let i=index;">{{profile}} <span (click)="removeProfile(i)">X</span></span>
                 <div class="input-group">
                     <div class="form-group" style="margin-top: 10px;">
                         <input id="topicTag3" [(ngModel)]="profile" [ngModelOptions]="{standalone: true}" value="Facebook-A,Linked-In" data-role="tagsinput" type="text" class="form-control form-control-sm">

@@ -1,3 +1,5 @@
+import * as MainActions from './../layout/store/main.actions';
+import { AppState } from './../store/app.reducers';
 import { Observer } from 'rxjs/Observer';
 import { catchError } from 'rxjs/operators/catchError';
 import { Observable } from 'rxjs/Observable';
@@ -8,6 +10,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { element } from 'protractor';
 import { EventsService } from './events.service';
+import { Store } from '@ngrx/store';
 
 // import {catchError}
 @Injectable()
@@ -54,24 +57,7 @@ export class SharedService {
         var token=this.container.cypheredToken;
         var headers=new HttpHeaders();
         headers.append('Application',token)
-        return this.http.get(config.url+'/api/v1/project-templates').flatMap(res=>{
-            this.container.projectTemplate=res[0];
-            return Observable.create((observer:Observer<any>)=>{
-                var statuses=res[0].us_statuses;
-
-                statuses.forEach(o=>{
-                    o.data=[];
-                    this.container.posts.forEach(p=>{
-                        if(p.status_extra_info.name===o.name)
-                        {
-                            o.data.push(p);
-                        }
-                    })
-                })
-
-                observer.next(statuses)
-            })
-        })
+        return this.http.get(config.url+'/api/v1/project-templates').map(res=>res[1])
     }
 
     searchtext(text)
@@ -80,6 +66,7 @@ export class SharedService {
     }
 
     constructor(private http:HttpClient,private container:ContainerService,
+        private store:Store<AppState>,
     private eventsService:EventsService)  {
         // Hidden the sidebar by default
         this.sidebarVisible = false
@@ -97,8 +84,8 @@ export class SharedService {
   getUserDetails(id)
   {
     return this.http.get(config.url+`/api/v1/users/`+id).map((res:any)=>{
-      this.eventsService.userUpdated.next(res);
-      this.container.user=res;
+        this.store.dispatch(new MainActions.UserUpdated(res));
+        this.container.user=res;
       console.log(res);
       return res;
     }).pipe(catchError(this.handleError));

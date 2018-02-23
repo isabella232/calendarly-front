@@ -11,7 +11,7 @@ export class EventsService {
   getProjectTemplate=new Subject<any>();
   constructor() { }
 
-    userUpdated=new Subject<any>();
+    // userUpdated=new Subject<any>();
 
     exitUser=new Subject<any>();
     showLoader=new Subject<any>();

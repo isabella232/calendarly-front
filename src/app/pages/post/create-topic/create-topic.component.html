@@ -9,9 +9,17 @@
         </div>
         <div class="col-md-12">
             <div class="form-group">
-                <label for="tags">Tags</label>
-                <input formControlName="tags" id="tagsinput" value="Tag-A,Tag-B" data-role="tagsinput" type="text" class="form-control tagsinput form-control-sm">
+                <label for="topic">Tags</label><br>
+                <span class="badge badge-pill badge-warning topicBadge" *ngFor="let tag of tags;let i=index;">{{tag}} <span (click)="removeTag(i)">X</span></span>
+                <div class="input-group">
+                    <div class="form-group" style="margin-top: 10px;">
+                        <input id="topicTag1" [(ngModel)]="tag" [ngModelOptions]="{standalone: true}" value="Tag-A,Tag-B" data-role="tagsinput" type="text" class="form-control form-control-sm">
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <span class="input-group-addon plus-btn tagBadge" (click)="addTag(tag)"><i class="zmdi zmdi-plus-circle"></i></span>
+                </div>
                 <i class="form-group__bar"></i>
+                <!-- <button (click)="addTopic(topic)">Add Topic</button> -->
             </div>
         </div>
 

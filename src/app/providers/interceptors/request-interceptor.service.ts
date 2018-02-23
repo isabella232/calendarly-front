@@ -16,7 +16,7 @@ export class RequestInterceptorService  implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    console.log(req)
+    // console.log(req)
     var token=window[this.container.storageStrategy].getItem('authToken');
     let authReq;
     if(token)

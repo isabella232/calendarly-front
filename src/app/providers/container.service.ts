@@ -16,4 +16,5 @@ export class ContainerService {
   cypheredToken;
   projectTemplate;
   posts=[];
+  kanbanBoard;
 }

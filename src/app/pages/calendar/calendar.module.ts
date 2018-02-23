@@ -1,3 +1,4 @@
+import { CalendarResolveGuard } from './calendar-resolve.guard';
 import { AddUserComponent } from './../../components/add-user/add-user.component';
 import { FormsModule } from '@angular/forms';
 import { PostModule } from './../post/post.module';

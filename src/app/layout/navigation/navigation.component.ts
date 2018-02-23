@@ -1,3 +1,5 @@
+import { Store } from '@ngrx/store';
+import { AppState } from './../../store/app.reducers';
 import { SharedService } from './../../providers/shared.service';
 import { AuthService } from './../../providers/auth.service';
 import { EventsService } from './../../providers/events.service';
@@ -51,7 +53,7 @@ export class NavigationComponent implements OnInit {
     }
 
     constructor(private sharedService: SharedService,private router:Router,
-        private authService:AuthService,
+        private authService:AuthService,private store:Store<AppState>,
     private eventsService:EventsService) {
         sharedService.sidebarVisibilitySubject.subscribe((value) => {
             this.sidebarVisible = value
@@ -67,10 +69,13 @@ export class NavigationComponent implements OnInit {
 
   userUpdated()
   {
-    this.eventsService.userUpdated.subscribe(user=>{
-      console.log(user)
-      this.user=user;
-    })
+      this.store.select('main').subscribe(state=>{
+          this.user=state.user;
+      })
+    // this.eventsService.userUpdated.subscribe(user=>{
+    //   console.log(user)
+    //   this.user=user;
+    // })
   }
  
 

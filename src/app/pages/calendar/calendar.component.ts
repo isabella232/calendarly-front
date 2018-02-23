@@ -1,13 +1,15 @@
+import { AppState } from './../../store/app.reducers';
 import { SharedService } from './../../providers/shared.service';
 import { PostService } from './../post/post.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CalendarService } from './calendar.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 declare var $:any;
 declare var swal:any;
 import * as _ from 'underscore';
 import { ContainerService } from '../../providers/container.service';
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -18,7 +20,8 @@ export class CalendarComponent  {
   @ViewChild('createTopic') createTopic:ModalDirective
   constructor(private calendarService:CalendarService,
     private container:ContainerService,private router:Router,
-    private postService:PostService,private sharedService:SharedService) { }
+    private postService:PostService,private sharedService:SharedService,
+  private store:Store<AppState>,private route: ActivatedRoute) { }
   date:Date;
   currentPost;
   roles=[];
@@ -107,7 +110,6 @@ $(this).css('background-color', 'red');
              $("#calendar").fullCalendar( 'updateEvent', this.currentPost);   
            }
        })
-            
   }
 
   deletePost(post)
@@ -134,19 +136,12 @@ $(this).css('background-color', 'red');
              
            })
          }
-       })
-
-      
+       })    
   }
   
-
   submitForm(post)
   {
     console.log(post,'post')
-     //  var post=this.createPost.value;
-     // this.createPost.value.description=this.postDescription;
-      // console.log(post);
-
      this.postService.createPost(post).subscribe(res=>{
          console.log(res)
          _.extend(post,res);
@@ -154,37 +149,16 @@ $(this).css('background-color', 'red');
      },er=>{ 
        console.log(er)
      })
-
-
-      
   }
-
+  posts=[];
   ngOnInit()
   {
-    // this.sharedService.createPostSubject.subscribe(()=>{
-    //   this.createPost.show()
-    // })
-
-    this.sharedService.createTopicSubject.subscribe(()=>{
+  this.initCalendar(this.container.posts);
+  this.container.customAttributes.forEach(obj=>{
+    this.container.customAttributes[obj.name]=obj;
+  })
+  this.sharedService.createTopicSubject.subscribe(()=>{
       this.createTopic.show();
-    })
-
-    // this.sharedService.getProjectTemplate().subscribe(template=>{
-    //   this.roles=template.roles;
-    //   this.user.role=this.roles[0];
-    // })
-    // this.initCalendar();
-    this.postService.getPosts().subscribe(posts=>{
-      console.log(posts)
-      this.initCalendar(posts);
-      // this.fullCalendar.fullCalendar('renderEvents', posts)
-    })
-
-    this.postService.getCustomAttributes().subscribe((res:any[])=>{
-      console.log(res)
-      res.forEach(obj=>{
-        this.container.customAttributes[obj.name]=obj;
-      })
     })
   }
   

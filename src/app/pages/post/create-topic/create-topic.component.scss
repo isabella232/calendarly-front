@@ -83,3 +83,17 @@ bootstrap-tagsinput {
 .upload-btn {
     margin: 20px;
 }
+
+.tagBadge,
+.topicBadge {
+    margin: 0 5px;
+}
+
+.plus-btn,
+.badge {
+    cursor: pointer;
+}
+
+span.plus-btn {
+    font-size: 18px;
+}

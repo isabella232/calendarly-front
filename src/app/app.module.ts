@@ -1,3 +1,8 @@
+import { LayoutResolveGuard } from './layout/layout-resolve.guard';
+import { KanbanResolveGuard } from './pages/kanban/kanban-resolve.guard';
+import { CalendarResolveGuard } from './pages/calendar/calendar-resolve.guard';
+import { AppInitGuard } from './app-init.guard';
+import { AppReducers } from './store/app.reducers';
 import { SharedService } from './providers/shared.service';
 import { ResponseInterceptorService } from './providers/interceptors/response-interceptor.service';
 import { RequestInterceptorService } from './providers/interceptors/request-interceptor.service';
@@ -18,6 +23,7 @@ import {ContainerService} from './providers/container.service';
 import {EventsService} from './providers/events.service';
 // import { ToastrModule } from 'toastr-ng2';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   imports: [
@@ -29,7 +35,8 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
     // ToastrModule.forRoot(),
     PostModule,
     FullcalendarModule,
-    NgHttpLoaderModule
+    NgHttpLoaderModule,
+    StoreModule.forRoot(AppReducers)
   ],
   declarations: [
     AppComponent
@@ -42,9 +49,13 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
       multi: true,
     },
     AuthGuard,
+    AppInitGuard,
     AuthService,
     ContainerService,
-    EventsService
+    EventsService,
+    CalendarResolveGuard,
+    KanbanResolveGuard,
+    LayoutResolveGuard
   ],
   bootstrap: [AppComponent]
 })

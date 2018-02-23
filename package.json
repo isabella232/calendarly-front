@@ -28,6 +28,8 @@
     "@angular/platform-browser-dynamic": "^5.2.4",
     "@angular/platform-server": "^5.2.4",
     "@angular/router": "^5.2.4",
+    "@ngrx/effects": "^5.1.0",
+    "@ngrx/store": "^5.1.0",
     "@types/dropzone": "^5.0.1",
     "angular2-text-mask": "^8.0.4",
     "animate.css": "^3.5.2",
