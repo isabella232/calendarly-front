@@ -1,3 +1,6 @@
+import * as CalendarActions from './../../calendar/store/calendar.actions';
+import { AppState } from './../../../store/app.reducers';
+import { Store } from '@ngrx/store';
 import { ContainerService } from './../../../providers/container.service';
 import { config } from './../../../providers/config';
 import { EventsService } from './../../../providers/events.service';
@@ -16,7 +19,8 @@ declare var swal:any;
 export class PostViewComponent  {
     images=config.images;
   constructor(private route:ActivatedRoute,private router:Router,private eventsService:EventsService,
-  private postService:PostService,private container:ContainerService,private sharedService:SharedService) { }
+  private postService:PostService,private container:ContainerService,private sharedService:SharedService,
+private store:Store<AppState>) { }
   post:any;
   date;
   time;
@@ -44,6 +48,11 @@ export class PostViewComponent  {
        console.log(er)
      });
     })
+
+
+    // this.store.select('calendar').subscribe(state=>{
+
+    // })
   }
 
 
@@ -128,6 +137,7 @@ export class PostViewComponent  {
            ).then(()=>{
             this.postService.deletePost(post.id).subscribe(res=>{
               console.log(res);
+              this.store.dispatch(new CalendarActions.DeletePost(post.id));
             });
             this.router.navigate(['/','calendar'])
            })

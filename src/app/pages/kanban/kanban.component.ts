@@ -10,6 +10,7 @@ declare var $: any;
 declare var swal: any;
 import * as _ from 'underscore';
 import { ContainerService } from '../../providers/container.service';
+import { DragulaService } from 'ng2-dragula';
 @Component({
   selector: 'app-kanban',
   templateUrl: './kanban.component.html',
@@ -21,7 +22,8 @@ export class KanbanComponent {
   constructor(private calendarService: KanbanService,
     private container: ContainerService, private router: Router,
     private postService: PostService, private sharedService: SharedService,
-    private eventsService: EventsService,private route:ActivatedRoute) { }
+    private eventsService: EventsService,private route:ActivatedRoute,
+    private dragulaService: DragulaService) { }
     kanbanBoard=[];
 
     ngOnInit()
@@ -29,6 +31,10 @@ export class KanbanComponent {
       this.route.data.subscribe(routeData=>{
         console.log(routeData)
         this.kanbanBoard=routeData.kanban.data;
+      })
+
+      this.dragulaService.drop.subscribe(res=>{
+        console.log(res);
       })
     }
 }

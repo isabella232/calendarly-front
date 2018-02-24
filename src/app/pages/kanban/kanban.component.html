@@ -1,8 +1,8 @@
 <div class="kanban-board">
     <div class="kanban-scroll" [style.width.px]="kanbanBoard.length*330">
-        <div class="card card-container" [dragula]="'board'" style="width:300px;margin:0 10px;" *ngFor="let board of kanbanBoard ">
+        <div class="card card-container" style="width:300px;margin:0 10px;" *ngFor="let board of kanbanBoard ">
 
-            <div class="card-body">
+            <div class="card-body" [dragula]="'board'" [dragulaModel]="board.data">
                 <h4 class="card-title">{{board.name}}</h4>
                 <div class="actions">
                     <div dropdown>

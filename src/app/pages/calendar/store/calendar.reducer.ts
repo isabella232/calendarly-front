@@ -18,6 +18,14 @@ export function CalendarReducer(state = initialState, action: CalendarActions.Ca
 
         case CalendarActions.ADD_POSTS_TO_STORE:
             return { ...state, posts: [...action.payload] };
+
+        case CalendarActions.DELETE_POST:
+        const id=action.payload
+        var posts=state.posts.filter(o=>o.id!==id)
+            return { ...state, posts: posts };
+
+        default:
+        return {...state}
     }
 
 }

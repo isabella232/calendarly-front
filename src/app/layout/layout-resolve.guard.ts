@@ -1,3 +1,6 @@
+import * as CalendarActions from './../pages/calendar/store/calendar.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from './../store/app.reducers';
 import { SharedService } from './../providers/shared.service';
 import { ContainerService } from './../providers/container.service';
 import { PostService } from './../pages/post/post.service';
@@ -8,7 +11,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 @Injectable()
 export class LayoutResolveGuard implements Resolve<any> {
   constructor(private postService:PostService,private container:ContainerService,
-  private sharedService:SharedService){}
+  private sharedService:SharedService,private store:Store<AppState>){}
  
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     console.log('hello')
@@ -17,6 +20,7 @@ export class LayoutResolveGuard implements Resolve<any> {
     observables[1]=this.postService.getCustomAttributes();
     observables[2]=this.sharedService.getKanbanLayout();
     return forkJoin([...observables]).map((results:any[])=>{
+      this.store.dispatch(new CalendarActions.AddPostsToStore(results[0]));
       this.container.posts=results[0];
       this.container.customAttributes=results[1];
       this.container.kanbanBoard=results[2]

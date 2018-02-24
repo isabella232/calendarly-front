@@ -1,3 +1,4 @@
+import * as CalendarActions from './store/calendar.actions';
 import { AppState } from './../../store/app.reducers';
 import { SharedService } from './../../providers/shared.service';
 import { PostService } from './../post/post.service';
@@ -25,6 +26,7 @@ export class CalendarComponent  {
   date:Date;
   currentPost;
   roles=[];
+  showCalendar=false;
   fullCalendar;
   user:any={};
     addMember()
@@ -146,14 +148,20 @@ $(this).css('background-color', 'red');
          console.log(res)
          _.extend(post,res);
          this.addPost(post);
+         this.store.dispatch(new CalendarActions.CreatePost(post));
      },er=>{ 
        console.log(er)
      })
   }
+  subscription;
   posts=[];
   ngOnInit()
   {
-  this.initCalendar(this.container.posts);
+    this.subscription=this.store.select('calendar').subscribe(state=>{
+      console.log(state);
+      this.initCalendar(state.posts);
+      this.showCalendar=true
+    })
   this.container.customAttributes.forEach(obj=>{
     this.container.customAttributes[obj.name]=obj;
   })
@@ -165,6 +173,13 @@ $(this).css('background-color', 'red');
   exit()
   {
     this.createPost.hide();
+  }
+
+  ngOnDestroy()
+  {
+    this.subscription.unsubscribe();
+    this.showCalendar=false
+
   }
 
 
