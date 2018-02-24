@@ -2,8 +2,8 @@
     <div class="kanban-scroll" [style.width.px]="kanbanBoard.length*330">
         <div class="card card-container" style="width:300px;margin:0 10px;" *ngFor="let board of kanbanBoard ">
 
-            <div class="card-body" [dragula]="'board'" [dragulaModel]="board.data">
-                <h4 class="card-title">{{board.name}}</h4>
+            <div class="card-body" [dragula]="'board'">
+                <h4 [attr.id]="board.id" class="card-title">{{board.name}}</h4>
                 <div class="actions">
                     <div dropdown>
                         <!-- <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i> -->
@@ -16,7 +16,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" *ngFor="let item of board.data">
+                <div class="card" [attr.id]="item.id" *ngFor="let item of board.data">
+                    <span style="display:none;">{{item.id}}</span>
 
                     <div class="card-body">
                         <h4 class="card-title">{{item.title}}</h4>

@@ -159,7 +159,7 @@ $(this).css('background-color', 'red');
   {
     this.subscription=this.store.select('calendar').subscribe(state=>{
       console.log(state);
-      this.initCalendar(state.posts);
+      this.initCalendar( state.posts );
       this.showCalendar=true
     })
   this.container.customAttributes.forEach(obj=>{

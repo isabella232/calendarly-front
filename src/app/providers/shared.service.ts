@@ -65,6 +65,11 @@ export class SharedService {
         return this.http.get(config.url+`/api/v1/search?project=${this.container.projectId}\&text=`+text)
     }
 
+    getPostStatuses()
+    {
+        return this.http.get(config.url+`/api/v1/userstory-statuses`)
+    }
+
     constructor(private http:HttpClient,private container:ContainerService,
         private store:Store<AppState>,
     private eventsService:EventsService)  {

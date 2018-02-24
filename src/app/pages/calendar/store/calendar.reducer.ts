@@ -24,6 +24,20 @@ export function CalendarReducer(state = initialState, action: CalendarActions.Ca
         var posts=state.posts.filter(o=>o.id!==id)
             return { ...state, posts: posts };
 
+        case CalendarActions.DRAG_POST:
+        var data=action.payload;
+        var posts=state.posts.slice();
+        posts.forEach(o=>{
+            if(o.id===data.id)
+            {
+               o.status=data.status; 
+               o.status_extra_info=data.status_extra_info
+            }
+        })
+
+        return {
+            ...state,posts:posts
+        }
         default:
         return {...state}
     }

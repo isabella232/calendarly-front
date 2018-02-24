@@ -13,23 +13,23 @@ export class KanbanResolveGuard implements Resolve<any> {
     console.log('hello111')
     var observables=[];
 
-    observables[0]=this.sharedService.getKanbanLayout()
+    observables[0]=this.sharedService.getPostStatuses().map((res:any[])=>res.filter(item=>item.project===this.container.projectId))
 
-    return Observable.create(observer=>{
-        var statuses=this.container.kanbanBoard.us_statuses;
-        var posts=this.container.posts.slice();
-        statuses.forEach(o=>{
-            o.data=[];
-            posts.forEach(p=>{
-                if(p.status_extra_info.name===o.name)
-                {
-                    o.data.push(p);
-                }
+    return forkJoin(observables).map((results:any[])=>{
+        var statuses=results[0];
+        this.container.statuses=statuses;
+            var posts=this.container.posts.slice();
+            statuses.forEach(o=>{
+                o.data=[];
+                posts.forEach(p=>{
+                    if(p.status===o.id)
+                    {
+                        o.data.push(p);
+                    }
+                })
             })
-        })
-
-        observer.next({data:statuses})
-        observer.complete();
+            return {data:statuses};
     })
+
   }
 }

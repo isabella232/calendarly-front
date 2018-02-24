@@ -18,7 +18,6 @@ export class CalendarService {
   {
     post.start=post.date;
     post.comments=[];
-    // post.title=post.name;
     post.fullDay=true;
     post._id=Date.now();
     post.saved=true;
@@ -31,11 +30,6 @@ export class CalendarService {
   {
     return this.http.post(config.url+'/api/v1/memberships',data).pipe(catchError(this.sharedService.handleError));
   }
-
-  // deleteComment(comment)
-  // {
-    
-  // }
 
   savePost(post)
   {
