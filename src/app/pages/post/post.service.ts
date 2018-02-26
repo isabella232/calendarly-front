@@ -17,18 +17,9 @@ export class PostService {
 
   createPost(data)
   {
-    // var token=window[this.container.storageStrategy].getItem('authToken');
     return this.http.post(config.url+'/api/v1/userstories',data,{
       headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
     })
-    // .flatMap((res:any)=>{
-    //   var obj:any={}
-    //  Object.keys(this.container.customAttributes).forEach(key=>{
-    //       obj[key]=data[key];
-    //   })
-    //   obj.postId=res.id;
-    //   return this.addCustomAttributesToPost(obj)
-    // })
     .pipe(catchError(this.sharedService.handleError));
   }
 

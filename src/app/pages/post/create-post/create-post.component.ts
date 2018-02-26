@@ -56,10 +56,6 @@ export class CreatePostComponent implements OnInit {
         if(this.createPost.valid)
         {
             this.store.dispatch(new CalendarActions.CreatePost(this.postService.mapPostToCalendarly(this.createPost.value)));
-            
-            // this.postService.createPost(this.postService.mapPostToCalendarly(this.createPost.value)).subscribe
-            
-            // this.formSubmitted.emit(this.postService.mapPostToCalendarly(this.createPost.value));
         }
     }
 
@@ -126,7 +122,7 @@ export class CreatePostComponent implements OnInit {
     //   console.log(this.postData)
     // this.initDatetimePicker();
     
-    $(".tagsinput").tagsinput();
+    // $(".tagsinput").tagsinput();
 
 
     if(this.postData)
@@ -208,7 +204,8 @@ export class CreatePostComponent implements OnInit {
           id:this.postData.id
       }
       this.postService.updatePost(this.postService.mapPostToCalendarly(post)).subscribe(res=>{
-          console.log(res)
+            this.sharedService.notify('Post updated Successfully')
+        console.log(res)
         //   this.formUpdated.emit();
         })
     

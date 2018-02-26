@@ -7,9 +7,7 @@ import { AppReducers } from './store/app.reducers';
 import { SharedService } from './providers/shared.service';
 import { ResponseInterceptorService } from './providers/interceptors/response-interceptor.service';
 import { RequestInterceptorService } from './providers/interceptors/request-interceptor.service';
-import { FullcalendarModule } from './fullcalendar/fullcalendar.module';
 import { PostModule } from './pages/post/post.module';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -22,7 +20,6 @@ import {AuthGuard} from './providers/auth.guard';
 import {AuthService} from './providers/auth.service';
 import {ContainerService} from './providers/container.service';
 import {EventsService} from './providers/events.service';
-// import { ToastrModule } from 'toastr-ng2';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -36,7 +33,6 @@ import { EffectsModule } from '@ngrx/effects';
     routing,
     // ToastrModule.forRoot(),
     PostModule,
-    FullcalendarModule,
     NgHttpLoaderModule,
     StoreModule.forRoot(AppReducers),
     EffectsModule.forRoot([CalendarEffects])

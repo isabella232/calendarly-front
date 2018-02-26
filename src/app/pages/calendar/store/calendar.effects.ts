@@ -1,3 +1,4 @@
+import { SharedService } from './../../../providers/shared.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PostService } from './../../post/post.service';
@@ -10,7 +11,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class CalendarEffects
 {
-    constructor(private actions:Actions,private postService:PostService){}
+    constructor(private actions:Actions,private postService:PostService,private sharedService:SharedService){}
 
     @Effect() getPosts$=this.actions
     .ofType(CalendarActions.GET_POSTS)
@@ -31,6 +32,7 @@ export class CalendarEffects
         return this.postService.createPost(postData)
     }).map(post=>{
         console.log(post,'aasd')
+        this.sharedService.notify('Post Created Successfully')
             return {
                 type:CalendarActions.CREATE_POST_SUCCESS,
                 payload:this.postService.mapPostResponse(post)

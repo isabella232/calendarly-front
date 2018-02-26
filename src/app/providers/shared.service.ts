@@ -11,6 +11,7 @@ import { Subject } from 'rxjs/Subject';
 import { element } from 'protractor';
 import { EventsService } from './events.service';
 import { Store } from '@ngrx/store';
+declare var Snackbar:any;
 
 // import {catchError}
 @Injectable()
@@ -68,6 +69,11 @@ export class SharedService {
     getPostStatuses()
     {
         return this.http.get(config.url+`/api/v1/userstory-statuses`)
+    }
+
+    notify(message)
+    {
+           Snackbar.show({text: message});
     }
 
     constructor(private http:HttpClient,private container:ContainerService,

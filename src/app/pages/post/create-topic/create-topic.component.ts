@@ -28,7 +28,7 @@ initJqueryData()
     //   console.log(this.postData)
     // this.initDatetimePicker();
     
-    $(".tagsinput").tagsinput();
+    // $(".tagsinput").tagsinput();
 
 
     if(this.topicData)
