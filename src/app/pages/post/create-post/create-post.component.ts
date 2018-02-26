@@ -1,3 +1,6 @@
+import * as CalendarActions from './../../calendar/store/calendar.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from './../../../store/app.reducers';
 import { SharedService } from './../../../providers/shared.service';
 import { Router } from '@angular/router';
 import { config } from './../../../providers/config';
@@ -20,6 +23,7 @@ export class CreatePostComponent implements OnInit {
 
   constructor(private fb:FormBuilder,private container:ContainerService,private postService:PostService,
     private eventsService:EventsService,private sharedService:SharedService,
+    private store:Store<AppState>,
     private router:Router
 ) { }
   createPost:FormGroup;
@@ -48,16 +52,14 @@ export class CreatePostComponent implements OnInit {
         })
 
         console.log(this.createPost.value)
-        // this.createPost.value.tags=this.createPost.value.tags.split(',')
-        // this.createPost.value.project=9;
-        // this.createPost.value.subject=this.createPost.value.title;
-
-        // console.log(this.createPost.value)
-        // console.log(this.createPost.valid)
         this.isSubmitClicked=true;
         if(this.createPost.valid)
         {
-            this.formSubmitted.emit(this.postService.mapPostToCalendarly(this.createPost.value));
+            this.store.dispatch(new CalendarActions.CreatePost(this.postService.mapPostToCalendarly(this.createPost.value)));
+            
+            // this.postService.createPost(this.postService.mapPostToCalendarly(this.createPost.value)).subscribe
+            
+            // this.formSubmitted.emit(this.postService.mapPostToCalendarly(this.createPost.value));
         }
     }
 
@@ -199,8 +201,16 @@ export class CreatePostComponent implements OnInit {
   updatePost()
   {
       var val=this.createPost.value;
-      _.extend(this.postData,val)           
-    this.formUpdated.emit(this.postService.mapPostToTaiga(this.postData));
+      var post={
+          ...val,
+          project:this.postData.project,
+          version:this.postData.version,
+          id:this.postData.id
+      }
+      this.postService.updatePost(this.postService.mapPostToCalendarly(post)).subscribe(res=>{
+          console.log(res)
+        //   this.formUpdated.emit();
+        })
     
   }
   topics=['Topic-1','Topic-2'];

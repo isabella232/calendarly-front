@@ -149,10 +149,10 @@ private store:Store<AppState>) { }
 
   updateForm(post)
   {
-    console.log(post)
-    this.postService.updatePost(post).subscribe(res=>{
-      console.log(res)
-    })
+    // console.log(post)
+    // this.postService.updatePost(post).subscribe(res=>{
+    //   console.log(res)
+    // })
   }
 
 }

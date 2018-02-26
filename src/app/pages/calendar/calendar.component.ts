@@ -86,11 +86,7 @@ $(this).css('background-color', 'red');
      swal('Post Added','Post has been added to your calendar','success').then(()=>{
          this.calendarService.addPost(mappedPost);
          $("#calendar").fullCalendar( 'renderEvent', mappedPost ,true);            
-        //  $('.modal').modal('hide');
-         this.createPost.hide();
-         // this.createPost.reset();
-         // this.createPost.markAsUntouched();
-         
+         this.createPost.hide();  
      })
      
   }
@@ -144,23 +140,27 @@ $(this).css('background-color', 'red');
   submitForm(post)
   {
     console.log(post,'post')
-     this.postService.createPost(post).subscribe(res=>{
-         console.log(res)
-         _.extend(post,res);
-         this.addPost(post);
-         this.store.dispatch(new CalendarActions.CreatePost(post));
-     },er=>{ 
-       console.log(er)
-     })
+    this.store.dispatch(new CalendarActions.CreatePost(post));
+    //  this.postService.createPost(post).subscribe(res=>{
+    //      console.log(res)
+    //      _.extend(post,res);
+    //      this.addPost(post);
+    //  },er=>{ 
+    //    console.log(er)
+    //  })
   }
   subscription;
   posts=[];
   ngOnInit()
   {
+    // this.showCalendar=false;
     this.subscription=this.store.select('calendar').subscribe(state=>{
       console.log(state);
-      this.initCalendar( state.posts );
-      this.showCalendar=true
+      $('#calendar').fullCalendar('destroy');
+      // this.showCalendar=true;
+      this.initCalendar(state.posts);
+      this.createPost.hide(); // remaining to handle on error!
+
     })
   this.container.customAttributes.forEach(obj=>{
     this.container.customAttributes[obj.name]=obj;
@@ -177,8 +177,8 @@ $(this).css('background-color', 'red');
 
   ngOnDestroy()
   {
-    this.subscription.unsubscribe();
-    this.showCalendar=false
+    // this.subscription.unsubscribe();
+    // this.showCalendar=false
 
   }
 

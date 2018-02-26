@@ -1,3 +1,4 @@
+import { CalendarEffects } from './pages/calendar/store/calendar.effects';
 import { LayoutResolveGuard } from './layout/layout-resolve.guard';
 import { KanbanResolveGuard } from './pages/kanban/kanban-resolve.guard';
 import { CalendarResolveGuard } from './pages/calendar/calendar-resolve.guard';
@@ -24,6 +25,7 @@ import {EventsService} from './providers/events.service';
 // import { ToastrModule } from 'toastr-ng2';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   imports: [
@@ -36,7 +38,8 @@ import { StoreModule } from '@ngrx/store';
     PostModule,
     FullcalendarModule,
     NgHttpLoaderModule,
-    StoreModule.forRoot(AppReducers)
+    StoreModule.forRoot(AppReducers),
+    EffectsModule.forRoot([CalendarEffects])
   ],
   declarations: [
     AppComponent

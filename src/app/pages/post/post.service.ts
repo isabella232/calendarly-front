@@ -20,14 +20,30 @@ export class PostService {
     // var token=window[this.container.storageStrategy].getItem('authToken');
     return this.http.post(config.url+'/api/v1/userstories',data,{
       headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
-    }).flatMap((res:any)=>{
-      var obj:any={}
-     Object.keys(this.container.customAttributes).forEach(key=>{
-          obj[key]=data[key];
-      })
-      obj.postId=res.id;
-      return this.addCustomAttributesToPost(obj)
-    }).pipe(catchError(this.sharedService.handleError));
+    })
+    // .flatMap((res:any)=>{
+    //   var obj:any={}
+    //  Object.keys(this.container.customAttributes).forEach(key=>{
+    //       obj[key]=data[key];
+    //   })
+    //   obj.postId=res.id;
+    //   return this.addCustomAttributesToPost(obj)
+    // })
+    .pipe(catchError(this.sharedService.handleError));
+  }
+
+  editBoard(id,data)
+    {
+      var headers=new HttpHeaders().append('Authorization','Application '+this.container.cypheredToken);
+      return this.http.patch(config.url+'/api/v1/userstories/'+id,data,{headers:headers})
+      .pipe(catchError(this.sharedService.handleError));
+    }
+    
+  createTopic(topic)
+  {
+    return this.http.post(config.url+'/api/v1/epics',topic,{
+      headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
+    })
   }
 
   deleteComment(postId,commentId)
@@ -39,16 +55,11 @@ export class PostService {
 
   updatePost(data:any)
   {
-    return this.http.patch(config.url+'/api/v1/userstories/'+data.id,data,{
-      headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
-    }).flatMap((res:any)=>{
-      var obj:any={}
-     Object.keys(this.container.customAttributes).forEach(key=>{
-          obj[key]=data[key];
-      })
-      obj.postId=res.id;
-      return this.addCustomAttributesToPost(obj)
-    }).pipe(catchError(this.sharedService.handleError));
+    var id=data.id;
+    delete data.id;
+    var headers=new HttpHeaders().append('Authorization','Application '+this.container.cypheredToken);
+    return this.http.patch(config.url+'/api/v1/userstories/'+id,data,{headers:headers})
+    .pipe(catchError(this.sharedService.handleError));
   }
 
   getComments(postId)
@@ -128,22 +139,31 @@ export class PostService {
   {
     console.log(post)
     post.start=post.date;
-    post.socialMedia=post.socialMedia.join(',')
-    // post.tags=post.tags.split(',');
     post.project=this.container.projectId;
     post.subject=post.title;
     post.assigned_to=this.container.user.id;
     post.description_html=post.description;
-    post.kanban_order=post.date.getTime();
-    post.backlog_order=post.date.getTime();
+    post.kanban_order=moment(post.date).toDate().getTime();
+    post.backlog_order=moment(post.date).toDate().getTime();
+    post=_.pick(post,'project','subject','assigned_to','description_html','kanban_order','backlog_order','id','version')
     
     return {...post};
   }
   
+  // mapTopicToTaiga(topic)
+  // {
+  //   post.kanban_order=post.date.toDate().getTime();
+  //   post.backlog_order=post.time.toDate().getTime();
+  //   return {...post}
+  // }
+
   mapPostToTaiga(post)
   {
+    console.log(post,'posta')
     post.kanban_order=post.date.toDate().getTime();
     post.backlog_order=post.time.toDate().getTime();
+    post.subject=post.title;
+    post.description_html=post.description;
     return {...post}
   }
 

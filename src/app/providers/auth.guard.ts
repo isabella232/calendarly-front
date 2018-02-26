@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate {
       return Observable.create(observer=>{
           this.authService.getToken().subscribe(res=>{
         console.log(res)
-        // return true;
         observer.next(true);
         observer.complete();
       },er=>{
@@ -25,10 +24,5 @@ export class AuthGuard implements CanActivate {
         observer.complete();
       })
       })
-      // return true;
-      // return this.authService.validateToken().map(res=>{
-      //   console.log(res)
-      //   return true;
-      // })
   }
 }

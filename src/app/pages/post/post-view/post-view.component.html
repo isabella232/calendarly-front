@@ -27,7 +27,9 @@
                 </div>
 
                 <div class="widget-signups__list">
-
+                    <a *ngIf="post.is_watcher">
+                        <img class="avatar-img" [src]="user.photo" src-fallback="{{images.fallbackImg}}" alt="">
+                    </a>
                     <a *ngFor="let watcher of watchers">
                         <img class="avatar-img" [src]="watcher.photo" src-fallback="{{images.fallbackImg}}" alt="">
                     </a>
@@ -55,16 +57,6 @@
                     <li class="nav-item">
                         <a class="nav-link active">Post</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" href="#">Topic</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Longer nav link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li> -->
-
                 </ul>
                 <button (click)="deletePost(post)" class="btn btn-light pull-right btn--icon" style="float:right;"><i class="zmdi zmdi-delete"></i></button>
                 <div class="clearfix"></div>

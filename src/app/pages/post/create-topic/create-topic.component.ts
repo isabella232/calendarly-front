@@ -1,15 +1,15 @@
+import * as CalendarActions from './../../calendar/store/calendar.actions';
+import { AppState } from './../../../store/app.reducers';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { config } from './../../../providers/config';
 import { ContainerService } from './../../../providers/container.service';
 import { PostService } from './../post.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 declare var $:any;
-import * as moment from 'moment';
-import * as _ from 'underscore';
 declare var swal:any;
 
-import { EventsService } from '../../../providers/events.service';
 @Component({
   selector: 'app-create-topic',
   templateUrl: './create-topic.component.html',
@@ -17,14 +17,12 @@ import { EventsService } from '../../../providers/events.service';
 })
 export class CreateTopicComponent {
 
-  constructor(private fb:FormBuilder,private container:ContainerService,private postService:PostService,
-    private eventsService:EventsService,
+  constructor(private fb:FormBuilder,private container:ContainerService,private store:Store<AppState>,
     private router:Router
 ) { }
 
 createTopic:FormGroup;
 topicData:any;
-@Output() topicSubmitted;
 initJqueryData()
   {
     //   console.log(this.postData)
@@ -59,6 +57,7 @@ initForm()
         title:this.fb.control(null),
         tags:this.fb.control(['Tag-A','Tag-B']),
         color:this.fb.control(null),
+        description:this.fb.control(null)
     })
 }
 
@@ -70,9 +69,14 @@ submitForm()
     })
 
     console.log(this.createTopic.value)
+    var topic=this.createTopic.value
+    topic.subject=topic.title;
+    topic.project=this.container.projectId;
     if(this.createTopic.valid)
     {
-         this.topicSubmitted.emit(this.postService.mapPostToCalendarly(this.createTopic.value));
+
+        this.store.dispatch(new CalendarActions.CreateTopic(topic));
+
     }
 }
 

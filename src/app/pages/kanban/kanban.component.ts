@@ -29,9 +29,16 @@ export class KanbanComponent {
     private eventsService: EventsService,private route:ActivatedRoute,
     private dragulaService: DragulaService) { }
     kanbanBoard=[];
-
+    currentPost;
+    currentStatus;
     ngOnInit()
     {
+      this.store.select('calendar').subscribe(state=>{
+        console.log(state,'state')
+        this.kanbanBoard=state.statuses;
+        
+      })
+
       this.route.data.subscribe(routeData=>{
         console.log(routeData)
         this.kanbanBoard=routeData.kanban.data;
@@ -42,17 +49,15 @@ export class KanbanComponent {
         var order=Number(res[2].children[0].id)
         console.log(res);
 
-       var status= this.container.statuses.filter(o=>o.id===order)[0];
+       this.currentStatus= this.container.statuses.filter(o=>o.id===order)[0];
+       this.currentPost= this.container.posts.filter(o=>o.id===id)[0]
+    
+       this.store.dispatch(new CalendarActions.DragPost({
+        id:Number(id),
+        data:{status:this.currentStatus.id,status_extra_info:this.currentStatus,version:this.currentPost.version}
+      }))
+      
 
-       var post= this.container.posts.filter(o=>o.id===id)[0]
-        
-      this.kanbanService.editBoard(id,{status:status.id,status_extra_info:status,version:post.version}).subscribe(res=>{
-          console.log(res)
-        this.store.dispatch(new CalendarActions.DragPost({
-          id:Number(id),
-          order:Number(order)
-        }))
-        })
       })
     }
 }

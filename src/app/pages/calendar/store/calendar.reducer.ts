@@ -2,44 +2,63 @@ import * as CalendarActions from './calendar.actions';
 
 export interface State {
     posts: any[];
-    attachments:any[]
+    attachments: any[],
+    currentStatus:any,
+    currentPost:any,
+    statuses:any[]
 }
 
 export var initialState: State = {
     posts: [],
-    attachments:[]
+    attachments: [],
+    currentStatus:null,
+    currentPost:null,
+    statuses:[]
 }
 
 export function CalendarReducer(state = initialState, action: CalendarActions.CalendarActions) {
 
     switch (action.type) {
-        case CalendarActions.CREATE_POST:
+        case CalendarActions.CREATE_POST_SUCCESS:
             return { ...state, posts: [...state.posts, action.payload] };
+
+        case CalendarActions.GET_POSTS_SUCCESS:
+            return { ...state, posts:action.payload};
 
         case CalendarActions.ADD_POSTS_TO_STORE:
             return { ...state, posts: [...action.payload] };
 
         case CalendarActions.DELETE_POST:
-        const id=action.payload
-        var posts=state.posts.filter(o=>o.id!==id)
+            const id = action.payload
+            var posts = state.posts.filter(o => o.id !== id)
             return { ...state, posts: posts };
 
-        case CalendarActions.DRAG_POST:
-        var data=action.payload;
-        var posts=state.posts.slice();
-        posts.forEach(o=>{
-            if(o.id===data.id)
-            {
-               o.status=data.status; 
-               o.status_extra_info=data.status_extra_info
-            }
-        })
-
+        case CalendarActions.SET_STATUSES:
         return {
-            ...state,posts:posts
+            ...state,statuses:action.payload
         }
+
+        case CalendarActions.DRAG_POST_SUCCESS:
+            var post = action.payload;
+            var statuses=state.statuses.slice();
+            var index;
+            statuses.forEach((o,i)=>{
+                o.data.forEach(d=>{
+                    if(d.id===post.id)
+                    {
+                        index=i;
+                    }     
+                })
+               
+            })
+
+            statuses[index]=post;
+        
+            return {
+                ...state,statuses:statuses
+            }
         default:
-        return {...state}
+            return { ...state }
     }
 
 }

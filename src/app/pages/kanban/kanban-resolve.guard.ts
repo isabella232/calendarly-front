@@ -1,3 +1,5 @@
+import * as CalendarActions from './../calendar/store/calendar.actions';
+import { Store } from '@ngrx/store';
 import { ContainerService } from './../../providers/container.service';
 import { SharedService } from './../../providers/shared.service';
 import { Injectable } from '@angular/core';
@@ -5,9 +7,11 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } fro
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { catchError } from 'rxjs/operators';
+import { AppState } from '../../store/app.reducers';
 @Injectable()
 export class KanbanResolveGuard implements Resolve<any> {
-  constructor(private sharedService:SharedService,private container:ContainerService){}
+  constructor(private sharedService:SharedService,private container:ContainerService,
+private store:Store<AppState>){}
  
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     console.log('hello111')
@@ -28,6 +32,7 @@ export class KanbanResolveGuard implements Resolve<any> {
                     }
                 })
             })
+            this.store.dispatch(new CalendarActions.SetStatuses(statuses));
             return {data:statuses};
     })
 
