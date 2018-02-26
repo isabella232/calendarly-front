@@ -43,6 +43,7 @@ export class CalendarEffects
     .mergeMap(topicData=>{
         return this.postService.createTopic(topicData)
     }).map(post=>{
+        this.sharedService.notify('Topic Created Successfully')
         console.log(post,'aasd')
             return {
                 type:CalendarActions.CREATE_TOPIC_SUCCESS,

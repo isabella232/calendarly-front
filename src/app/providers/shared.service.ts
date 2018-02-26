@@ -73,7 +73,7 @@ export class SharedService {
 
     notify(message)
     {
-           Snackbar.show({text: message});
+           Snackbar.show({text: message,pos:'bottom-center'});
     }
 
     constructor(private http:HttpClient,private container:ContainerService,

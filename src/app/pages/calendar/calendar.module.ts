@@ -8,6 +8,7 @@ import { CalendarComponent } from './calendar.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 const Calendar_ROUTES = [
     { path: '', component: CalendarComponent }
@@ -23,7 +24,8 @@ const Calendar_ROUTES = [
         RouterModule.forChild(Calendar_ROUTES),
         ModalModule.forRoot(),
         PostModule,
-        FormsModule
+        FormsModule,
+        FlexLayoutModule
     ],
     providers:[CalendarService]
 })

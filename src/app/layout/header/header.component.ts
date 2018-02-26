@@ -90,6 +90,7 @@ export class HeaderComponent implements OnInit {
     this.user.role=Number(this.user.role)
     console.log(this.user)
       this.calendarService.addMember({project:this.container.projectId,...this.user}).subscribe(res=>{
+        this.sharedService.notify('Member added Successfully')
         console.log(res)
       })
   }

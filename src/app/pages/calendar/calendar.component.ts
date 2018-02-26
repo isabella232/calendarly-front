@@ -6,8 +6,11 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CalendarService } from './calendar.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {ObservableMedia} from '@angular/flex-layout';
+
 declare var $:any;
 declare var swal:any;
+import * as moment from 'moment'
 import * as _ from 'underscore';
 import { ContainerService } from '../../providers/container.service';
 import { Store } from '@ngrx/store';
@@ -22,7 +25,8 @@ export class CalendarComponent  {
   constructor(private calendarService:CalendarService,
     private container:ContainerService,private router:Router,
     private postService:PostService,private sharedService:SharedService,
-  private store:Store<AppState>,private route: ActivatedRoute) { }
+  private store:Store<AppState>,private route: ActivatedRoute,
+  public media: ObservableMedia) { }
   date:Date;
   currentPost;
   roles=[];
@@ -39,6 +43,14 @@ export class CalendarComponent  {
     }
 
   initCalendar(posts?:any[]) {
+    var height;
+    if(window.innerWidth>600)
+    {
+      height=undefined;
+    }
+    else{
+      height=650;
+    }
     this.fullCalendar=$('#calendar')
     
     this.fullCalendar.fullCalendar({
@@ -47,12 +59,13 @@ export class CalendarComponent  {
           center: 'prev, title, next',
           left: ''
       },
-
+      eventLimit: true,
+      height:height,
       theme: true, //Do not remove this as it ruin the design
       selectable: true,
       selectHelper: true,
       editable: true,
-
+      defaultDate:moment(this.date),
       //Add Events
       events: posts?posts:[],
       eventClick: (calEvent, jsEvent, view)=> {
@@ -153,6 +166,10 @@ $(this).css('background-color', 'red');
   posts=[];
   ngOnInit()
   {
+    this.media.subscribe(res=>{
+      console.log(res);
+    })
+    this.sharedService.notify('Welcome to Calendarly');
     // this.showCalendar=false;
     this.subscription=this.store.select('calendar').subscribe(state=>{
       console.log(state);
