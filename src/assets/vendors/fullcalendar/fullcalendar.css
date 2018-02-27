@@ -57,6 +57,14 @@ body .fc {
     /* for IE */
 }
 
+.icon-calendar {
+    content: "\f137";
+    color: #fff;
+    font-size: 25px;
+    position: relative;
+    top: 5px;
+}
+
 .fc-bgevent {
     /* default look for background events */
     background: rgb(143, 223, 130);

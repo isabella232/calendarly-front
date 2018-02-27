@@ -25,12 +25,6 @@ createTopic:FormGroup;
 topicData:any;
 initJqueryData()
   {
-    //   console.log(this.postData)
-    // this.initDatetimePicker();
-    
-    // $(".tagsinput").tagsinput();
-
-
     if(this.topicData)
     {
         $('.html-editor').summernote('code',this.topicData.description,{
@@ -74,9 +68,7 @@ submitForm()
     topic.project=this.container.projectId;
     if(this.createTopic.valid)
     {
-
         this.store.dispatch(new CalendarActions.CreateTopic(topic));
-
     }
 }
 
@@ -90,23 +82,16 @@ tags=['Tag-A','Tag-B'];
 
 addTag(tag)
 {
-    if(this.tag==='')
+    if(!this.tag)
     {
         return false;
     }
     if(this.tags.indexOf(tag)===-1)
     {
       this.tags.push(tag);
+      this.tag=''
     }
-    this.tag=''
 }
-
-
-// cancel()
-// {
-//     // this.createTopic.hi
-// }
-
 
 ngOnInit()
 {

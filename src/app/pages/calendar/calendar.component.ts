@@ -6,7 +6,6 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CalendarService } from './calendar.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {ObservableMedia} from '@angular/flex-layout';
 
 declare var $:any;
 declare var swal:any;
@@ -25,8 +24,7 @@ export class CalendarComponent  {
   constructor(private calendarService:CalendarService,
     private container:ContainerService,private router:Router,
     private postService:PostService,private sharedService:SharedService,
-  private store:Store<AppState>,private route: ActivatedRoute,
-  public media: ObservableMedia) { }
+  private store:Store<AppState>,private route: ActivatedRoute) { }
   date:Date;
   currentPost;
   roles=[];
@@ -110,6 +108,10 @@ $(this).css('background-color', 'red');
          title: 'Are you sure?',
          text: "You want to update this post",
          type: 'warning',
+         buttonIcons:{
+          next:'a-  fa fa-chevron-circle-right a-' ,
+          prev:'a-  fa fa-chevron-circle-left a-'
+         },
          showCancelButton: true,
          confirmButtonColor: '#3085d6',
          cancelButtonColor: '#d33',
@@ -154,27 +156,14 @@ $(this).css('background-color', 'red');
   {
     console.log(post,'post')
     this.store.dispatch(new CalendarActions.CreatePost(post));
-    //  this.postService.createPost(post).subscribe(res=>{
-    //      console.log(res)
-    //      _.extend(post,res);
-    //      this.addPost(post);
-    //  },er=>{ 
-    //    console.log(er)
-    //  })
   }
   subscription;
   posts=[];
   ngOnInit()
   {
-    this.media.subscribe(res=>{
-      console.log(res);
-    })
-    this.sharedService.notify('Welcome to Calendarly');
-    // this.showCalendar=false;
     this.subscription=this.store.select('calendar').subscribe(state=>{
       console.log(state);
       $('#calendar').fullCalendar('destroy');
-      // this.showCalendar=true;
       this.initCalendar(state.posts);
       this.createPost.hide(); // remaining to handle on error!
 
@@ -190,13 +179,6 @@ $(this).css('background-color', 'red');
   exit()
   {
     this.createPost.hide();
-  }
-
-  ngOnDestroy()
-  {
-    // this.subscription.unsubscribe();
-    // this.showCalendar=false
-
   }
 
 

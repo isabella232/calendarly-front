@@ -66,33 +66,17 @@ private store:Store<AppState>) { }
   }
   isCommentOpen=false;
   currentComments=[];
+  isViewLess=true;
   toggleComments()
   {
-    this.isCommentOpen=!this.isCommentOpen;
-    if(this.isCommentOpen)
-    {
-      this.currentComments=this.comments;
-    }
-    else{
-      this.currentComments=this.visibleComments;
-    }
+   this.isViewLess=!this.isViewLess;
   }
 
   getComments(postId)
   {
     this.postService.getComments(postId).subscribe(comments=>{
-      this.currentComments=this.comments;
       this.comments=comments;
-      if(this.comments.length>2)
-      {
-        // this.visibleComments[0]=this.comments[this.comments.length-2];
-        // this.visibleComments[1]=this.comments[this.comments.length-1];
-        var len=this.comments.length;
-        this.visibleComments=this.comments.slice(len-2,len-1)
-        // this.visibleComments=this.comments.slice(len-1)
-        this.currentComments=this.visibleComments;
-      }
-
+      this.lessComments=[this.comments[0],this.comments[1]]
       console.log(comments)
     },er=>{
       console.log(er)
@@ -107,10 +91,15 @@ private store:Store<AppState>) { }
       console.log(this.comments)
       this.postService.updatePost({comment:body,version:1,id:this.post.id}).subscribe(res=>{
         console.log(res)
-        this.visibleComments.push({
-          comment:body,
-          user:this.user
-        })
+        this.comments.push({
+          user:{
+          name:res.assigned_to_extra_info.username,
+          photo:res.owner_extra_info.photo
+          },
+          comment:this.commentBody
+        })   
+        this.commentBody=''
+        console.log(this.comments,'asd')
       },er=>{
         console.log(er)
       })
@@ -143,8 +132,28 @@ private store:Store<AppState>) { }
            })
          }
        })
-
-      
+  }
+  lessComments=[]
+  deleteComment(post,comment,index)
+  {
+      swal({
+         title: 'Are you sure?',
+         text: "You will not be able to recover this post",
+         type: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Delete'
+       }).then((result) => {
+         if (result.value) {
+          this.postService.deleteComment(post.id,comment.id).subscribe(res=>{
+            console.log(res,'deletecomment');
+            this.comments.splice(index,1)
+            this.sharedService.notify('Comment Deleted!')
+       });
+         
+         }
+       })
   }
 
   updateForm(post)

@@ -8,7 +8,8 @@
         "outDir": "dist",
         "assets": [
             "assets",
-            "favicon.ico"
+            "favicon.ico",
+            { "glob": "icons.svg", "input": "../node_modules/trumbowyg/dist/ui/", "output": "./trumbowyg/" }
         ],
         "index": "index.html",
         "main": "main.ts",
@@ -26,6 +27,7 @@
             "../node_modules/sweetalert2/dist/sweetalert2.css",
             "../node_modules/dragula/dist/dragula.css",
             "assets/vendors/fullcalendar/fullcalendar.css",
+            "../node_modules/trumbowyg/dist/ui/trumbowyg.min.css",
             "assets/css/snackbar.css",
             "styles.scss"
         ],
@@ -35,7 +37,8 @@
             "../node_modules/summernote/dist/summernote-lite.js",
             "../node_modules/sweetalert2/dist/sweetalert2.all.js",
             "assets/vendors/fullcalendar/lib/moment.min.js",
-            "assets/vendors/fullcalendar/fullcalendar.min.js",
+            "../node_modules/trumbowyg/dist/trumbowyg.min.js",
+            "assets/vendors/fullcalendar/fullcalendar.js",
             "assets/js/snackbar.js"
         ],
         "environmentSource": "environments/environment.ts",

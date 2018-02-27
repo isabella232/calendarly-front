@@ -73,8 +73,8 @@
         // jquery-ui theming
         theme: false,
         themeButtonIcons: {
-            prev: 'circle-triangle-w',
-            next: 'circle-triangle-e',
+            prev: 'chevron-circle-left',
+            next: 'chevron-circle-right',
             prevYear: 'seek-prev',
             nextYear: 'seek-next'
         },
@@ -118,8 +118,8 @@
             nextYear: 'left-double-arrow'
         },
         themeButtonIcons: {
-            prev: 'circle-triangle-e',
-            next: 'circle-triangle-w',
+            prev: 'chevron-circle-left',
+            next: 'chevron-circle-right',
             nextYear: 'seek-prev',
             prevYear: 'seek-next'
         }
@@ -5053,7 +5053,7 @@
             var content = $(
                 '<div class="fc-header ' + view.widgetHeaderClass + '">' +
                 '<span class="fc-close ' +
-                (isTheme ? 'ui-icon ui-icon-closethick' : 'fc-icon fc-icon-x') +
+                (isTheme ? 'fa fa-closethick' : 'fc-icon fc-icon-x') +
                 '"></span>' +
                 '<span class="fc-title">' +
                 htmlEscape(title) +
@@ -7650,7 +7650,7 @@
                                 if (viewText || customText) {
                                     innerHtml = htmlEscape(viewText || customText);
                                 } else if (themeIcon && options.theme) {
-                                    innerHtml = "<span class='ui-icon ui-icon-" + themeIcon + "'></span>";
+                                    innerHtml = "<i class='icon-calendar fa fa-" + themeIcon + "'></i>";
                                 } else if (normalIcon && !options.theme) {
                                     innerHtml = "<span class='fc-icon fc-icon-" + normalIcon + "'></span>";
                                 } else {

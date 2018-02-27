@@ -60,14 +60,24 @@ export class CreatePostComponent implements OnInit {
     }
 
     suggestedTopics=[];
-    suggestTopics()
+    suggestTopics(e?:any)
     {
-        // var topic=this.topic;
-        // console.log(this.createPost.value.topic)
-        this.sharedService.searchtext(this.topic).subscribe((res:any)=>{
-            console.log(res);
-            this.suggestedTopics=res.epics;
-        })
+        console.log(e)
+
+        if(e.keyCode===13)
+        {
+            this.suggestedTopics=[];
+
+           this.topics.push(this.topic);
+           return this.topic=''
+        }
+        else{
+            this.sharedService.searchtext(this.topic).subscribe((res:any)=>{
+                console.log(res);
+                this.suggestedTopics=res.epics;
+            })
+        }
+       
     }
 
     toggleVisibility(file)
@@ -133,9 +143,12 @@ export class CreatePostComponent implements OnInit {
     }
     else{
 
-        $('.html-editor').summernote({
-            height: 150
-        });
+        // $('.html-editor').summernote({
+        //     height: 150
+        // });
+
+        $('#editor').trumbowyg();
+
     }
 
 
@@ -219,43 +232,46 @@ export class CreatePostComponent implements OnInit {
   
   addTopic(topic)
   {
-      if(this.topic==='')
+      if(!this.topic)
       {
           return false;
       }
       if(this.topics.indexOf(topic)===-1)
       {
         this.topics.push(topic);
+        this.topic=''
       }
-      this.topic=''
+    //   this.topic=''
   }
 
 
   addTag(tag)
   {
-      if(this.tag==='')
+      if(!this.tag)
       {
           return false;
       }
       if(this.tags.indexOf(tag)===-1)
       {
         this.tags.push(tag);
-      }
-      this.tag=''
+        this.tag=''
+    }
+    //   this.tag=''
   }
 
  
   addProfile(profile)
   {
-      if(this.profile==='')
+      if(!this.profile)
       {
           return false;
       }
       if(this.profiles.indexOf(profile)===-1)
       {
         this.profiles.push(profile);
-      }
-      this.profile=''
+        this.profile=''
+    }
+    //   this.profile=''
   }
 
   removeTopic(index)
@@ -274,6 +290,7 @@ export class CreatePostComponent implements OnInit {
     this.tags.splice(index,1)
   }
   ngOnInit() {
+
     //   this.time=this.date;
       console.log(this.postData)
     this.initForm();
@@ -365,6 +382,10 @@ export class CreatePostComponent implements OnInit {
 
   ngAfterViewInit()
   {
+    $('.editor').trumbowyg({
+        svgPath: './assets/img/icons.svg'
+    });
+
     this.initJqueryData()   
   }
 

@@ -47,6 +47,11 @@
     float: left;
 }
 
+.card>.actions,
+.card-body .actions {
+    top: auto !important;
+}
+
 .timeline {
     padding-left: 50px;
     padding-top: 0;

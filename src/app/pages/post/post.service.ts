@@ -39,8 +39,8 @@ export class PostService {
 
   deleteComment(postId,commentId)
   {
-    return this.http.post(config.url+`/api/v1/history/userstory/${postId}/delete_comment?id=${commentId}`,{
-      headers:new HttpHeaders().set('Authorization','Application '+this.container.cypheredToken)
+    return this.http.post(config.url+`/api/v1/history/userstory/${postId}/delete_comment?id=${commentId}`,{},{
+      headers:new HttpHeaders().append('Authorization','Application '+this.container.cypheredToken)
     }).pipe(catchError(this.sharedService.handleError));
   }
 

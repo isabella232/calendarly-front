@@ -12,9 +12,7 @@ import { CommonModule } from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PostRoutingModule } from './post.routing.module';
-import { CalendarService } from '../calendar/calendar.service';
 import { TextMaskModule } from 'angular2-text-mask';
-import { ColorPickerModule } from 'ng2-color-picker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({

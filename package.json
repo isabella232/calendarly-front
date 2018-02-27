@@ -69,6 +69,7 @@
     "select2": "^4.0.4",
     "summernote": "^0.8.9",
     "sweetalert2": "^7.7.0",
+    "trumbowyg": "^2.9.4",
     "typescript": "2.4.2",
     "zone.js": "^0.8.14"
   },
