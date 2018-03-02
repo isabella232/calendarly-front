@@ -109,7 +109,8 @@ export class PostService {
     post.description_html=post.description;
     post.kanban_order=moment(post.date).toDate().getTime();
     post.backlog_order=moment(post.date).toDate().getTime();
-    post=_.pick(post,'project','subject','assigned_to','description_html','kanban_order','backlog_order','id','version')
+    post=_.pick(post,'project','subject','assigned_to','description_html',
+    'kanban_order','backlog_order','id','version','tags','profiles','topics')
     
     return {...post};
   }

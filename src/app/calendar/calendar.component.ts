@@ -161,6 +161,7 @@ $(this).css('background-color', 'red');
   posts=[];
   ngOnInit()
   {
+    this.sharedService.notify('Welcome to Calendarly');
     this.subscription=this.store.select('calendar').subscribe(state=>{
       console.log(state);
       $('#calendar').fullCalendar('destroy');

@@ -60,9 +60,13 @@ export class CreatePostComponent implements OnInit {
     }
 
     suggestedTopics=[];
-    suggestTopics(e?:any)
+    suggestTopics(e?:any,topic?:any)
     {
         console.log(e)
+        // if(this.topic.length===0)
+        // {
+        // return false;
+        // }
 
         if(e.keyCode===13)
         {
@@ -72,10 +76,7 @@ export class CreatePostComponent implements OnInit {
            return this.topic=''
         }
         else{
-            this.sharedService.searchtext(this.topic).subscribe((res:any)=>{
-                console.log(res);
-                this.suggestedTopics=res.epics;
-            })
+           
         }
        
     }
@@ -214,7 +215,10 @@ export class CreatePostComponent implements OnInit {
           ...val,
           project:this.postData.project,
           version:this.postData.version,
-          id:this.postData.id
+          id:this.postData.id,
+          tags:this.tags,
+          topics:this.topics,
+          profiles:this.profiles
       }
       this.postService.updatePost(this.postService.mapPostToCalendarly(post)).subscribe(res=>{
             this.sharedService.notify('Post updated Successfully')
@@ -226,13 +230,14 @@ export class CreatePostComponent implements OnInit {
   topics=['Topic-1','Topic-2'];
   tags=['Tag-A','Tag-B'];
   profiles=['Facebook-A','Linked-In'];
-  topic;
-  tag;
-  profile;
+  topic='';
+  tag='';
+  profile='';
   
-  addTopic(topic)
+  addTopic(topic:string)
   {
-      if(!this.topic)
+      console.log(topic,'topic')
+      if(topic.length===0)
       {
           return false;
       }
@@ -276,7 +281,7 @@ export class CreatePostComponent implements OnInit {
 
   removeTopic(index)
   {
-    this.tags.splice(index,1)
+    this.topics.splice(index,1)
   }
 
   removeTag(index)
@@ -287,7 +292,7 @@ export class CreatePostComponent implements OnInit {
 
   removeProfile(index)
   {
-    this.tags.splice(index,1)
+    this.profiles.splice(index,1)
   }
   ngOnInit() {
 

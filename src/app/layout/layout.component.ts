@@ -16,7 +16,7 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sharedService.notify('Welcome to Calendarly');
+    // this.sharedService.notify('Welcome to Calendarly');
     this.sharedService.getProjectTemplate().subscribe(res=>{
       console.log(res)
     })
