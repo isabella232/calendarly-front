@@ -38,6 +38,13 @@ export function MainReducers(state=initialState,action:MainActions.MainActions)
             ...state,
             user:action.payload
         }
+
+        case MainActions.SET_TOKEN:
+        window[this.container.storageStrategy].setItem('cypheredToken',action.payload);
+        return {
+            ...state,
+            cypheredToken:action.payload
+        }
     }
 
 }

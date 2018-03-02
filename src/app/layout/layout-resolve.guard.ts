@@ -1,9 +1,9 @@
-import * as CalendarActions from './../pages/calendar/store/calendar.actions';
+import * as CalendarActions from './../calendar/store/calendar.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from './../store/app.reducers';
 import { SharedService } from './../providers/shared.service';
 import { ContainerService } from './../providers/container.service';
-import { PostService } from './../pages/post/post.service';
+import { PostService } from './../post/post.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs/Observable';

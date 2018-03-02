@@ -6,7 +6,7 @@ import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 declare var $:any;
 import * as moment from 'moment';
 import * as _ from 'underscore';
-import { CalendarService } from '../../pages/calendar/calendar.service';
+import { CalendarService } from '../../calendar/calendar.service';
 declare var swal:any;
 
 @Component({

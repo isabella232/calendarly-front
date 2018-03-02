@@ -4,6 +4,7 @@ export const AUTHENTICATE_USER='AUTHENTICATE_USER';
 export const SIGN_OUT_USER='SIGN_OUT';
 export const FORGOT_PASSWORD='FORGOT_PASSWORD';
 export const USER_UPDATED='USER_UPDATED';
+export const SET_TOKEN='SET_TOKEN';
 
 export class AuthenticateUser implements Action
 {
@@ -29,7 +30,13 @@ export class UserUpdated implements Action
     constructor(public payload){}
 }
 
+export class SetToken implements Action
+{
+    readonly type=SET_TOKEN;
+    constructor(public payload){}
+}
+
 
 export type MainActions = AuthenticateUser | SignOutUser | ForgotPassword
-| UserUpdated
+| UserUpdated | SetToken
 ;

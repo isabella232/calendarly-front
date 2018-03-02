@@ -1,8 +1,8 @@
 import { EventsService } from './../../providers/events.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { PostService } from './../../pages/post/post.service';
+import { PostService } from './../../post/post.service';
 import { ContainerService } from './../../providers/container.service';
-import { CalendarService } from './../../pages/calendar/calendar.service';
+import { CalendarService } from './../../calendar/calendar.service';
 import { SharedService } from './../../providers/shared.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as _ from 'underscore';

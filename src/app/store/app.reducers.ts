@@ -1,4 +1,4 @@
-import * as CalendarReducer from "../pages/calendar/store/calendar.reducer";
+import * as CalendarReducer from "../calendar/store/calendar.reducer";
 import { ActionReducerMap } from "@ngrx/store";
 import * as MainReducers from "../layout/store/main.reducers";
 

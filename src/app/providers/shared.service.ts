@@ -4,7 +4,7 @@ import { Observer } from 'rxjs/Observer';
 import { catchError } from 'rxjs/operators/catchError';
 import { Observable } from 'rxjs/Observable';
 import { ContainerService } from './container.service';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { config } from './config';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
@@ -32,8 +32,6 @@ export class SharedService {
   {
     return this.http.post(config.url+'/api/v1/memberships',data)
   }
-
-    // Theming
     maTheme: string
     maThemeSubject: Subject<string> = new Subject<string>()
 
@@ -44,9 +42,6 @@ export class SharedService {
 
     getProjectTemplate()
     {
-        var token=this.container.cypheredToken;
-        var headers=new HttpHeaders();
-        headers.append('Application',token)
         return this.http.get(config.url+'/api/v1/project-templates').map(res=>{
             this.container.projectTemplate=res[0];
             return res[0];
@@ -55,9 +50,6 @@ export class SharedService {
 
     getKanbanLayout()
     {
-        var token=this.container.cypheredToken;
-        var headers=new HttpHeaders();
-        headers.append('Application',token)
         return this.http.get(config.url+'/api/v1/project-templates').map(res=>res[1])
     }
 
@@ -79,10 +71,7 @@ export class SharedService {
     constructor(private http:HttpClient,private container:ContainerService,
         private store:Store<AppState>,
     private eventsService:EventsService)  {
-        // Hidden the sidebar by default
         this.sidebarVisible = false
-
-        // Set default theme as green
         this.maTheme = 'green'
     }
 

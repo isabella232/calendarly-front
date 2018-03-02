@@ -1,0 +1,158 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card" *ngIf="post">
+
+            <div class="card-body">
+                <div class="form-group form-group--select">
+                    <label>Status</label>
+                    <div class="select">
+                        <select class="form-control">
+                        <option>{{post.status_extra_info.name}}</option>
+                        <!-- <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                        <option>Option 4</option>
+                        <option>Option 5</option> -->
+                      </select>
+                    </div>
+                </div>
+
+                <div class="form-group form-group--select">
+                    <label>Assigned To</label>
+                    <div class="select">
+                        <select class="form-control">
+                        <option>{{post.assigned_to_extra_info.full_name_display}}</option>
+                      </select>
+                    </div>
+                </div>
+
+                <div class="widget-signups__list">
+                    <a *ngIf="post.is_watcher">
+                        <img class="avatar-img" [src]="user.photo" src-fallback="{{images.fallbackImg}}" alt="">
+                    </a>
+                    <a *ngFor="let watcher of watchers">
+                        <img class="avatar-img" [src]="watcher.photo" src-fallback="{{images.fallbackImg}}" alt="">
+                    </a>
+
+                </div>
+                <div class="widget-signups__list">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8"></div>
+                        <div class="col-md-12 col-sm-4 col-lg-12">
+                            <button class="btn btn-primary watchBtn" (click)="watchPost()" *ngIf="!post.is_watcher">Watch</button>
+                            <button class="btn btn-primary watchBtn" (click)="watchPost()" *ngIf="post.is_watcher">Unwatch</button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card" *ngIf="post">
+            <div class="card-header">
+                <ul class="nav nav-pills nav-fill" style="float:left;">
+                    <li class="nav-item">
+                        <a class="nav-link active">Post</a>
+                    </li>
+                </ul>
+                <button (click)="deletePost(post)" class="btn btn-light pull-right btn--icon" style="float:right;"><i class="fa fa-trash"></i></button>
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="card-body">
+                <app-create-post [postData]="post" [date]="date" [time]="time" (formUpdated)="updateForm($event)"></app-create-post>
+            </div>
+        </div>
+
+        <!-- <ng-container> -->
+        <div class="card" style="margin-bottom:100px;">
+            <!-- <div class="card-header">
+
+                </div> -->
+            <div class="card-body">
+                <ng-container *ngIf="!isViewLess">
+                    <ng-container *ngFor="let comment of comments;let i=index;">
+                        <div class="listview" *ngIf="!comment.delete_comment_date">
+                            <div class="listview__item ">
+                                <img src-fallback="{{images.fallbackImg}}" [src]="comment.user.photo" class="listview__img" alt="">
+
+                                <div class="listview__content">
+                                    <h3 class="listview__heading">{{comment.user.name}}</h3>
+                                    <!-- <p>{{ recentPostData.post }}</p> -->
+                                    <p>{{comment.comment}}</p>
+                                </div>
+
+                                <div class="actions" *ngIf="comment.id">
+                                    <div dropdown class="actions__item">
+                                        <i dropdownToggle class="zmdi zmdi-more-vert"></i>
+                                        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item">Edit Comment</a>
+                                            <a class="dropdown-item" (click)="deleteComment(post,comment,i)">Delete Comment</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <button class="btn btn-primary" (click)="postComment(commentBody)">Post Comment</button> -->
+
+                            <!-- <a href="" class="view-more">View All Comments</a> -->
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+
+                <ng-container *ngIf="isViewLess">
+                    <ng-container *ngFor="let comment of lessComments;let i=index;">
+                        <div class="listview" *ngIf="!comment.delete_comment_date">
+                            <div class="listview__item ">
+                                <img src-fallback="{{images.fallbackImg}}" [src]="comment.user.photo" class="listview__img" alt="">
+
+                                <div class="listview__content">
+                                    <h3 class="listview__heading">{{comment.user.name}}</h3>
+                                    <p>{{comment.comment}}</p>
+                                </div>
+
+                                <div class="actions" *ngIf="comment.id">
+                                    <div dropdown class="actions__item">
+                                        <i dropdownToggle class="zmdi zmdi-more-vert"></i>
+                                        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item">Edit Comment</a>
+                                            <a class="dropdown-item" (click)="deleteComment(post,comment,i)">Delete Comment</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <a *ngIf="comments.length>=2" (click)="toggleComments()" class="view-more">View {{isViewLess?'More':'Less'}} Comments</a>
+
+
+                <div class="listview ">
+                    <div class="listview__item ">
+                        <img src-fallback="{{images.fallbackImg}}" [src]="user.photo" class="listview__img" alt="">
+
+                        <div class="listview__content">
+                            <h3 class="listview__heading">{{user.full_name}}</h3>
+                            <div class="form-group">
+                                <input type="text" class="form-control" [(ngModel)]="commentBody" placeholder="Post comment">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 hidden-xs"></div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <button style="margin:10px auto !important;width:100% !important; " class="btn btn-primary pull-right" (click)="postComment(commentBody)">Post Comment</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
