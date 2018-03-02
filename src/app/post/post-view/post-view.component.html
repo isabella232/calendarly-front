@@ -27,9 +27,6 @@
                 </div>
 
                 <div class="widget-signups__list">
-                    <a *ngIf="post.is_watcher">
-                        <img class="avatar-img" [src]="user.photo" src-fallback="{{images.fallbackImg}}" alt="">
-                    </a>
                     <a *ngFor="let watcher of watchers">
                         <img class="avatar-img" [src]="watcher.photo" src-fallback="{{images.fallbackImg}}" alt="">
                     </a>

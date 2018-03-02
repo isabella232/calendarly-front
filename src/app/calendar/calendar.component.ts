@@ -6,13 +6,13 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CalendarService } from './calendar.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ContainerService } from '../providers/container.service';
+import { Store } from '@ngrx/store';
+import * as moment from 'moment'
 
 declare var $:any;
 declare var swal:any;
-import * as moment from 'moment'
-import * as _ from 'underscore';
-import { ContainerService } from '../providers/container.service';
-import { Store } from '@ngrx/store';
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -24,23 +24,17 @@ export class CalendarComponent  {
   constructor(private calendarService:CalendarService,
     private container:ContainerService,private router:Router,
     private postService:PostService,private sharedService:SharedService,
-  private store:Store<AppState>,private route: ActivatedRoute) { }
+  private store:Store<AppState>) { }
+  
   date:Date;
   currentPost;
-  roles=[];
   showCalendar=false;
   fullCalendar;
-  user:any={};
-    addMember()
-    {
-      this.user.role=Number(this.user.role)
-      console.log(this.user)
-        this.calendarService.addMember({project:this.container.projectId,...this.user}).subscribe(res=>{
-          console.log(res)
-        })
-    }
+  subscription;
+  posts=[];
 
   initCalendar(posts?:any[]) {
+    $('#calendar').fullCalendar('destroy');
     var height;
     if(window.innerWidth>600)
     {
@@ -64,24 +58,15 @@ export class CalendarComponent  {
       selectHelper: true,
       editable: true,
       defaultDate:moment(this.date),
-      //Add Events
       events: posts?posts:[],
       eventClick: (calEvent, jsEvent, view)=> {
           this.router.navigate(['/','post',calEvent._id])
       },
-       
-      //On Day Select
       select: (start, end, allDay) =>{
         this.createPost.show();
-          // $('#addNew-event').modal('show');   
-          // $('#addNew-event input:text').val('');
-          // $('#getStart').val(start);
-          // $('#getEnd').val(end);
       },
       dayClick: (date, jsEvent, view)=> {
-          // console.log(date)
           this.date=date.toDate();
-          // this.isEditMode=false;
 $(this).css('background-color', 'red');
 
         }
@@ -157,23 +142,15 @@ $(this).css('background-color', 'red');
     console.log(post,'post')
     this.store.dispatch(new CalendarActions.CreatePost(post));
   }
-  subscription;
-  posts=[];
+
   ngOnInit()
   {
     this.sharedService.notify('Welcome to Calendarly');
     this.subscription=this.store.select('calendar').subscribe(state=>{
       console.log(state);
-      $('#calendar').fullCalendar('destroy');
       this.initCalendar(state.posts);
       this.createPost.hide(); // remaining to handle on error!
 
-    })
-  this.container.customAttributes.forEach(obj=>{
-    this.container.customAttributes[obj.name]=obj;
-  })
-  this.sharedService.createTopicSubject.subscribe(()=>{
-      this.createTopic.show();
     })
   }
   

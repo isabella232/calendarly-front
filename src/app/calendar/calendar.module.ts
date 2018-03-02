@@ -17,9 +17,9 @@ import { NgModule } from '@angular/core';
     imports: [
         CommonModule,
         CoreModule,
-        ModalModule.forRoot(),
-        PostModule,
-        FormsModule,
+        // ModalModule.forRoot(),
+        // PostModule,
+        // FormsModule,
         CalendarRoutingModule
     ],
     providers:[CalendarService,CalendarResolveGuard],

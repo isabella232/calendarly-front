@@ -63,10 +63,6 @@ export class CreatePostComponent implements OnInit {
     suggestTopics(e?:any,topic?:any)
     {
         console.log(e)
-        // if(this.topic.length===0)
-        // {
-        // return false;
-        // }
 
         if(e.keyCode===13)
         {
@@ -76,16 +72,16 @@ export class CreatePostComponent implements OnInit {
            return this.topic=''
         }
         else{
-           
+            this.sharedService.searchtext(this.topic).subscribe((res:any)=>{
+                console.log(res);
+                this.suggestedTopics=res.epics;
+            })
         }
        
     }
 
     toggleVisibility(file)
     {
-        // var formData=new FormData();
-        // formData.append('attached_file',file,file.name)
-
         file.isVisible=!file.isVisible;
         this.postService.updateAttachment({isVisible:file.isVisible,id:file.id}).subscribe(res=>{
             console.log(res)
@@ -124,17 +120,11 @@ export class CreatePostComponent implements OnInit {
                 })
             }
           })
-       
+  
     }
-
   @Input() postData;
   initJqueryData()
   {
-    //   console.log(this.postData)
-    // this.initDatetimePicker();
-    
-    // $(".tagsinput").tagsinput();
-
 
     if(this.postData)
     {
@@ -143,13 +133,7 @@ export class CreatePostComponent implements OnInit {
         });
     }
     else{
-
-        // $('.html-editor').summernote({
-        //     height: 150
-        // });
-
         $('#editor').trumbowyg();
-
     }
 
 
@@ -223,7 +207,6 @@ export class CreatePostComponent implements OnInit {
       this.postService.updatePost(this.postService.mapPostToCalendarly(post)).subscribe(res=>{
             this.sharedService.notify('Post updated Successfully')
         console.log(res)
-        //   this.formUpdated.emit();
         })
     
   }
@@ -246,7 +229,6 @@ export class CreatePostComponent implements OnInit {
         this.topics.push(topic);
         this.topic=''
       }
-    //   this.topic=''
   }
 
 
@@ -261,7 +243,6 @@ export class CreatePostComponent implements OnInit {
         this.tags.push(tag);
         this.tag=''
     }
-    //   this.tag=''
   }
 
  
@@ -295,8 +276,6 @@ export class CreatePostComponent implements OnInit {
     this.profiles.splice(index,1)
   }
   ngOnInit() {
-
-    //   this.time=this.date;
       console.log(this.postData)
     this.initForm();
 
@@ -304,14 +283,9 @@ export class CreatePostComponent implements OnInit {
         console.log('hello')
         this.suggestTopics();
     })
-    // this.initJqueryData();
-   
-    // console.log(this.postData)
     if(this.postData)
       {
           this.editMode=true;
-        //   this.date=this.postData.date;
-        // this.time=this.postData.time;
           this.createPost.patchValue(this.postData);
           this.topics=this.postData.tags.split(',');
           console.log('data found',this.postData);
@@ -323,12 +297,6 @@ export class CreatePostComponent implements OnInit {
       }
   }
 
-//   exit()
-//   {
-//     this.route
-//   }
-  
-  
 
   uploadFiles()
   {
@@ -381,8 +349,6 @@ export class CreatePostComponent implements OnInit {
      })
        }
       })
-
-
   }
 
   ngAfterViewInit()

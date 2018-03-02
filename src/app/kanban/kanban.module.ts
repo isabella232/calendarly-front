@@ -17,9 +17,9 @@ import {DragulaModule} from 'ng2-dragula';
     imports: [
         CommonModule,
         CoreModule,
-        BsDropdownModule.forRoot(),
-        FormsModule,
-        DragulaModule,
+        // BsDropdownModule.forRoot(),
+        // FormsModule,
+        // DragulaModule,
         KanbanRoutingModule
     ],
     providers:[KanbanService,KanbanResolveGuard],

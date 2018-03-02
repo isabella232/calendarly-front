@@ -1,12 +1,10 @@
 import { AppState } from './../../store/app.reducers';
 import { SharedService } from './../../providers/shared.service';
-import { EventsService } from './../../providers/events.service';
 import { config } from './../../providers/config';
 import { ContainerService } from './../../providers/container.service';
 import * as CalendarActions from './../../calendar/store/calendar.actions';
 import { Store } from '@ngrx/store';
 import { PostService } from './../post.service';
-import { CalendarService } from './../../calendar/calendar.service';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 declare var $:any;
@@ -18,7 +16,7 @@ declare var swal:any;
 })
 export class PostViewComponent  {
     images=config.images;
-  constructor(private route:ActivatedRoute,private router:Router,private eventsService:EventsService,
+  constructor(private route:ActivatedRoute,private router:Router,
   private postService:PostService,private container:ContainerService,private sharedService:SharedService,
 private store:Store<AppState>) { }
   post:any;
@@ -26,8 +24,14 @@ private store:Store<AppState>) { }
   time;
   comments=[];
   watchers=[];
+  lessComments=[]
   commentBody;
   user:any;
+  isCommentOpen=false;
+  currentComments=[];
+  isViewLess=true;
+
+
   ngOnInit() {
     this.user=this.container.user;
     this.route.params.subscribe(param=>{
@@ -49,24 +53,23 @@ private store:Store<AppState>) { }
      });
     })
 
-
-    // this.store.select('calendar').subscribe(state=>{
-
-    // })
   }
 
 
   watchPost()
   {
     this.postService.toggleWatchPost(this.post.id,!this.post.is_watcher).subscribe(res=>{
-      this.post.is_watcher=!this.post.is_watcher
+      this.post.is_watcher=!this.post.is_watcher;
+      if(this.post.is_watcher)
+      {
+        this.watchers.unshift(this.user);
+      }
+      else{
+        this.watchers=this.watchers.filter(o=>o.id!==this.user.id);
+      }
       console.log(res);
-      // this.watchPost
     })
   }
-  isCommentOpen=false;
-  currentComments=[];
-  isViewLess=true;
   toggleComments()
   {
    this.isViewLess=!this.isViewLess;
@@ -139,7 +142,6 @@ private store:Store<AppState>) { }
          }
        })
   }
-  lessComments=[]
   deleteComment(post,comment,index)
   {
       swal({
@@ -160,14 +162,6 @@ private store:Store<AppState>) { }
          
          }
        })
-  }
-
-  updateForm(post)
-  {
-    // console.log(post)
-    // this.postService.updatePost(post).subscribe(res=>{
-    //   console.log(res)
-    // })
   }
 
 }
