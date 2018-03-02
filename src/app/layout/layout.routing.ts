@@ -29,12 +29,12 @@ const LAYOUT_ROUTES: Routes = [
                     path: ':id',
                     component: PostViewComponent
                 }]
-            },
-            {
-                path: 'pages', loadChildren: '../pages/pages.module#PagesModule' 
             }
         ]
 
+    },
+    {
+        path: 'pages', loadChildren: '../pages/pages.module#PagesModule' 
     },
     {
         path: '**', redirectTo: 'calendar', pathMatch: 'full'

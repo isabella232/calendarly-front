@@ -60,7 +60,7 @@ export class SharedService {
 
     getPostStatuses()
     {
-        return this.http.get(config.url+`/api/v1/userstory-statuses`)
+        return this.http.get(config.url+`/api/v1/userstory-statuses`).map((res:any[])=>res.filter(s=>s.project===this.container.projectId))
     }
 
     notify(message)

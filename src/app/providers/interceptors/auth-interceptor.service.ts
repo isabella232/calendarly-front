@@ -12,7 +12,6 @@ import 'rxjs/add/operator/do';
 export class AuthInterceptor  implements HttpInterceptor {
   constructor(private container:ContainerService,private router:Router){};
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    console.log(req)
     let authReq;
     var token
    
@@ -32,19 +31,6 @@ export class AuthInterceptor  implements HttpInterceptor {
       }
   
     return next.handle(authReq)
-    .do((e:any)=>{
-      // console.log(e,'response')
-      if(e instanceof HttpErrorResponse)
-      {
-        if(e.status===401)
-        {
-          this.router.navigate(['/','pages','login']);
-          window[this.container.storageStrategy].removeItem('authToken');
-          window[this.container.storageStrategy].removeItem('auth_code');
-        }
-      }
-    
-    })
 
   }
 }

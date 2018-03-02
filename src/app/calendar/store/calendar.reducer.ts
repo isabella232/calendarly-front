@@ -25,7 +25,7 @@ export function CalendarReducer(state = initialState, action: CalendarActions.Ca
         case CalendarActions.GET_POSTS_SUCCESS:
             return { ...state, posts:action.payload};
 
-        case CalendarActions.ADD_POSTS_TO_STORE:
+        case CalendarActions.SET_POSTS:
             return { ...state, posts: [...action.payload] };
 
         case CalendarActions.DELETE_POST:

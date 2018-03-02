@@ -16,6 +16,7 @@ export const DRAG_POST_SUCCESS='DRAG_POST_SUCCESS';
 export const SET_CURRENT_POST='SET_CURRENT_POST'
 export const SET_CURRENT_STATUS='SET_CURRENT_STATUS'
 export const SET_STATUSES='SET_STATUSES';
+export const SET_POSTS='SET_POSTS';
 
 export class GetPosts implements Action {
     readonly type = GET_POSTS;
@@ -49,8 +50,8 @@ export class GetPostsError implements Action {
     constructor(public payload) { }
 }
 
-export class AddPostsToStore implements Action {
-    readonly type = ADD_POSTS_TO_STORE;
+export class SetPosts implements Action {
+    readonly type = SET_POSTS;
     constructor(public payload) { }
 }
 
@@ -94,7 +95,7 @@ constructor(public payload){}
 }
 
 export type CalendarActions = GetPosts | GetPostsSuccess | 
-GetPostsError | AddPostsToStore | CreatePost | CreatePostSuccess | 
+GetPostsError | SetPosts | CreatePost | CreatePostSuccess | 
 DeletePost | DragPost | CreateTopic | 
 CreateTopicSuccess | SetCurrentPost | SetCurrentStatus | 
 DragPost | SetStatuses

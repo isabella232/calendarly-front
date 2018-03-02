@@ -1,6 +1,6 @@
 <div class="kanban-board">
-    <div class="kanban-scroll" [style.width.px]="kanbanBoard.length*330">
-        <div class="card card-container" style="width:300px;margin:0 10px;" *ngFor="let board of kanbanBoard ">
+    <div class="kanban-scroll" [style.width.px]="statuses.length*330">
+        <div class="card card-container" style="width:300px;margin:0 10px;" *ngFor="let board of statuses ">
 
             <div class="card-body" [dragula]="'board'">
                 <h4 [attr.id]="board.id" class="card-title">{{board.name}}</h4>

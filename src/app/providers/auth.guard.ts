@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       console.log(state)
       return Observable.create(observer=>{
-          this.authService.getToken().subscribe(res=>{
+        this.authService.getToken().subscribe(res=>{
         console.log(res)
         observer.next(true);
         observer.complete();

@@ -18,16 +18,25 @@ export class LayoutResolveGuard implements Resolve<any> {
     var observables=[];
     observables[0]=this.postService.getPosts()
     observables[1]=this.postService.getCustomAttributes();
-    observables[2]=this.sharedService.getKanbanLayout();
+    observables[2]=this.sharedService.getPostStatuses();
     return forkJoin([...observables]).map((results:any[])=>{
-      this.store.dispatch(new CalendarActions.AddPostsToStore(results[0]));
-      this.container.posts=results[0];
+      console.log(results)
+      var posts=results[0];
+      var statuses=results[2];
+      statuses.forEach(o=>{
+          o.data=[];
+          posts.forEach(p=>{
+              if(p.status===o.id)
+              {
+                  o.data.push(p);
+              }
+          })
+      })
+      this.store.dispatch(new CalendarActions.SetStatuses(statuses));
+      this.store.dispatch(new CalendarActions.SetPosts(posts));
+      
       this.container.customAttributes=results[1];
-      this.container.kanbanBoard=results[2]
       return {
-        posts:results[0],
-        customAttributes:results[1],
-        kanbanBoard:results[2]
       }
     });
   }

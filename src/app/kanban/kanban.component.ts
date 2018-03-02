@@ -28,21 +28,15 @@ export class KanbanComponent {
     private postService: PostService, private sharedService: SharedService,
     private eventsService: EventsService,private route:ActivatedRoute,
     private dragulaService: DragulaService) { }
-    kanbanBoard=[];
+    statuses=[];
     currentPost;
     currentStatus;
     ngOnInit()
     {
       this.store.select('calendar').subscribe(state=>{
         console.log(state,'state')
-        this.kanbanBoard=state.statuses;
-        
+        this.statuses=state.statuses;
       })
-
-      // this.route.data.subscribe(routeData=>{
-      //   console.log(routeData)
-      //   this.kanbanBoard=routeData.kanban.data;
-      // })
 
       this.dragulaService.drop.subscribe(res=>{
         var id=Number(res[1].id)
