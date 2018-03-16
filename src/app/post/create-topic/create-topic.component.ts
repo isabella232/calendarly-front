@@ -1,3 +1,5 @@
+import { EventsService } from './../../providers/events.service';
+import { SharedService } from './../../providers/shared.service';
 import * as CalendarActions from './../../calendar/store/calendar.actions';
 import { AppState } from './../../store/app.reducers';
 import { Store } from '@ngrx/store';
@@ -18,11 +20,17 @@ declare var swal:any;
 export class CreateTopicComponent {
 
   constructor(private fb:FormBuilder,private container:ContainerService,private store:Store<AppState>,
-    private router:Router
+    private router:Router,private sharedService:SharedService,private eventsService:EventsService
 ) { }
 
 createTopic:FormGroup;
 topicData:any;
+
+close()
+{
+   this.eventsService.hideTopic.next();
+}
+
 initJqueryData()
   {
     if(this.topicData)
@@ -42,6 +50,10 @@ initJqueryData()
    $('file-images').hover(()=>{
        $(this).next().css({'display':'none'})
    })
+
+   $('.editor').trumbowyg({
+    svgPath: './assets/img/icons.svg'
+});
     
   } 
 
@@ -65,11 +77,15 @@ submitForm()
     console.log(this.createTopic.value)
     var topic=this.createTopic.value
     topic.subject=topic.title;
+    topic.assigned_to=this.container.user.id;
     topic.project=this.container.projectId;
     if(this.createTopic.valid)
     {
         this.store.dispatch(new CalendarActions.CreateTopic(topic));
     }
+    else{
+        this.sharedService.notify('Please enter valid information')
+}
 }
 
 removeTag(index)
@@ -96,6 +112,11 @@ addTag(tag)
 ngOnInit()
 {
     this.initForm();
+}
+
+ngAfterViewInit()
+{
+    this.initJqueryData();
 }
 
 }

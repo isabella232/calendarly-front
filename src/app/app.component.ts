@@ -53,7 +53,7 @@ export class AppComponent {
       window[this.container.storageStrategy].removeItem('cypheredToken')
       window[this.container.storageStrategy].removeItem('authToken');
       window[this.container.storageStrategy].removeItem('auth_code')
-
+      this.sharedService.notify('You were logged out')
     })
   }
 

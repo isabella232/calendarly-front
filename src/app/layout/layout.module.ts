@@ -1,3 +1,4 @@
+import { PostViewResolveGuard } from './../post/post-view/post-view-resolve.guard';
 import { AuthInterceptor } from './../providers/interceptors/auth-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './../providers/auth.service';
@@ -14,7 +15,7 @@ import { NgModule } from "@angular/core";
 import { LayoutRouting } from "./layout.routing";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
-import { ButtonsModule } from 'ngx-bootstrap';
+import { ButtonsModule, TooltipModule } from 'ngx-bootstrap';
 import { LayoutComponent } from "./layout.component";
 import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './header/search/search.component';
@@ -44,9 +45,10 @@ import { CoreModule } from '../core/core.module';
     ProfileModule,
     PostModule,
     ModalModule.forRoot(),
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    TooltipModule.forRoot()
   ],
-  providers:[CalendarService,LayoutResolveGuard,AuthGuard,AuthService]
+  providers:[CalendarService,LayoutResolveGuard,AuthGuard,AuthService,PostViewResolveGuard]
 })
 
 export class LayoutModule {  }

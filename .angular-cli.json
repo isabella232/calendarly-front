@@ -28,6 +28,7 @@
             "../node_modules/dragula/dist/dragula.css",
             "assets/vendors/fullcalendar/fullcalendar.css",
             "../node_modules/trumbowyg/dist/ui/trumbowyg.min.css",
+            "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
             "assets/css/snackbar.css",
             "styles.scss"
         ],

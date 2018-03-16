@@ -42,6 +42,15 @@
     }
 }
 
+.editbtn {
+    float: right;
+}
+
+.editinput {
+    width: 80%;
+    display: inline;
+}
+
 .nav-link {
     width: 150px !important;
     float: left;
@@ -50,6 +59,10 @@
 .card>.actions,
 .card-body .actions {
     top: auto !important;
+}
+
+.avatar-img {
+    margin-right: 0;
 }
 
 .timeline {

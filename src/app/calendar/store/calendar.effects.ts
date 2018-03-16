@@ -1,3 +1,5 @@
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { DELETE_POST } from './../../kanban/store/kanban-actions';
 import { SharedService } from './../../providers/shared.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -7,11 +9,13 @@ import {Actions,Effect} from '@ngrx/effects';
 
 import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/map'
+import { Router } from '@angular/router';
 
 @Injectable()
 export class CalendarEffects
 {
-    constructor(private actions:Actions,private postService:PostService,private sharedService:SharedService){}
+    constructor(private actions:Actions,private postService:PostService,
+        private sharedService:SharedService,private router:Router){}
 
     @Effect() getPosts$=this.actions
     .ofType(CalendarActions.GET_POSTS)
@@ -36,6 +40,20 @@ export class CalendarEffects
             return {
                 type:CalendarActions.CREATE_POST_SUCCESS,
                 payload:this.postService.mapPostResponse(post)
+            }
+    })
+
+    @Effect() deletePost=this.actions.ofType(CalendarActions.DELETE_POST).map((action:CalendarActions.CreatePost)=>action.payload)
+    .mergeMap(postId=>{
+        console.log(postId,'postdata')
+        return forkJoin([this.postService.deletePost(postId),Observable.of(postId)])
+    }).map(results=>{
+        var postId=results[1];
+        this.sharedService.notify('Post Deleted Successfully');
+        this.router.navigate(['/','calendar'])
+            return {
+                type:CalendarActions.DELETE_POST_SUCCESS,
+                payload:postId
             }
     })
 

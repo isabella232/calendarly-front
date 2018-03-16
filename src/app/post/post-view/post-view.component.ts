@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { PostService } from './../post.service';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-declare var $:any;
 declare var swal:any;
 @Component({
   selector: 'app-post-view',
@@ -30,7 +29,16 @@ private store:Store<AppState>) { }
   isCommentOpen=false;
   currentComments=[];
   isViewLess=true;
+  visibleComments=[];
 
+  editComment(post,comment)
+  {
+    comment.isEditMode=true;
+      this.postService.editComment(post.id,comment.id,{comment:comment.comment}).subscribe(res=>{
+        console.log(res,'comments')
+        comment.isEditMode=false;
+      })
+  }
 
   ngOnInit() {
     this.user=this.container.user;
@@ -44,7 +52,6 @@ private store:Store<AppState>) { }
         })
       })
       this.getComments(this.post.id)
-      // this.date=post.start.toDate()
       this.time=post.date.toDate();
       this.date=post.time.toDate();
       console.log(this.post);
@@ -92,7 +99,6 @@ private store:Store<AppState>) { }
     })
   }
 
-  visibleComments=[];
   postComment(body)
   {
     if(body)
@@ -128,18 +134,9 @@ private store:Store<AppState>) { }
          confirmButtonText: 'Delete'
        }).then((result) => {
          if (result.value) {
-           swal(
-             'Deleted!',
-             'The post has been removed from your calendar',
-             'success'
-           ).then(()=>{
-            this.postService.deletePost(post.id).subscribe(res=>{
-              console.log(res);
-              this.store.dispatch(new CalendarActions.DeletePost(post.id));
-            });
-            this.router.navigate(['/','calendar'])
-           })
-         }
+          this.store.dispatch(new CalendarActions.DeletePost(post.id));
+
+        }
        })
   }
   deleteComment(post,comment,index)

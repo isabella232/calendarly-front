@@ -1,10 +1,10 @@
+import { SharedService } from './../../providers/shared.service';
 import { ContainerService } from './../../providers/container.service';
 import { AuthService } from './../../providers/auth.service';
 
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
-// import { ToastrService } from 'toastr-ng2';
 
 import {ModalDirective} from 'ngx-bootstrap'
 @Component({
@@ -15,7 +15,7 @@ import {ModalDirective} from 'ngx-bootstrap'
 export class LoginComponent implements OnInit {
 
   constructor(private fb:FormBuilder,private authService:AuthService,private router:Router,
-  private container:ContainerService) { }
+  private container:ContainerService,private sharedService:SharedService) { }
 
   loginForm:FormGroup;
   @ViewChild('forgotPasswordModal') forgotPasswordModal:ModalDirective;
@@ -34,10 +34,8 @@ export class LoginComponent implements OnInit {
   emailPassword(userInfo)
   {
     this.authService.forgotPassword(userInfo).subscribe(res=>{
-      console.log(res)
       this.forgotPasswordModal.hide();
     },er=>{
-      console.log(er)
       this.forgotPasswordModal.hide();
     })
   }
@@ -46,20 +44,21 @@ export class LoginComponent implements OnInit {
   {
     var userData=this.loginForm.value;
     userData.type='normal'
-    console.log(userData)
     if(this.rememberMe)
     {
       this.container.storageStrategy='localStorage';
       window[this.container.storageStrategy].setItem('storageStrategy',this.container.storageStrategy);
     }
     this.authService.authenticateUser(userData).subscribe(res=>{
-      console.log(res);
       this.router.navigate(['/','calendar'])   ;       
-      console.log(res)
     },er=>{
-      // this.toastr.error('Username or password not found.')
-      console.log(er)
+      this.sharedService.notify('Either username or password is invalid')
     })
+  }
+
+  createAccount()
+  {
+    this.router.navigate(['/','pages','signup'])
   }
 
   ngOnInit() {

@@ -25,6 +25,13 @@ export class PostService {
       return this.http.patch(config.url+'/api/v1/userstories/'+id,data)
       .pipe(catchError(this.sharedService.handleError));
     }
+
+
+    editComment(postId,commentId,data)
+    {
+      return this.http.post(config.url+`/api/v1/history/userstory/${postId}/edit_comment?id=${commentId}`,data)
+      .pipe(catchError(this.sharedService.handleError));
+    }
     
   createTopic(topic)
   {
@@ -107,10 +114,11 @@ export class PostService {
     post.subject=post.title;
     post.assigned_to=this.container.user.id;
     post.description_html=post.description;
+    post.epics=post.topics
     post.kanban_order=moment(post.date).toDate().getTime();
     post.backlog_order=moment(post.date).toDate().getTime();
     post=_.pick(post,'project','subject','assigned_to','description_html',
-    'kanban_order','backlog_order','id','version','tags','profiles','topics')
+    'kanban_order','backlog_order','id','version','tags','profiles','topics','epics')
     
     return {...post};
   }
@@ -139,9 +147,9 @@ export class PostService {
         post.title=post.subject;
         post.tags=_.compact(_.flatten(post.tags)).join(',')
         post.socialMedia=_.compact(_.flatten(post.socialMedia)).join(',')
-        post.topics=_.compact(_.flatten(post.topics)).join(',')
         post.start=moment(post.kanban_order)
         post.time=moment(post.backlog_order)
+        post.topics=post.epics?post.epics:[];
       })
   
     }
@@ -151,7 +159,8 @@ export class PostService {
         postData.start=moment(postData.kanban_order)  
         postData.date=moment(postData.kanban_order)  
         postData.time=moment(postData.backlog_order)  
-        
+        postData.topics=postData.epics?postData.epics:[];
+
     }
     return postData;
     
@@ -166,6 +175,12 @@ export class PostService {
     }).pipe(catchError(this.sharedService.handleError));
   }
 
+  getLocalPost(id)
+  { 
+    console.log(this.posts,'posts')
+      return this.posts.filter(p=>p.id===id)[0];
+  }
+
   
   updateAttachment(file)
   {
@@ -177,8 +192,7 @@ export class PostService {
   getPosts()
   {
     return this.http.get(config.url+'/api/v1/userstories').map((posts:any[])=>{
-      // console.log(posts)
-      this.posts=this.mapPostResponse(posts)
+      this.posts=this.mapPostResponse(posts);
       this.container.posts=this.posts;
       console.log(this.posts)
       return this.posts;

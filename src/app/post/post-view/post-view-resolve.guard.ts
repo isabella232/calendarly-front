@@ -22,8 +22,14 @@ export class PostViewResolveGuard implements Resolve<any> {
        p.watchers.forEach(id=>{
         observables.push(this.sharedService.getUserDetails(id))
       })
-    return forkJoin(observables);
-   }).mergeMap(results=>{
+      if(observables.length)
+      {
+        return forkJoin(observables);
+      }
+      else{
+         return Observable.create(observer=>observer.next([]))
+      }
+   }).mergeMap((results:any[])=>{
     watchers=results;
     return this.postService.getComments(post.id)
    }).map(c=>{

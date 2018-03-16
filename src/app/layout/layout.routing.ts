@@ -7,6 +7,7 @@ import { AuthGuard } from './../providers/auth.guard';
 import { CalendarComponent } from './../calendar/calendar.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
+import { PostViewResolveGuard } from '../post/post-view/post-view-resolve.guard';
 
 const LAYOUT_ROUTES: Routes = [
     {
@@ -27,7 +28,11 @@ const LAYOUT_ROUTES: Routes = [
                 path: 'post',
                 children: [{
                     path: ':id',
-                    component: PostViewComponent
+                    component: PostViewComponent,
+                    // resolve:
+                    // {
+                    //     post:PostViewResolveGuard
+                    // }
                 }]
             }
         ]

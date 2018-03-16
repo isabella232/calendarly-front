@@ -1,0 +1,12 @@
+    .back-btn {
+        display: none;
+    }
+    
+    @media (min-width: 1200px) {
+        .back-btn {
+            display: block;
+            position: fixed;
+            top: 83px;
+            left: 20px;
+        }
+    }

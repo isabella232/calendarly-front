@@ -57,6 +57,10 @@ body .fc {
     /* for IE */
 }
 
+.fc-day-number {
+    color: #000000;
+}
+
 .icon-calendar {
     content: "\f137";
     color: #fff;

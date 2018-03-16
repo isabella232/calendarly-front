@@ -74,6 +74,11 @@ $(this).css('background-color', 'red');
 
   }
 
+  navigateToPost(id)
+  {
+    this.router.navigate(['/','post',id]);
+  }
+
   addPost(post)
   {
 
@@ -87,70 +92,69 @@ $(this).css('background-color', 'red');
      
   }
 
-  updatePost()
-  {
-     swal({
-         title: 'Are you sure?',
-         text: "You want to update this post",
-         type: 'warning',
-         buttonIcons:{
-          next:'a-  fa fa-chevron-circle-right a-' ,
-          prev:'a-  fa fa-chevron-circle-left a-'
-         },
-         showCancelButton: true,
-         confirmButtonColor: '#3085d6',
-         cancelButtonColor: '#d33',
-         confirmButtonText: 'Yes, update it!'
-       }).then((res)=>{
-           if(res.value)
-           {
-             this.calendarService.updatePost(this.currentPost);
-             $("#calendar").fullCalendar( 'updateEvent', this.currentPost);   
-           }
-       })
-  }
+  // updatePost()
+  // {
+  //    swal({
+  //        title: 'Are you sure?',
+  //        text: "You want to update this post",
+  //        type: 'warning',
+  //        buttonIcons:{
+  //         next:'a-  fa fa-chevron-circle-right a-' ,
+  //         prev:'a-  fa fa-chevron-circle-left a-'
+  //        },
+  //        showCancelButton: true,
+  //        confirmButtonColor: '#3085d6',
+  //        cancelButtonColor: '#d33',
+  //        confirmButtonText: 'Yes, update it!'
+  //      }).then((res)=>{
+  //          if(res.value)
+  //          {
+  //            this.calendarService.updatePost(this.currentPost);
+  //            $("#calendar").fullCalendar( 'updateEvent', this.currentPost);   
+  //          }
+  //      })
+  // }
 
-  deletePost(post)
-  {
-      this.postService.deletePost(post);
-      swal({
-         title: 'Are you sure?',
-         text: "You want to delete this post",
-         type: 'warning',
-         showCancelButton: true,
-         confirmButtonColor: '#3085d6',
-         cancelButtonColor: '#d33',
-         confirmButtonText: 'Yes, delete it!'
-       }).then((result) => {
-         if (result.value) {
-           swal(
-             'Deleted!',
-             'The post has been removed from the calendar',
-             'success'
-           ).then(()=>{
-               console.log(post)
-             $("#calendar").fullCalendar( 'removeEvents', post._id );
-             $('.modal').modal('hide');
+  // deletePost(post)
+  // {
+  //     this.postService.deletePost(post);
+  //     swal({
+  //        title: 'Are you sure?',
+  //        text: "You want to delete this post",
+  //        type: 'warning',
+  //        showCancelButton: true,
+  //        confirmButtonColor: '#3085d6',
+  //        cancelButtonColor: '#d33',
+  //        confirmButtonText: 'Yes, delete it!'
+  //      }).then((result) => {
+  //        if (result.value) {
+  //          swal(
+  //            'Deleted!',
+  //            'The post has been removed from the calendar',
+  //            'success'
+  //          ).then(()=>{
+  //              console.log(post)
+  //            $("#calendar").fullCalendar( 'removeEvents', post._id );
+  //            $('.modal').modal('hide');
              
-           })
-         }
-       })    
-  }
+  //          })
+  //        }
+  //      })    
+  // }
   
-  submitForm(post)
-  {
-    console.log(post,'post')
-    this.store.dispatch(new CalendarActions.CreatePost(post));
-  }
-
+  // submitPost(post)
+  // {
+  //   console.log(post,'post')
+  //   this.store.dispatch(new CalendarActions.CreatePost(post));
+  // } 
   ngOnInit()
   {
     this.sharedService.notify('Welcome to Calendarly');
     this.subscription=this.store.select('calendar').subscribe(state=>{
+      this.posts=state.posts
       console.log(state);
       this.initCalendar(state.posts);
       this.createPost.hide(); // remaining to handle on error!
-
     })
   }
   

@@ -1,4 +1,10 @@
+import { ActionReducerMap } from '@ngrx/store';
 import * as CalendarActions from './calendar.actions';
+
+// export interface FeatureState
+// {
+//     calendar:State
+// }
 
 export interface State {
     posts: any[];
@@ -16,11 +22,23 @@ export var initialState: State = {
     statuses:[]
 }
 
+export const reducer:ActionReducerMap<any>={
+    calendar:CalendarReducer
+}
+
 export function CalendarReducer(state = initialState, action: CalendarActions.CalendarActions) {
 
     switch (action.type) {
         case CalendarActions.CREATE_POST_SUCCESS:
-            return { ...state, posts: [...state.posts, action.payload] };
+        var statuses=[...state.statuses];
+        var post=action.payload;
+        statuses.forEach(o=>{
+          if(o.id===post.status)
+          {
+              o.data.push(post)
+          }
+      })
+        return { ...state, posts: [...state.posts, post],statuses:statuses };
 
         case CalendarActions.GET_POSTS_SUCCESS:
             return { ...state, posts:action.payload};
@@ -28,10 +46,27 @@ export function CalendarReducer(state = initialState, action: CalendarActions.Ca
         case CalendarActions.SET_POSTS:
             return { ...state, posts: [...action.payload] };
 
-        case CalendarActions.DELETE_POST:
+        case CalendarActions.DELETE_POST_SUCCESS:
             const id = action.payload
-            var posts = state.posts.filter(o => o.id !== id)
-            return { ...state, posts: posts };
+            var posts = [...state.posts];
+            var statuses=[...state.statuses];
+
+            posts.forEach((p,i)=>{
+                if(p.id===id)
+                {
+                    posts.splice(i,1)
+                }
+            })
+
+            statuses.forEach((s)=>{
+              s.data.forEach((p,i)=>{
+                  if(p.id===id)
+                  {
+                      s.data.splice(i,1)
+                  }
+              })
+            })
+            return { ...state, posts: posts ,statuses:statuses};
 
         case CalendarActions.SET_STATUSES:
         return {

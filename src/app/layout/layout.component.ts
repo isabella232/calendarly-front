@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SharedService } from '../providers/shared.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,18 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
   maTheme: string = this.sharedService.maTheme;
+  hideBtn;
 
-  constructor(private sharedService: SharedService) {
+  constructor(private sharedService: SharedService,private router:Router) {
     sharedService.maThemeSubject.subscribe((value) => {
       this.maTheme = value
     })
   }
 
   ngOnInit() {
-    // this.sharedService.notify('Welcome to Calendarly');
-    this.sharedService.getProjectTemplate().subscribe(res=>{
-      console.log(res)
-    })
+  }
+  goback()
+  {
+    this.router.navigate(['../'])
   }
 
 }

@@ -10,9 +10,9 @@ export class EventsService {
   toggleSidebar=new Subject<any>();
   getProjectTemplate=new Subject<any>();
   constructor() { }
-
+    hideTopic=new Subject<any>();
     // userUpdated=new Subject<any>();
-
+    openPostSubject=new Subject<any>();
     exitUser=new Subject<any>();
     showLoader=new Subject<any>();
    notify(message, type){

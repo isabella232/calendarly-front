@@ -7,7 +7,9 @@ export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
 export const CREATE_TOPIC='CREATE_TOPIC';
 export const CREATE_TOPIC_SUCCESS='CREATE_TOPIC_SUCCESS';
 
+export const DELETE_POST_SUCCESS='DELETE_POST_SUCCESS'
 export const DELETE_POST='DELETE_POST'
+
 export const DRAG_POST='DRAG_POST'
 export const GET_POSTS='GET_POSTS'
 export const GET_POSTS_SUCCESS='GET_SUCCESS'
@@ -65,11 +67,15 @@ export class CreatePostSuccess implements Action {
     constructor(public payload) { }
 }
 
+export class DeletePostSuccess implements Action {
+    readonly type = DELETE_POST_SUCCESS;
+    constructor(public payload) { }
+}
+
 export class DeletePost implements Action {
     readonly type = DELETE_POST;
     constructor(public payload) { }
 }
-
 export class DragPost implements Action {
     readonly type = DRAG_POST;
     constructor(public payload) { }
@@ -99,4 +105,4 @@ GetPostsError | SetPosts | CreatePost | CreatePostSuccess |
 DeletePost | DragPost | CreateTopic | 
 CreateTopicSuccess | SetCurrentPost | SetCurrentStatus | 
 DragPost | SetStatuses
- | DragPostSuccess
+ | DragPostSuccess | DeletePostSuccess

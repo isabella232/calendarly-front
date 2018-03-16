@@ -1,9 +1,9 @@
-// import { ToastrService } from 'toastr-ng2';
 import { ContainerService } from '../../providers/container.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../providers/auth.service';
 import { FormBuilder, FormGroup, Validators,ValidatorFn ,AbstractControl} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../../providers/shared.service';
 
 
 @Component({
@@ -14,13 +14,18 @@ import { Component, OnInit } from '@angular/core';
 export class SignupComponent implements OnInit {
   
     constructor(private fb:FormBuilder,private authService:AuthService,private router:Router,
-    private container:ContainerService) { }
+    private container:ContainerService,private sharedService:SharedService) { }
     signupForm:FormGroup;
   
-   validatePassword():ValidatorFn
+    login()
     {
-      //  console.log(this.signupForm.get('confirmPassword').errors)
-    return (c:AbstractControl)=>{
+      this.router.navigate(['/','pages','login'])
+    }
+
+
+    validatePassword():ValidatorFn
+    {
+      return (c:AbstractControl)=>{
       var pControl=c.get('password');
       var cControl=c.get('confirmPassword');
       if(pControl.pristine || cControl.pristine)
@@ -58,23 +63,14 @@ export class SignupComponent implements OnInit {
     submitForm()
     {
       var userData=this.signupForm.value;
-      // userData.type='public'
-      console.log(userData)
       this.authService.signupUser(userData).subscribe(res=>{
-        console.log(this.container.isAuthenticated)
         if(this.container.isAuthenticated)
         {
           this.router.navigate(['/','calendar'])
         }
-        else{
-          // this.authService.handleError(err)
-          console.log('Unauthenticated')
-        }
-        console.log(res)
+      
       },er=>{
-        // this.toastr.error('Username or password not found.')
-        console.log(er)
-        // this.eventsService.notify(er.message,'danger');
+        this.sharedService.notify('Please enter valid details')
       })
     }
   

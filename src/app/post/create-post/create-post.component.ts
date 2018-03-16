@@ -36,11 +36,19 @@ export class CreatePostComponent implements OnInit {
   maxDate = new Date(2018, 9, 15);
   files=[];
   @Output() exit = new EventEmitter();
-  @Output() formSubmitted=new EventEmitter();
-  @Output() formUpdated=new EventEmitter();
   @Input() date;
   @Input() time;
-    submitForm()
+  suggestedTopics=[];
+  topics=[];
+  tags=['Tag-A','Tag-B'];
+  profiles=['Facebook-A','Linked-In'];
+  topic:any;
+  tag='';
+  profile='';
+  topicsString=[];
+
+
+  submitForm()
     {
         this.createPost.patchValue({
             description:$('.html-editor').summernote('code'),
@@ -50,17 +58,24 @@ export class CreatePostComponent implements OnInit {
             socialMedia:this.profiles,
             topics:this.topics
         })
-
+        this.createPost.value.topics=this.topics;
         console.log(this.createPost.value)
+        var postValue={...this.createPost.value}
         this.isSubmitClicked=true;
         if(this.createPost.valid)
         {
-            this.store.dispatch(new CalendarActions.CreatePost(this.postService.mapPostToCalendarly(this.createPost.value)));
+            this.store.dispatch(new CalendarActions.CreatePost(this.postService.mapPostToCalendarly(postValue)));
+            this.createPost.reset();
+            this.topics=[];
+            this.tags=['Tag-A','Tag-B'];
+            this.profiles=['Facebook-A','Linked-In'];
+        }
+        else{
+                this.sharedService.notify('Please enter valid information')
         }
     }
 
-    suggestedTopics=[];
-    suggestTopics(e?:any,topic?:any)
+    suggestTopics(e?:any)
     {
         console.log(e)
 
@@ -120,7 +135,6 @@ export class CreatePostComponent implements OnInit {
                 })
             }
           })
-  
     }
   @Input() postData;
   initJqueryData()
@@ -128,12 +142,14 @@ export class CreatePostComponent implements OnInit {
 
     if(this.postData)
     {
-        $('.html-editor').summernote('code',this.postData.description,{
+        $('.html-editor').summernote('code',this.postData.description_html,{
             height:150
         });
     }
     else{
-        $('#editor').trumbowyg();
+        $('.html-editor').summernote({
+            height: 150
+        });
     }
 
 
@@ -210,27 +226,18 @@ export class CreatePostComponent implements OnInit {
         })
     
   }
-  topics=['Topic-1','Topic-2'];
-  tags=['Tag-A','Tag-B'];
-  profiles=['Facebook-A','Linked-In'];
-  topic='';
-  tag='';
-  profile='';
-  
-  addTopic(topic:string)
+
+
+  addTopic(topic)
   {
-      console.log(topic,'topic')
-      if(topic.length===0)
+      console.log(this.topics,'topic')
+
+      if(_.findIndex(this.topics,{id:topic.id})===-1)
       {
-          return false;
-      }
-      if(this.topics.indexOf(topic)===-1)
-      {
-        this.topics.push(topic);
-        this.topic=''
+          this.topics.push(topic);
+          this.topic=''
       }
   }
-
 
   addTag(tag)
   {
@@ -279,21 +286,19 @@ export class CreatePostComponent implements OnInit {
       console.log(this.postData)
     this.initForm();
 
-    $("#topicTag").on('keyup',()=>{
-        console.log('hello')
-        this.suggestTopics();
-    })
     if(this.postData)
       {
-          this.editMode=true;
-          this.createPost.patchValue(this.postData);
-          this.topics=this.postData.tags.split(',');
-          console.log('data found',this.postData);
+          this.loadPost(this.postData);
+        //   this.editMode=true;
+        //   this.createPost.patchValue(this.postData);
+        //   this.tags=this.postData.tags.split(',');
+        //   this.topics=this.postData.topics;
+        //   console.log('data found',this.postData);
 
-          this.postService.getAttachments(this.postData).subscribe((files:any[])=>{
-              console.log(files)
-              this.files=files;
-          })
+        //   this.postService.getAttachments(this.postData).subscribe((files:any[])=>{
+        //       console.log(files)
+        //       this.files=files;
+        //   })
       }
   }
 
@@ -353,11 +358,41 @@ export class CreatePostComponent implements OnInit {
 
   ngAfterViewInit()
   {
-    $('.editor').trumbowyg({
-        svgPath: './assets/img/icons.svg'
-    });
-
     this.initJqueryData()   
+  }
+
+  loadPost(post)
+  {
+    this.editMode=true;
+    this.createPost.patchValue(post);
+    this.tags=post.tags.split(',');
+    this.topics=post.topics;
+    console.log('data found',post);
+
+    this.postService.getAttachments(post).subscribe((files:any[])=>{
+        console.log(files)
+        this.files=files;
+    })
+  }
+
+  ngOnChanges(change)
+  {
+    console.log(change,'change')
+    if(change.postData&&!change.postData.firstChange)
+    {
+        var post=change.postData.currentValue;
+        this.loadPost(post);
+        // this.editMode=true;
+        // this.createPost.patchValue(post);
+        // this.tags=post.tags.split(',');
+        // this.topics=post.topics;
+        // console.log('data found',post);
+
+        // this.postService.getAttachments(post).subscribe((files:any[])=>{
+        //     console.log(files)
+        //     this.files=files;
+        // })
+    }
   }
 
 }

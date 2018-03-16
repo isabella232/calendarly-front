@@ -1,87 +1,21 @@
-<!-- <div class="container">
-    <section class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <img class="img-responsive" id="logo" src="./assets/img/logo.jpg" alt="">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-content">
-                        <form [formGroup]="signupForm">
-                            <div class="form-group form-group--float">
-                                <input formControlName="username" type="text" class="form-control" formControlFloat>
-                                <label>Username</label>
-                                <i class="form-group__bar"></i>
-                            </div>
-                            <div class="form-group form-group--float">
-                                <input formControlName="full_name" type="text" class="form-control" formControlFloat>
-                                <label>Full Name</label>
-                                <i class="form-group__bar"></i>
-                            </div>
-                            <div class="form-group form-group--float">
-                                <input formControlName="email" type="text" class="form-control" formControlFloat>
-                                <label>Email Id</label>
-                                <i class="form-group__bar"></i>
-                            </div>
-                            <ng-container formGroupName="password">
-                                <div class="form-group form-group--float">
-                                    <input formControlName="password" type="text" class="form-control" formControlFloat>
-                                    <label>Password</label>
-                                    <i class="form-group__bar"></i>
-                                </div>
-
-                                <div class="form-group form-group--float">
-                                    <input formControlName="confirmPassword" type="text" class="form-control" formControlFloat>
-                                    <label>Confirm Password</label>
-                                    <i class="form-group__bar"></i>
-                                </div>
-
-                            </ng-container>
-                        </form>
-
-                        <button class="btn btn-success btn--icon-text login-btn" (click)="submitForm()"><i class="zmdi zmdi-refresh"></i> Sign Up</button>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-    </section>
-
-
-</div> -->
-
-
 <div class="container">
-    <!-- <section class="content"> -->
     <div class="row">
         <div class="col-md-12">
             <img class="img-responsive" [style.width.%]="80" id="logo" src="./assets/img/logo.jpg" alt="">
         </div>
     </div>
-    <!-- <header class="content__title">
-                <h1>Sample Pages</h1>
-            </header> -->
-
     <div class="row">
         <div class="col-md-2 col-lg-3"></div>
-        <!-- <div class="col-md-4 hidden-lg-block"></div> -->
-
         <div class="col-md-8 col-lg-6">
             <div class="card">
                 <div class="card-content">
                     <form [formGroup]="signupForm">
                         <div class="form-group form-group--float">
                             <input placeholder="Username" formControlName="username" type="text" class="form-control" formControlFloat>
-                            <!-- <label>Username</label> -->
                             <i class="form-group__bar"></i>
                         </div>
                         <div class="form-group form-group--float">
                             <input placeholder="Full Name" formControlName="full_name" type="text" class="form-control" formControlFloat>
-                            <!-- <label></label> -->
                             <i class="form-group__bar"></i>
                         </div>
                         <div class="form-group form-group--float">
@@ -92,13 +26,11 @@
                         <ng-container formGroupName="password">
                             <div class="form-group form-group--float">
                                 <input placeholder="Password" formControlName="password" type="text" class="form-control" formControlFloat>
-                                <!-- <label></label> -->
                                 <i class="form-group__bar"></i>
                             </div>
 
                             <div class="form-group form-group--float">
                                 <input placeholder="Confirm Password" formControlName="confirmPassword" type="text" class="form-control" formControlFloat>
-                                <!-- <label></label> -->
                                 <i class="form-group__bar"></i>
                             </div>
 
@@ -106,6 +38,7 @@
                     </form>
                     <div class="button-container">
                         <button class="btn btn-success btn--icon-text login-btn" (click)="submitForm()"><i class="zmdi zmdi-refresh"></i> Sign Up</button>
+                        <button class="btn btn-success btn--icon-text login-btn" (click)="login()"><i class="zmdi zmdi-refresh"></i> Already have an account?</button>
                         <div class="clearfix"></div>
                     </div>
 

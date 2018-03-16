@@ -32,12 +32,6 @@
 
     </div>
 </form>
-<!-- <div class="row">
-    <div class="col-md-12">
-        <color-picker [(ngModel)]="color" [availableColors]="availableColors">
-        </color-picker>
-    </div>
-</div> -->
 <div class="row">
     <div class="col-md-12" id="html-editor">
         <div class="html-editor"></div>
@@ -45,11 +39,8 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <!-- <button type="button" class="btn btn-danger waves-effect waves-button pull-right submit-btn waves-float" (click)="cancel()" data-dismiss="modal">Close</button> -->
-        <!-- <button type="button" (click)="goback()" class="btn btn-danger waves-effect waves-button pull-right submit-btn waves-float" *ngIf="editMode" (click)="cancel()">Cancel</button> -->
         <button type="button" (click)="submitForm()" class="btn btn-primary waves-effect waves-button waves-float pull-right submit-btn" id="addEvent">Save</button>
-        <!-- <button type="button" (click)="updatePost()" class="btn btn-primary waves-effect waves-button waves-float pull-right submit-btn" id="addEvent" *ngIf="editMode">Update</button> -->
-
+        <button type="button" (click)="close()" class="btn btn-danger waves-effect waves-button waves-float pull-right submit-btn" id="addEvent">Close</button>
         <div class="clearfix"></div>
     </div>
 </div>

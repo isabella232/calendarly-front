@@ -18,7 +18,7 @@ export const initialState={
     cypheredToken:null,
     auth_code:null,
     appState:'random-state',
-    user:null
+    user:{}
 }
 
 export function MainReducers(state=initialState,action:MainActions.MainActions)

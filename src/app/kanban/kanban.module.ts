@@ -1,3 +1,4 @@
+import { Ng2ImgFallbackModule } from 'ng2-img-fallback';
 import { CoreModule } from './../core/core.module';
 import { KanbanResolveGuard } from './kanban-resolve.guard';
 import { KanbanRoutes, KanbanRoutingModule } from './kanban.routing.module';
@@ -17,6 +18,7 @@ import {DragulaModule} from 'ng2-dragula';
     imports: [
         CommonModule,
         CoreModule,
+        Ng2ImgFallbackModule,
         // BsDropdownModule.forRoot(),
         // FormsModule,
         // DragulaModule,

@@ -1,0 +1,978 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>material documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	    <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">material documentation</a>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="./index.html">material documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./index.html"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="./overview.html" 
+                                         href="./overview.html" 
+                                        >
+                                        <span class="fa fa-fw fa-th"></span>Overview
+                                    </a>
+                                </li>
+                                <li class="link">
+                                  <a href="./index.html"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./dependencies.html"
+                                        
+                                        >
+                                        <span class="fa fa-fw fa-list"></span>Dependencies
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <div class="menu-toggler linked" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            >
+                                <span class="fa fa-fw fa-archive"></span>
+                                <span class="link-name">Modules</span>
+                                <span class="fa fa-angle-down"></span>
+                            </div>
+                        </a>
+                        <ul class="links collapse "
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="./modules/AppModule.html" >AppModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/CalendarModule.html" >CalendarModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/CalendarRoutingModule.html" >CalendarRoutingModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/CoreModule.html" >CoreModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/KanbanModule.html" >KanbanModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/KanbanRoutingModule.html" >KanbanRoutingModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/LayoutModule.html" >LayoutModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/PagesModule.html" >PagesModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/PagesRoutingModule.html" >PagesRoutingModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/PostModule.html" >PostModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/ProfileModule.html" >ProfileModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/TypeaheadComponentModule.html" >TypeaheadComponentModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-components-links"
+                            >
+                            <span class="fa fa-fw fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="./components/AddUserComponent.html" >AddUserComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/CalendarComponent.html" >CalendarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/CreatePostComponent.html" >CreatePostComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/CreateTopicComponent.html" >CreateTopicComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/HeaderComponent.html" >HeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/KanbanComponent.html" >KanbanComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/LayoutComponent.html" >LayoutComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/LoginComponent.html" >LoginComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/NavigationComponent.html" >NavigationComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/NavigationTriggerComponent.html" >NavigationTriggerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/PostViewComponent.html" >PostViewComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/ProfileComponent.html" >ProfileComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/SearchComponent.html" >SearchComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/SignupComponent.html" >SignupComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/TypeaheadComponent.html" >TypeaheadComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-classes-links"
+                            >
+                            <span class="fa fa-fw fa-file-code-o"></span>
+                            <span>Classes</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-classes-links"
+                            >
+                                <li class="link">
+                                    <a href="./classes/AddPost.html" >AddPost</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/AuthenticateUser.html" >AuthenticateUser</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/CreatePost.html" >CreatePost</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/CreatePostSuccess.html" >CreatePostSuccess</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/CreateTopic.html" >CreateTopic</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/CreateTopicSuccess.html" >CreateTopicSuccess</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/DeletePost.html" >DeletePost</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/DeletePost.html" >DeletePost</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/DeletePostSuccess.html" >DeletePostSuccess</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/DragPost.html" >DragPost</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/DragPost.html" >DragPost</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/DragPostSuccess.html" >DragPostSuccess</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/DragPostSuccess.html" >DragPostSuccess</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/ForgotPassword.html" >ForgotPassword</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/GetPosts.html" >GetPosts</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/GetPostsError.html" >GetPostsError</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/GetPostsSuccess.html" >GetPostsSuccess</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/SetCurrentPost.html" >SetCurrentPost</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/SetCurrentPost.html" >SetCurrentPost</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/SetCurrentStatus.html" >SetCurrentStatus</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/SetCurrentStatus.html" >SetCurrentStatus</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/SetPosts.html" >SetPosts</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/SetStatuses.html" >SetStatuses</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/SetToken.html" >SetToken</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/SignOutUser.html" >SignOutUser</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./classes/UserUpdated.html" >UserUpdated</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-injectables-links"
+                            >
+                            <span class="fa fa-fw fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="./injectables/AuthGuard.html" >AuthGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/AuthService.html" >AuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/CalendarEffects.html" >CalendarEffects</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/CalendarResolveGuard.html" >CalendarResolveGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/CalendarService.html" >CalendarService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/ContainerService.html" >ContainerService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/EventsService.html" >EventsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/KanbanResolveGuard.html" >KanbanResolveGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/KanbanService.html" >KanbanService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/LayoutResolveGuard.html" >LayoutResolveGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/PostService.html" >PostService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/PostViewResolveGuard.html" >PostViewResolveGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./injectables/SharedService.html" >SharedService</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-interceptors-links"
+                            >
+                            <span class="fa fa-fw fa-exchange"></span>
+                            <span>Interceptors</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-interceptors-links"
+                            >
+                                <li class="link">
+                                    <a href="./interceptors/AuthInterceptor.html" >AuthInterceptor</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-interfaces-links"
+                            >
+                            <span class="fa fa-fw fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="./interfaces/AppState.html" >AppState</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./interfaces/State.html" >State</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./interfaces/State.html" >State</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./interfaces/State.html" >State</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-pipes-links"
+                            >
+                            <span class="fa fa-fw fa-plus"></span>
+                            <span>Pipes</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-pipes-links"
+                            >
+                                <li class="link">
+                                    <a href="./pipes/ContinuePipe.html" >ContinuePipe</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-miscellaneous-links"
+                            >
+                            <span class="fa fa-fw fa-cubes"></span>
+                            <span>Miscellaneous</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-miscellaneous-links"
+                            >
+                                <li class="link">
+                                  <a href="./miscellaneous/functions.html" data-type="entity-link" >Functions</a>
+                                </li>
+                                <li class="link">
+                                  <a href="./miscellaneous/typealiases.html" data-type="entity-link" >Type aliases</a>
+                                </li>
+                                <li class="link">
+                                  <a href="./miscellaneous/variables.html" data-type="entity-link" >Variables</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-fw fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
+                                        <img src="./images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="./index.html">material documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./index.html"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="./overview.html" 
+                                                href="./overview.html" 
+                                               >
+                                               <span class="fa fa-fw fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                                       <li class="link">
+                                         <a href="./index.html"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./dependencies.html"
+                                               
+                                               >
+                                               <span class="fa fa-fw fa-list"></span>Dependencies
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <div class="menu-toggler linked" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   >
+                                       <span class="fa fa-fw fa-archive"></span>
+                                       <span class="link-name">Modules</span>
+                                       <span class="fa fa-angle-down"></span>
+                                   </div>
+                               </a>
+                               <ul class="links collapse "
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="./modules/AppModule.html" >AppModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/CalendarModule.html" >CalendarModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/CalendarRoutingModule.html" >CalendarRoutingModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/CoreModule.html" >CoreModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/KanbanModule.html" >KanbanModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/KanbanRoutingModule.html" >KanbanRoutingModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/LayoutModule.html" >LayoutModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/PagesModule.html" >PagesModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/PagesRoutingModule.html" >PagesRoutingModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/PostModule.html" >PostModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/ProfileModule.html" >ProfileModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/TypeaheadComponentModule.html" >TypeaheadComponentModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#components-links"
+                   >
+                                   <span class="fa fa-fw fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="./components/AddUserComponent.html" >AddUserComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/CalendarComponent.html" >CalendarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/CreatePostComponent.html" >CreatePostComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/CreateTopicComponent.html" >CreateTopicComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/HeaderComponent.html" >HeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/KanbanComponent.html" >KanbanComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/LayoutComponent.html" >LayoutComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/LoginComponent.html" >LoginComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/NavigationComponent.html" >NavigationComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/NavigationTriggerComponent.html" >NavigationTriggerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/PostViewComponent.html" >PostViewComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/ProfileComponent.html" >ProfileComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/SearchComponent.html" >SearchComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/SignupComponent.html" >SignupComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/TypeaheadComponent.html" >TypeaheadComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#classes-links"
+                   >
+                                   <span class="fa fa-fw fa-file-code-o"></span>
+                                   <span>Classes</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="classes-links"
+                   >
+                                       <li class="link">
+                                           <a href="./classes/AddPost.html" >AddPost</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/AuthenticateUser.html" >AuthenticateUser</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/CreatePost.html" >CreatePost</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/CreatePostSuccess.html" >CreatePostSuccess</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/CreateTopic.html" >CreateTopic</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/CreateTopicSuccess.html" >CreateTopicSuccess</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/DeletePost.html" >DeletePost</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/DeletePost.html" >DeletePost</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/DeletePostSuccess.html" >DeletePostSuccess</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/DragPost.html" >DragPost</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/DragPost.html" >DragPost</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/DragPostSuccess.html" >DragPostSuccess</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/DragPostSuccess.html" >DragPostSuccess</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/ForgotPassword.html" >ForgotPassword</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/GetPosts.html" >GetPosts</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/GetPostsError.html" >GetPostsError</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/GetPostsSuccess.html" >GetPostsSuccess</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/SetCurrentPost.html" >SetCurrentPost</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/SetCurrentPost.html" >SetCurrentPost</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/SetCurrentStatus.html" >SetCurrentStatus</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/SetCurrentStatus.html" >SetCurrentStatus</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/SetPosts.html" >SetPosts</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/SetStatuses.html" >SetStatuses</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/SetToken.html" >SetToken</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/SignOutUser.html" >SignOutUser</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./classes/UserUpdated.html" >UserUpdated</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#injectables-links"
+                   >
+                                   <span class="fa fa-fw fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="./injectables/AuthGuard.html" >AuthGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/AuthService.html" >AuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/CalendarEffects.html" >CalendarEffects</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/CalendarResolveGuard.html" >CalendarResolveGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/CalendarService.html" >CalendarService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/ContainerService.html" >ContainerService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/EventsService.html" >EventsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/KanbanResolveGuard.html" >KanbanResolveGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/KanbanService.html" >KanbanService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/LayoutResolveGuard.html" >LayoutResolveGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/PostService.html" >PostService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/PostViewResolveGuard.html" >PostViewResolveGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./injectables/SharedService.html" >SharedService</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#interceptors-links"
+                   >
+                                   <span class="fa fa-fw fa-exchange"></span>
+                                   <span>Interceptors</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="interceptors-links"
+                   >
+                                       <li class="link">
+                                           <a href="./interceptors/AuthInterceptor.html" >AuthInterceptor</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#interfaces-links"
+                   >
+                                   <span class="fa fa-fw fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="./interfaces/AppState.html" >AppState</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./interfaces/State.html" >State</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./interfaces/State.html" >State</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./interfaces/State.html" >State</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#pipes-links"
+                   >
+                                   <span class="fa fa-fw fa-plus"></span>
+                                   <span>Pipes</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="pipes-links"
+                   >
+                                       <li class="link">
+                                           <a href="./pipes/ContinuePipe.html" >ContinuePipe</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#miscellaneous-links"
+                   >
+                                   <span class="fa fa-fw fa-cubes"></span>
+                                   <span>Miscellaneous</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="miscellaneous-links"
+                   >
+                                       <li class="link">
+                                         <a href="./miscellaneous/functions.html" data-type="entity-link" >Functions</a>
+                                       </li>
+                                       <li class="link">
+                                         <a href="./miscellaneous/typealiases.html" data-type="entity-link" >Type aliases</a>
+                                       </li>
+                                       <li class="link">
+                                         <a href="./miscellaneous/variables.html" data-type="entity-link" >Variables</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-fw fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
+                                               <img src="./images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
+               </div>
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="calendarly">Calendarly</h1>
+<p>Social media content management portal.</p>
+<h2 id="development-server">Development server</h2>
+<p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The app will automatically reload if you change any of the source files.</p>
+<h2 id="code-scaffolding">Code scaffolding</h2>
+<p>Run <code>ng generate component component-name</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|module</code>.</p>
+<h2 id="build">Build</h2>
+<p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory. Use the <code>-prod</code> flag for a production build.</p>
+<h2 id="running-unit-tests">Running unit tests</h2>
+<p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
+<h2 id="running-end-to-end-tests">Running end-to-end tests</h2>
+<p>Run <code>ng e2e</code> to execute the end-to-end tests via <a href="http://www.protractortest.org/">Protractor</a>.
+Before running the tests make sure you are serving the app via <code>ng serve</code>.</p>
+<h2 id="further-help">Further help</h2>
+<p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://github.com/angular/angular-cli/blob/master/README.md">Angular CLI README</a>.</p>
+<h2 id="compilers-used">Compilers used</h2>
+<ol>
+<li>The project is compiled using webpack. </li>
+<li>Gulp is used for temporary frontend tasks.</li>
+</ol>
+<h2 id="project-structure">Project Structure</h2>
+<ol>
+<li>The main app bundling module is contained in app folder under the name app.module.</li>
+</ol>
+<h2 id="module-structure">Module structure</h2>
+<p>Feature modules:</p>
+<ol>
+<li>Dashboard</li>
+<li>Calendar</li>
+<li>Profile</li>
+<li>Post</li>
+<li>Core</li>
+<li>Layout</li>
+</ol>
+<p>The core module contains the major shared modules and re-exports them to be made available to all.</p>
+<p>Shared modules such as header, sidebar, chat are contained in core module.</p>
+<h2 id="layout-module">Layout Module</h2>
+<ol>
+<li>Used for scaffolding the application&#39;s major routing logic.</li>
+<li>Imports Core Module.</li>
+<li>Contains the major layout components such as the header, sidebar, chatbar.</li>
+<li>Contains the app&#39;s major routing module.</li>
+</ol>
+<h2 id="calendar-module">Calendar Module</h2>
+<ol>
+<li>Our app&#39;s default opening page.</li>
+<li>Contains the fullCalendar.js(Jquery UI plugin) for the user to interact and add a post.</li>
+<li>Provides features such as &#39;Add a post&#39;, &#39;Edit Post&#39;.</li>
+<li>Contains an instance of createPost component for adding a post to the calendar.</li>
+<li>Provides a service &#39;CalendarService&#39; to allow contain related to calendar which can then be injected into onther modules when required.</li>
+</ol>
+<h2 id="post-module-feature-module-">Post Module (feature module)</h2>
+<ol>
+<li><p>It contains 2 components:</p>
+<ul>
+<li>Create Post Component</li>
+<li>Post-View Component</li>
+</ul>
+</li>
+<li><p>Create Post Component:</p>
+<ul>
+<li>Contains form which is shared in seveal other components.</li>
+<li>Used to modularize the code.</li>
+<li>Contains output property &#39;formSubmitted&#39; and &#39;formUpdated&#39; and input property &#39;postData&#39;.</li>
+</ul>
+</li>
+<li><p>Post View Component:</p>
+<ul>
+<li>Contains instance of createPost which populates data when clicked on an existing calendarly post.</li>
+<li>Under this component the user can:<ul>
+<li>Watch/Unwatch a post.</li>
+<li>Delete the post.</li>
+<li>Add Attatchments to the post.</li>
+<li>Post comments on the post.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="services">Services</h2>
+<ol>
+<li><p>Calendar Service:</p>
+<ul>
+<li>Contains factory methods related to the calendar and its operations.</li>
+<li>Injected centrally to make the instance avaiable to all the components.</li>
+</ul>
+</li>
+<li><p>Events Service:</p>
+<ul>
+<li>Contains Rxjs subjects for cross component communication.</li>
+<li>Helps in centralizing the events related subjects,event emitters into one service.</li>
+</ul>
+</li>
+</ol>
+<h2 id="pipes">Pipes</h2>
+<ol>
+<li>Continue Pipe<ul>
+<li>For covering equal string sizes and mapping all the excess sized strings to a similar        string resembling ...mp4.It is mainly used for input files while uploading files.</li>
+</ul>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+           </div>
+       </div>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script>var COMPODOC_CURRENT_PAGE_DEPTH = 0;</script>
+
+       <script src="./js/search/search.js"></script>
+       <script src="./js/search/lunr.min.js"></script>
+       <script src="./js/search/search-lunr.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+       <script src="./js/search/search_index.js"></script>
+
+
+    </body>
+</html>

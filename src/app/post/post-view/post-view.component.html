@@ -70,6 +70,8 @@
 
                 </div> -->
             <div class="card-body">
+                <h4 class="card-title">Comments</h4>
+
                 <ng-container *ngIf="!isViewLess">
                     <ng-container *ngFor="let comment of comments;let i=index;">
                         <div class="listview" *ngIf="!comment.delete_comment_date">
@@ -79,14 +81,16 @@
                                 <div class="listview__content">
                                     <h3 class="listview__heading">{{comment.user.name}}</h3>
                                     <!-- <p>{{ recentPostData.post }}</p> -->
-                                    <p>{{comment.comment}}</p>
+                                    <p *ngIf="!comment.isEditMode">{{comment.comment}}</p>
+                                    <input *ngIf="comment.isEditMode" type="text" class="form-control editinput" [(ngModel)]="comment.comment" placeholder="Post comment">
+                                    <button *ngIf="comment.isEditMode" type="button" class="btn btn-primary btn-sm editbtn" (click)="editComment(post,comment)">Update</button>
                                 </div>
 
                                 <div class="actions" *ngIf="comment.id">
                                     <div dropdown class="actions__item">
                                         <i dropdownToggle class="zmdi zmdi-more-vert"></i>
                                         <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item">Edit Comment</a>
+                                            <a class="dropdown-item" (click)="comment.isEditMode=true;">Edit Comment</a>
                                             <a class="dropdown-item" (click)="deleteComment(post,comment,i)">Delete Comment</a>
                                         </div>
                                     </div>
@@ -108,14 +112,16 @@
 
                                 <div class="listview__content">
                                     <h3 class="listview__heading">{{comment.user.name}}</h3>
-                                    <p>{{comment.comment}}</p>
+                                    <p *ngIf="!comment.isEditMode">{{comment.comment}}</p>
+                                    <input *ngIf="comment.isEditMode" type="text" class="form-control editinput" [(ngModel)]="comment.comment" placeholder="Post comment">
+                                    <button *ngIf="comment.isEditMode" type="button" class="btn btn-primary btn-sm editbtn" (click)="editComment(post,comment)">Update</button>
                                 </div>
 
                                 <div class="actions" *ngIf="comment.id">
                                     <div dropdown class="actions__item">
                                         <i dropdownToggle class="zmdi zmdi-more-vert"></i>
                                         <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item">Edit Comment</a>
+                                            <a class="dropdown-item" (click)="comment.isEditMode=true;">Edit Comment</a>
                                             <a class="dropdown-item" (click)="deleteComment(post,comment,i)">Delete Comment</a>
                                         </div>
                                     </div>
@@ -124,8 +130,7 @@
                         </div>
                     </ng-container>
                 </ng-container>
-                <a *ngIf="comments.length>=2" (click)="toggleComments()" class="view-more">View {{isViewLess?'More':'Less'}} Comments</a>
-
+                <a *ngIf="comments.length>2" (click)="toggleComments()" class="view-more">View {{isViewLess?'More':'Less'}} Comments</a>
 
                 <div class="listview ">
                     <div class="listview__item ">

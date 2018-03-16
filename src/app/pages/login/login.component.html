@@ -40,11 +40,15 @@
 
                     </form>
                     <div class="button-container">
-                        <button class="btn col-sm-12 btn-success pull-right btn--icon-text login-btn" (click)="submitForm()"><i class="zmdi zmdi-refresh"></i> Login</button>
+                        <button class="btn col-sm-12 btn-success btn-danger pull-right btn--icon-text login-btn" (click)="submitForm()"> Login</button>
 
-                        <button class="btn col-sm-12 btn-info pull-left btn--icon-text login-btn" (click)="forgotPasswordModal.show()"><i class="zmdi zmdi-refresh"></i> Forgot Password</button>
+                        <button class="btn col-sm-12 btn-info btn-danger pull-left btn--icon-text login-btn" (click)="forgotPasswordModal.show()">Forgot Password</button>
                         <div class="clearfix"></div>
                     </div>
+                    <button style="width:100%;" class="btn col-sm-12 btn-info pull-left btn--icon-text btn-success login-btn" (click)="createAccount()"><i class="zmdi zmdi-refresh"></i> 
+                    Create an account
+                    </button>
+
 
 
                     <div bsModal #forgotPasswordModal="bs-modal" class="modal fade">

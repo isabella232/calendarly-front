@@ -17,5 +17,6 @@ export class ContainerService {
   projectTemplate;
   statuses=[];
   posts=[];
+  isFirst=true;
   kanbanBoard;
 }

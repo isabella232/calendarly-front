@@ -168,5 +168,14 @@ export class HeaderComponent implements OnInit {
       this.roles=template.roles;
       this.user.role=this.roles[0];
     })
+
+    this.eventsService.hideTopic.subscribe(()=>{
+      this.createTopic.hide();
+    })
+
+
+    this.eventsService.openPostSubject.subscribe(()=>{
+      this.createPost.show();
+    })
   }
 }
