@@ -1,3 +1,5 @@
+import { AppState } from './../store/app.reducers';
+import { Store } from '@ngrx/store';
 import { ContainerService } from './../providers/container.service';
 import { config } from './../providers/config';
 import { SharedService } from './../providers/shared.service';
@@ -12,7 +14,7 @@ import { catchError } from 'rxjs/operators/catchError';
 export class PostService {
 
   constructor(private http:HttpClient,private container:ContainerService,
-  private router:Router,private sharedService:SharedService) { }
+  private router:Router,private sharedService:SharedService,private store:Store<AppState>) { }
 
   createPost(data)
   {
@@ -113,12 +115,15 @@ export class PostService {
     post.project=this.container.projectId;
     post.subject=post.title;
     post.assigned_to=this.container.user.id;
+    post.publish_date=post.date;
+    post.publish_time=post.time;
     post.description_html=post.description;
     post.epics=post.topics
     post.kanban_order=moment(post.date).toDate().getTime();
     post.backlog_order=moment(post.date).toDate().getTime();
     post=_.pick(post,'project','subject','assigned_to','description_html',
-    'kanban_order','backlog_order','id','version','tags','profiles','topics','epics')
+    'kanban_order','backlog_order','id','version','tags','profiles','topics','epics','status',
+  'publish_date','publish_time');
     
     return {...post};
   }
@@ -147,8 +152,8 @@ export class PostService {
         post.title=post.subject;
         post.tags=_.compact(_.flatten(post.tags)).join(',')
         post.socialMedia=_.compact(_.flatten(post.socialMedia)).join(',')
-        post.start=moment(post.kanban_order)
-        post.time=moment(post.backlog_order)
+        post.start=moment(post.publish_date)
+        post.time=moment(post.publish_time)
         post.topics=post.epics?post.epics:[];
       })
   
@@ -156,9 +161,9 @@ export class PostService {
     else{
       postData.title=postData.subject;
       postData.tags=_.compact(_.flatten(postData.tags)).join(',')
-        postData.start=moment(postData.kanban_order)  
-        postData.date=moment(postData.kanban_order)  
-        postData.time=moment(postData.backlog_order)  
+        postData.start=moment(postData.publish_date)  
+        postData.date=moment(postData.publish_date)  
+        postData.time=moment(postData.publish_time)  
         postData.topics=postData.epics?postData.epics:[];
 
     }
@@ -170,6 +175,19 @@ export class PostService {
 
   getPost(postId)
   {
+    console.log(postId)
+    // return this.store.select('calendar').map(state=>{
+    //   console.log(state.posts,'post')
+    //   var Post;
+    //   state.posts.forEach(post=>{
+    //     if(post.id==postId)
+    //     {
+    //       Post=post;
+    //     }
+    //   })
+    //   console.log(Post,'post')
+    //   return Post;
+    // })
     return this.http.get(config.url+'/api/v1/userstories/'+postId).map(post=>{
       return this.mapPostResponse(post)
     }).pipe(catchError(this.sharedService.handleError));

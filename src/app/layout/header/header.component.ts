@@ -161,9 +161,11 @@ export class HeaderComponent implements OnInit {
   }
   roles=[];
   user:any={};
+  status;
+
   ngOnInit() {
-    this.sharedService.getProjectTemplate().subscribe(template=>{
-      this.container.projectTemplate=template[1];
+    this.sharedService.getProjectTemplate(0).subscribe(template=>{
+      this.container.projectTemplate=template;
       this.eventsService.getProjectTemplate.next(template)
       this.roles=template.roles;
       this.user.role=this.roles[0];
@@ -173,8 +175,8 @@ export class HeaderComponent implements OnInit {
       this.createTopic.hide();
     })
 
-
-    this.eventsService.openPostSubject.subscribe(()=>{
+    this.eventsService.openPostSubject.subscribe((status?:any)=>{
+      this.status=status;
       this.createPost.show();
     })
   }

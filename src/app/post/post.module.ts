@@ -1,3 +1,4 @@
+import { PostCommentsComponent } from './post-view/post-comments/post-comments.component';
 import { PostRoutes } from './post.routing.module';
 import { RouterModule } from '@angular/router';
 import { CreateTopicComponent } from './create-topic/create-topic.component';
@@ -28,7 +29,9 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     TextMaskModule,
     TypeaheadModule
   ],
-  declarations: [CreatePostComponent,PostViewComponent,CreateTopicComponent],
+  declarations: [CreatePostComponent,PostViewComponent,CreateTopicComponent,
+    PostCommentsComponent
+],
   exports:[CreatePostComponent,PostViewComponent,CreateTopicComponent],
   providers:[PostService]
 })

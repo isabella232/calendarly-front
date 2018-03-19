@@ -24,7 +24,7 @@ export class CalendarComponent  {
   constructor(private calendarService:CalendarService,
     private container:ContainerService,private router:Router,
     private postService:PostService,private sharedService:SharedService,
-  private store:Store<AppState>) { }
+  private store:Store<AppState>,private route:ActivatedRoute) { }
   
   date:Date;
   currentPost;
@@ -92,61 +92,6 @@ $(this).css('background-color', 'red');
      
   }
 
-  // updatePost()
-  // {
-  //    swal({
-  //        title: 'Are you sure?',
-  //        text: "You want to update this post",
-  //        type: 'warning',
-  //        buttonIcons:{
-  //         next:'a-  fa fa-chevron-circle-right a-' ,
-  //         prev:'a-  fa fa-chevron-circle-left a-'
-  //        },
-  //        showCancelButton: true,
-  //        confirmButtonColor: '#3085d6',
-  //        cancelButtonColor: '#d33',
-  //        confirmButtonText: 'Yes, update it!'
-  //      }).then((res)=>{
-  //          if(res.value)
-  //          {
-  //            this.calendarService.updatePost(this.currentPost);
-  //            $("#calendar").fullCalendar( 'updateEvent', this.currentPost);   
-  //          }
-  //      })
-  // }
-
-  // deletePost(post)
-  // {
-  //     this.postService.deletePost(post);
-  //     swal({
-  //        title: 'Are you sure?',
-  //        text: "You want to delete this post",
-  //        type: 'warning',
-  //        showCancelButton: true,
-  //        confirmButtonColor: '#3085d6',
-  //        cancelButtonColor: '#d33',
-  //        confirmButtonText: 'Yes, delete it!'
-  //      }).then((result) => {
-  //        if (result.value) {
-  //          swal(
-  //            'Deleted!',
-  //            'The post has been removed from the calendar',
-  //            'success'
-  //          ).then(()=>{
-  //              console.log(post)
-  //            $("#calendar").fullCalendar( 'removeEvents', post._id );
-  //            $('.modal').modal('hide');
-             
-  //          })
-  //        }
-  //      })    
-  // }
-  
-  // submitPost(post)
-  // {
-  //   console.log(post,'post')
-  //   this.store.dispatch(new CalendarActions.CreatePost(post));
-  // } 
   ngOnInit()
   {
     this.sharedService.notify('Welcome to Calendarly');

@@ -29,10 +29,10 @@ const LAYOUT_ROUTES: Routes = [
                 children: [{
                     path: ':id',
                     component: PostViewComponent,
-                    // resolve:
-                    // {
-                    //     post:PostViewResolveGuard
-                    // }
+                    resolve:
+                    {
+                        post:PostViewResolveGuard
+                    }
                 }]
             }
         ]

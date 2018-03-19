@@ -1,0 +1,91 @@
+<div class="card" style="margin-bottom:100px;">
+    <!-- <div class="card-header">
+
+        </div> -->
+    <div class="card-body">
+        <h4 class="card-title">Comments</h4>
+
+        <ng-container *ngIf="!isViewLess">
+            <ng-container *ngFor="let comment of comments;let i=index;">
+                <div class="listview" *ngIf="!comment.delete_comment_date">
+                    <div class="listview__item ">
+                        <img src-fallback="{{fallbackImg}}" [src]="comment.user.photo" class="listview__img" alt="">
+
+                        <div class="listview__content">
+                            <h3 class="listview__heading">{{comment.user.name}}</h3>
+                            <!-- <p>{{ recentPostData.post }}</p> -->
+                            <p class="body" *ngIf="!comment.isEditMode">{{comment.comment}}</p>
+                            <input *ngIf="comment.isEditMode" type="text" class="form-control editinput" [(ngModel)]="comment.comment" placeholder="Post comment">
+                            <button *ngIf="comment.isEditMode" type="button" class="btn btn-primary btn-sm editbtn" (click)="editComment(post,comment)">Update</button>
+                        </div>
+
+                        <div class="actions" *ngIf="comment.id">
+                            <div dropdown class="actions__item">
+                                <i dropdownToggle class="zmdi zmdi-more-vert"></i>
+                                <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" (click)="comment.isEditMode=true;">Edit Comment</a>
+                                    <a class="dropdown-item" (click)="removeComment(comment,i)">Delete Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button class="btn btn-primary" (click)="postComment(commentBody)">Post Comment</button> -->
+
+                    <!-- <a href="" class="view-more">View All Comments</a> -->
+                </div>
+            </ng-container>
+        </ng-container>
+
+
+        <ng-container *ngIf="isViewLess">
+            <ng-container *ngFor="let comment of lessComments;let i=index;">
+                <div class="listview" *ngIf="!comment.delete_comment_date">
+                    <div class="listview__item ">
+                        <img src-fallback="{{fallbackImg}}" [src]="comment.user.photo" class="listview__img" alt="">
+
+                        <div class="listview__content">
+                            <h3 class="listview__heading">{{comment.user.name}}</h3>
+                            <p class="body" *ngIf="!comment.isEditMode">{{comment.comment}}</p>
+                            <input *ngIf="comment.isEditMode" type="text" class="form-control editinput" [(ngModel)]="comment.comment" placeholder="Post comment">
+                            <button *ngIf="comment.isEditMode" type="button" class="btn btn-primary btn-sm editbtn" (click)="editComment(post,comment)">Update</button>
+                        </div>
+
+                        <div class="actions" *ngIf="comment.id">
+                            <div dropdown class="actions__item">
+                                <i dropdownToggle class="zmdi zmdi-more-vert"></i>
+                                <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" (click)="comment.isEditMode=true;">Edit Comment</a>
+                                    <a class="dropdown-item" (click)="removeComment(comment,i)">Delete Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+        <a *ngIf="comments.length>2" (click)="toggleComments()" class="view-more">View {{isViewLess?'More':'Less'}} Comments</a>
+
+        <div class="listview ">
+            <div class="listview__item ">
+                <img src-fallback="{{fallbackImg}}" [src]="user.photo" class="listview__img" alt="">
+
+                <div class="listview__content">
+                    <h3 class="listview__heading">{{user.full_name}}</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control" [(ngModel)]="commentBody" placeholder="Post comment">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8 hidden-xs"></div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <button style="margin:10px auto !important;width:100% !important; " class="btn btn-primary pull-right" (click)="submitComment(commentBody)">Post Comment</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

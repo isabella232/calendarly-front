@@ -37,6 +37,7 @@ export class CreatePostComponent implements OnInit {
   files=[];
   @Output() exit = new EventEmitter();
   @Input() date;
+  @Input() status;
   @Input() time;
   suggestedTopics=[];
   topics=[];
@@ -50,6 +51,7 @@ export class CreatePostComponent implements OnInit {
 
   submitForm()
     {
+        console.log(this.status,'status')
         this.createPost.patchValue({
             description:$('.html-editor').summernote('code'),
             date:this.date,
@@ -59,8 +61,13 @@ export class CreatePostComponent implements OnInit {
             topics:this.topics
         })
         this.createPost.value.topics=this.topics;
+        // this.createPost.value.status=this.status;
         console.log(this.createPost.value)
         var postValue={...this.createPost.value}
+        if(this.status)
+        {
+            postValue.status=this.status;
+        }
         this.isSubmitClicked=true;
         if(this.createPost.valid)
         {
@@ -190,7 +197,8 @@ export class CreatePostComponent implements OnInit {
           console.log(e)
           this.createPost.patchValue({
               time:e.date.toDate()
-          })        })
+          })       
+         })
 
   }
 
@@ -289,16 +297,6 @@ export class CreatePostComponent implements OnInit {
     if(this.postData)
       {
           this.loadPost(this.postData);
-        //   this.editMode=true;
-        //   this.createPost.patchValue(this.postData);
-        //   this.tags=this.postData.tags.split(',');
-        //   this.topics=this.postData.topics;
-        //   console.log('data found',this.postData);
-
-        //   this.postService.getAttachments(this.postData).subscribe((files:any[])=>{
-        //       console.log(files)
-        //       this.files=files;
-        //   })
       }
   }
 
@@ -382,16 +380,6 @@ export class CreatePostComponent implements OnInit {
     {
         var post=change.postData.currentValue;
         this.loadPost(post);
-        // this.editMode=true;
-        // this.createPost.patchValue(post);
-        // this.tags=post.tags.split(',');
-        // this.topics=post.topics;
-        // console.log('data found',post);
-
-        // this.postService.getAttachments(post).subscribe((files:any[])=>{
-        //     console.log(files)
-        //     this.files=files;
-        // })
     }
   }
 

@@ -1,3 +1,4 @@
+import { KanbanColumnsComponent } from './kanban-columns/kanban-columns.component';
 import { Ng2ImgFallbackModule } from 'ng2-img-fallback';
 import { CoreModule } from './../core/core.module';
 import { KanbanResolveGuard } from './kanban-resolve.guard';
@@ -13,15 +14,13 @@ import {DragulaModule} from 'ng2-dragula';
 
 @NgModule ({
     declarations: [
-        KanbanComponent
+        KanbanComponent,
+        KanbanColumnsComponent
     ],
     imports: [
         CommonModule,
         CoreModule,
         Ng2ImgFallbackModule,
-        // BsDropdownModule.forRoot(),
-        // FormsModule,
-        // DragulaModule,
         KanbanRoutingModule
     ],
     providers:[KanbanService,KanbanResolveGuard],

@@ -11,7 +11,8 @@ export interface State {
     attachments: any[],
     currentStatus:any,
     currentPost:any,
-    statuses:any[]
+    statuses:any[],
+    comments:any[]
 }
 
 export var initialState: State = {
@@ -19,7 +20,8 @@ export var initialState: State = {
     attachments: [],
     currentStatus:null,
     currentPost:null,
-    statuses:[]
+    statuses:[],
+    comments:[]
 }
 
 export const reducer:ActionReducerMap<any>={
@@ -73,6 +75,20 @@ export function CalendarReducer(state = initialState, action: CalendarActions.Ca
             ...state,statuses:action.payload
         }
 
+        case CalendarActions.ADD_COMMENT:
+        return {
+            ...state,
+            comments:[...state.comments,action.payload]
+        }
+
+        case CalendarActions.DELETE_COMMENT:
+        var comments=[...state.comments];
+        comments.splice(action.payload,1);
+        return {
+            ...state,
+            comments:comments
+        }
+
         case CalendarActions.DRAG_POST_SUCCESS:
             var post = action.payload;
             var statuses=state.statuses.slice();
@@ -92,6 +108,15 @@ export function CalendarReducer(state = initialState, action: CalendarActions.Ca
             return {
                 ...state,statuses:statuses
             }
+
+            case CalendarActions.ADD_COMMENT_SUCCESS:
+
+            return {
+                ...state,
+                comments:[...state.comments,action.payload]
+            }
+
+
         default:
             return { ...state }
     }

@@ -43,6 +43,26 @@ export class CalendarEffects
             }
     })
 
+    // @Effect() addComment=this.actions.ofType(CalendarActions.ADD_COMMENT).map((action:CalendarActions.AddComment)=>action.payload)
+    // .mergeMap(data=>{
+    //     console.log(data,'postdata')
+    //     return this.postService.updatePost({comment:data.body,version:1,id:data.post.id})
+    // }).map(post=>{
+    //     console.log(post,'aasd')
+    //     this.sharedService.notify('Post Created Successfully')
+    //     this.comments.push()   
+    //         return {
+    //             type:CalendarActions.ADD_COMMENT_SUCCESS,
+    //             payload:{
+    //         user:{
+    //         name:res.assigned_to_extra_info.username,
+    //         photo:res.owner_extra_info.photo
+    //         },
+    //         comment:body
+    //       }
+    //         }
+    // })
+
     @Effect() deletePost=this.actions.ofType(CalendarActions.DELETE_POST).map((action:CalendarActions.CreatePost)=>action.payload)
     .mergeMap(postId=>{
         console.log(postId,'postdata')
@@ -50,7 +70,6 @@ export class CalendarEffects
     }).map(results=>{
         var postId=results[1];
         this.sharedService.notify('Post Deleted Successfully');
-        this.router.navigate(['/','calendar'])
             return {
                 type:CalendarActions.DELETE_POST_SUCCESS,
                 payload:postId

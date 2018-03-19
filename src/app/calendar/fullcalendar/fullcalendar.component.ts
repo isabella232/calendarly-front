@@ -1,19 +1,20 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 declare var $:any;
 
 @Component({
   selector: 'fullcalendar',
   templateUrl: './fullcalendar.component.html',
-  styleUrls: ['./fullcalendar.component.scss']
+  styleUrls: ['./fullcalendar.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class FullcalendarComponent implements OnInit {
 
   constructor() { }
   @Input() posts=[];
   @Input() date;  
-  @Output() showCreatePost;
-  @Output() navigateToPost;
+  @Output() showCreatePost:EventEmitter<any> = new EventEmitter();;
+  @Output() navigateToPost:EventEmitter<any> = new EventEmitter();;
 
   fullCalendar;
 
@@ -48,10 +49,10 @@ export class FullcalendarComponent implements OnInit {
       defaultDate:moment(this.date),
       events: posts?posts:[],
       eventClick: (calEvent, jsEvent, view)=> {
-        this.navigateToPost(calEvent._id)
+        this.navigateToPost.emit(calEvent._id)
       },
       select: (start, end, allDay) =>{
-        this.showCreatePost.show();
+        this.showCreatePost.emit();
       },
       dayClick: (date, jsEvent, view)=> {
           this.date=date.toDate();
@@ -59,6 +60,15 @@ export class FullcalendarComponent implements OnInit {
 
         }
       });
+  }
+
+  ngOnChanges(change)
+  {
+    console.log(change);
+   if(change.posts)
+   {
+     this.posts=change.posts.currentValue;
+   }
   }
 
 }

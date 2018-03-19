@@ -37,6 +37,8 @@ export class LayoutResolveGuard implements Resolve<any> {
       
       this.container.customAttributes=results[1];
       return {
+        posts:posts,
+        statuses:statuses
       }
     });
   }

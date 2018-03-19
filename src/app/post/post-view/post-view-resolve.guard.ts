@@ -6,42 +6,43 @@ import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 @Injectable()
 export class PostViewResolveGuard implements Resolve<any> {
-  constructor(private postService:PostService,private sharedService:SharedService){}
- 
+  constructor(private postService: PostService, private sharedService: SharedService) { }
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    console.log('hello',route)
-    var observables=[];
-    var watchers=[];
-    var postId=route.params.id;
+    console.log('hello', route)
+    var observables = [];
+    var watchers = [];
+    var postId = route.params.id;
     var post;
     var comments;
-   return this.postService.getPost(postId)
-  .mergeMap(p=>{
-       console.log(p)
-       post=p;
-       p.watchers.forEach(id=>{
-        observables.push(this.sharedService.getUserDetails(id))
+    return this.postService.getPost(postId)
+      .mergeMap(p => {
+        console.log(p)
+        post = p;
+        p.watchers.forEach(id => {
+          observables.push(this.sharedService.getUserDetails(id))
+        })
+        if (observables.length) {
+          return forkJoin(observables);
+        }
+        else {
+          return Observable.create(observer => {
+            observer.next([]);
+            observer.complete();
+          })
+        }
+      }).mergeMap((results: any[]) => {
+        console.log(results, 'results')
+        watchers = results;
+        return this.postService.getComments(post.id)
+      }).map(c => {
+        comments = c;
+        return {
+          post: post,
+          comments: comments,
+          watchers: watchers
+        }
       })
-      if(observables.length)
-      {
-        return forkJoin(observables);
-      }
-      else{
-         return Observable.create(observer=>observer.next([]))
-      }
-   }).mergeMap((results:any[])=>{
-    watchers=results;
-    return this.postService.getComments(post.id)
-   }).map(c=>{
-       comments=c;
-       return {
-           data:{
-               post:post,
-               comments:comments,
-               watchers:watchers
-           }
-       }
-   })
 
   }
 }

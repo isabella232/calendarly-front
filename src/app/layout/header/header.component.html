@@ -152,7 +152,7 @@
                 <h5 class="modal-title pull-left">Create a Post</h5>
             </div>
             <div class="modal-body">
-                <app-create-post (formSubmitted)="submitForm($event)" (exit)="exit()" [date]="date" [time]="date"></app-create-post>
+                <app-create-post [status]="status" (formSubmitted)="submitForm($event)" (exit)="exit()" [date]="date" [time]="date"></app-create-post>
                 <!-- Curabitur blandit mollis lacus. Nulla sit amet est. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Cras sagittis. -->
             </div>
             <div class="modal-footer">

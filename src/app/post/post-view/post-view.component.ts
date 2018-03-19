@@ -42,22 +42,15 @@ private store:Store<AppState>) { }
 
   ngOnInit() {
     this.user=this.container.user;
-    this.route.params.subscribe(param=>{
-      console.log(param)
-    this.postService.getPost(Number(param.id)).subscribe(post=>{
-      this.post=post;
-      this.post.watchers.forEach(id=>{
-        this.sharedService.getUserDetails(id).subscribe(user=>{
-          this.watchers.push(user);
-        })
-      })
-      this.getComments(this.post.id)
-      this.time=post.date.toDate();
-      this.date=post.time.toDate();
-      console.log(this.post);
-     },er=>{
-       console.log(er)
-     });
+
+    this.route.data.subscribe(data=>
+    {
+      console.log(data,'data');
+      this.comments=data.post.comments;
+      this.watchers=data.post.watchers;
+      this.post=data.post.post;
+      this.date=this.post.date.toDate();
+      this.time=this.post.time.toDate();
     })
 
   }
@@ -77,50 +70,7 @@ private store:Store<AppState>) { }
       console.log(res);
     })
   }
-  toggleComments()
-  {
-   this.isViewLess=!this.isViewLess;
-  }
-
-  getComments(postId)
-  {
-    this.postService.getComments(postId).subscribe(comments=>{
-      this.comments=comments;
-      if(this.comments.length>=2)
-      {
-        this.lessComments=[this.comments[0],this.comments[1]]
-      }
-      else{
-        this.lessComments=this.comments;
-      }
-      console.log(comments)
-    },er=>{
-      console.log(er)
-    })
-  }
-
-  postComment(body)
-  {
-    if(body)
-    {
-      console.log(this.comments)
-      this.postService.updatePost({comment:body,version:1,id:this.post.id}).subscribe(res=>{
-        console.log(res)
-        this.comments.push({
-          user:{
-          name:res.assigned_to_extra_info.username,
-          photo:res.owner_extra_info.photo
-          },
-          comment:this.commentBody
-        })   
-        this.commentBody=''
-        console.log(this.comments,'asd')
-      },er=>{
-        console.log(er)
-      })
-    }
- 
-  }
+  
 
   deletePost(post)
   {
@@ -139,26 +89,41 @@ private store:Store<AppState>) { }
         }
        })
   }
-  deleteComment(post,comment,index)
+  deleteComment(data)
   {
-      swal({
-         title: 'Are you sure?',
-         text: "You will not be able to recover this post",
-         type: 'warning',
-         showCancelButton: true,
-         confirmButtonColor: '#3085d6',
-         cancelButtonColor: '#d33',
-         confirmButtonText: 'Delete'
-       }).then((result) => {
-         if (result.value) {
-          this.postService.deleteComment(post.id,comment.id).subscribe(res=>{
-            console.log(res,'deletecomment');
-            this.comments.splice(index,1)
-            this.sharedService.notify('Comment Deleted!')
-       });
-         
-         }
-       })
+    console.log(data,'data')
+    var post=data.post;
+    var comment=data.comment;
+    var index=data.index;
+    
+    this.postService.deleteComment(this.post.id,comment.id).subscribe(res=>{
+      console.log(res,'deletecomment');
+      this.comments.splice(index,1)
+      this.sharedService.notify('Comment Deleted!')
+ });
+  }
+
+  postComment(body)
+  {
+    if(body)
+    {
+      console.log(this.comments)
+      this.postService.updatePost({comment:body,version:1,id:this.post.id}).subscribe(res=>{
+        console.log(res)
+        this.comments.push({
+          user:{
+          name:res.assigned_to_extra_info.username,
+          photo:res.owner_extra_info.photo
+          },
+          comment:body
+        })   
+        this.commentBody=''
+        console.log(this.comments,'asd')
+      },er=>{
+        console.log(er)
+      })
+    }
+ 
   }
 
 }

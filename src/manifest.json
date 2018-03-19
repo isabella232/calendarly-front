@@ -1,0 +1,23 @@
+{
+    "short_name": "Calendarly",
+    "name": "Your Content Calendar in the Cloud",
+    "icons": [{
+            "src": "/assets/img/icons/icon-48.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "/assets/img/icons/icon-96.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "/assets/img/icons/icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ],
+    "background_color": "#F3E2A0",
+    "theme_color": "#382F34",
+    "display": "standalone"
+}

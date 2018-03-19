@@ -45,15 +45,11 @@ export class SharedService {
         this.maThemeSubject.next(this.maTheme)
     }
 
-    getProjectTemplate() {
-        return this.http.get(config.url + '/api/v1/project-templates').map(res => {
+    getProjectTemplate(id) {
+        return this.http.get(config.url + '/api/v1/project-templates/'+id).map(res => {
             this.container.projectTemplate = res[0];
             return res[0];
         })
-    }
-
-    getKanbanLayout() {
-        return this.http.get(config.url + '/api/v1/project-templates').map(res => res[1])
     }
 
     searchtext(text) {
