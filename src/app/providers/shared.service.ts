@@ -1,3 +1,4 @@
+import { isArray } from 'util';
 import * as MainActions from './../layout/store/main.actions';
 import { AppState } from './../store/app.reducers';
 import { Observer } from 'rxjs/Observer';
@@ -52,10 +53,42 @@ export class SharedService {
         })
     }
 
-    searchtext(text) {
-        return this.http.get(config.url + `/api/v1/search?project=${this.container.projectId}\&text=` + text)
+
+    mapSearchResponse(obj)
+    {
+        var response=[]
+      Object.keys(obj).forEach(key=>{
+        if(isArray(obj[key]))
+        {
+          obj[key].forEach(o=>{
+            o.type=key;
+            response.push(o);
+          })
+        }
+       
+      })
+
+      return response;
+  
+      
     }
 
+    searchtext(text) {
+        return this.http.get(config.url + `/api/v1/search?project=${this.container.projectId}\&text=` + text).map((res:any)=>
+    {
+        res.Posts=res.userstories;
+        res.Topics=res.epics;
+        delete res.epics;
+        delete res.userstories;
+       return this.mapSearchResponse(res);
+        
+    })
+    }
+
+    searchEpics(text) {
+        return this.http.get(config.url + `/api/v1/search?project=${this.container.projectId}\&text=` + text).map((res:any)=>res.epics)
+    }
+    
     getPostStatuses() {
         return this.http.get(config.url + `/api/v1/userstory-statuses`).map((res: any[]) => res.filter(s => s.project === this.container.projectId))
     }

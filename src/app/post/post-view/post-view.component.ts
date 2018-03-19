@@ -108,7 +108,7 @@ private store:Store<AppState>) { }
     if(body)
     {
       console.log(this.comments)
-      this.postService.updatePost({comment:body,version:1,id:this.post.id}).subscribe(res=>{
+      this.postService.updatePost({comment:body,version:1,id:this.post.id}).subscribe((res:any)=>{
         console.log(res)
         this.comments.push({
           user:{

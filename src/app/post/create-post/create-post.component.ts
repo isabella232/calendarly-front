@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { config } from './../../providers/config';
 import { AppState } from './../../store/app.reducers';
 import { SharedService } from './../../providers/shared.service';
@@ -12,6 +13,7 @@ import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 declare var $:any;
 import * as moment from 'moment';
 import * as _ from 'underscore';
+import { Subscription } from 'rxjs';
 declare var swal:any;
 
 @Component({
@@ -81,27 +83,19 @@ export class CreatePostComponent implements OnInit {
                 this.sharedService.notify('Please enter valid information')
         }
     }
-
+    subscription:Subscription;
     suggestTopics(e?:any)
     {
-        console.log(e)
-
-        if(e.keyCode===13)
+        if(this.subscription)
         {
-            this.suggestedTopics=[];
+            this.subscription.unsubscribe();
+        }
+        console.log(e)
+        this.searchObservable= this.sharedService.searchEpics(this.topic)
 
-           this.topics.push(this.topic);
-           return this.topic=''
-        }
-        else{
-            this.sharedService.searchtext(this.topic).subscribe((res:any)=>{
-                console.log(res);
-                this.suggestedTopics=res.epics;
-            })
-        }
        
     }
-
+    searchObservable:Observable<any>;
     toggleVisibility(file)
     {
         file.isVisible=!file.isVisible;
@@ -225,8 +219,10 @@ export class CreatePostComponent implements OnInit {
           version:this.postData.version,
           id:this.postData.id,
           tags:this.tags,
-          topics:this.topics,
-          profiles:this.profiles
+          topics:[this.topics],
+          profiles:this.profiles,
+          date:this.date,
+          time:this.time
       }
       this.postService.updatePost(this.postService.mapPostToCalendarly(post)).subscribe(res=>{
             this.sharedService.notify('Post updated Successfully')
@@ -291,6 +287,11 @@ export class CreatePostComponent implements OnInit {
     this.profiles.splice(index,1)
   }
   ngOnInit() {
+    this.searchObservable= Observable.create(observer=>{
+        observer.next([]);
+        observer.complete();
+    })
+
       console.log(this.postData)
     this.initForm();
 

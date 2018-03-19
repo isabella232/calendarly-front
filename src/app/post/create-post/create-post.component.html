@@ -14,7 +14,7 @@
                 <span class="badge badge-pill badge-warning topicBadge" *ngFor="let topic of topics;let i=index;">{{topic.subject}} <span (click)="removeTopic(i)">X</span></span>
                 <div class="input-group">
                     <div class="form-group" style="margin-top: 10px;">
-                        <input id="topicTag" (typeaheadOnSelect)="addTopic($event.item)" typeaheadOptionField="subject" (ngModelChange)="suggestTopics($event)" [typeahead]="suggestedTopics" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" [(ngModel)]="topic" [ngModelOptions]="{standalone: true}"
+                        <input id="topicTag" (typeaheadOnSelect)="addTopic($event.item)" typeaheadOptionField="subject" (ngModelChange)="suggestTopics($event)" [typeahead]="searchObservable" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" [(ngModel)]="topic" [ngModelOptions]="{standalone: true}"
                             value="Topic-1,Topic-2" data-role="tagsinput" type="text" class="form-control form-control-sm">
                         <i class="form-group__bar"></i>
                     </div>

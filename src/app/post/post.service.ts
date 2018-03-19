@@ -1,3 +1,4 @@
+import { forkJoin } from 'rxjs/observable/forkJoin';
 import { AppState } from './../store/app.reducers';
 import { Store } from '@ngrx/store';
 import { ContainerService } from './../providers/container.service';
@@ -18,8 +19,16 @@ export class PostService {
 
   createPost(data)
   {
-    return this.http.post(config.url+'/api/v1/userstories',data)
-    .pipe(catchError(this.sharedService.handleError));
+    var topics=data.epics;
+    var observables=[];
+    var resPost;
+   return this.http.post(config.url+'/api/v1/userstories',data).mergeMap((post:any)=>{
+     resPost=post;
+    topics.forEach(topic=>{
+      observables.push(this.addTopicToPost(topic.id,post.id));
+    })
+   return forkJoin(observables).map(res=>resPost);
+  })
   }
 
   editBoard(id,data)
@@ -47,10 +56,21 @@ export class PostService {
 
   updatePost(data:any)
   {
+    console.log(data,'topics')
+    var topics=data.epics[0];
+    var observables=[];
     var id=data.id;
     delete data.id;
-    return this.http.patch(config.url+'/api/v1/userstories/'+id,data)
-    .pipe(catchError(this.sharedService.handleError));
+    var resPost;
+   return this.http.patch(config.url+'/api/v1/userstories/'+id,data).mergeMap((post:any)=>{
+    resPost=post;
+    topics.forEach(topic=>{
+      observables.push(this.addTopicToPost(topic.id,post.id));
+    })
+   return forkJoin(observables).map(res=>resPost);
+  })
+    // return this.http.patch(config.url+'/api/v1/userstories/'+id,data)
+    // .pipe(catchError(this.sharedService.handleError));
   }
 
   getComments(postId)
@@ -110,17 +130,17 @@ export class PostService {
 
   mapPostToCalendarly(post)
   {
-    console.log(post)
     post.start=post.date;
     post.project=this.container.projectId;
     post.subject=post.title;
     post.assigned_to=this.container.user.id;
-    post.publish_date=post.date;
-    post.publish_time=post.time;
+    post.publish_date=post.date
+    post.publish_time=post.time
     post.description_html=post.description;
-    post.epics=post.topics
-    post.kanban_order=moment(post.date).toDate().getTime();
-    post.backlog_order=moment(post.date).toDate().getTime();
+    post.epics=post.topics;
+    console.log(post)
+    // post.kanban_order=moment(post.date).toDate().getTime();
+    // post.backlog_order=moment(post.date).toDate().getTime();
     post=_.pick(post,'project','subject','assigned_to','description_html',
     'kanban_order','backlog_order','id','version','tags','profiles','topics','epics','status',
   'publish_date','publish_time');
@@ -216,4 +236,9 @@ export class PostService {
       return this.posts;
     }).pipe(catchError(this.sharedService.handleError));
   }
+
+  addTopicToPost(topic,post)
+  {
+    return this.http.post(config.url+`/api/v1/epics/${topic}/related_userstories`,{epic:topic,user_story:post})  }
+
 }

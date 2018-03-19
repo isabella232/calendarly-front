@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { SharedService } from './../../../providers/shared.service';
 import { Component, OnInit} from '@angular/core';
@@ -43,21 +44,10 @@ export class SearchComponent implements OnInit {
 
     
   }
-
+  searchObservable:Observable<any>;
   searchText(text)
   {
-    console.log(text)
-    this.sharedService.searchtext(text).subscribe((res:any)=>{
-      console.log(res)
-      // this.posts=res.epics;
-      res.Posts=res.userstories;
-      res.Topics=res.epics;
-      delete res.epics;
-      delete res.userstories;
-      this.mapSearchResponse(res);
-      // var mappedRes=this.mapSearchResponse(res);
-      // console.log(this.response)
-    })
+   this.searchObservable = this.sharedService.searchtext(text)
   }
 
   selectOption(data)
@@ -70,5 +60,6 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchObservable= this.sharedService.searchtext('')
   }
 }
